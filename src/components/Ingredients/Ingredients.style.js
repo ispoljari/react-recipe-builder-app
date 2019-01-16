@@ -14,7 +14,7 @@ export const List = styled.ul`
   overflow: -webkit-paged-x;
 
   li {
-    margin-right: 8px;
+    margin-right: 5px;
     padding: 2px;
   }
 `;

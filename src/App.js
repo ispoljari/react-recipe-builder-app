@@ -29,8 +29,67 @@ class App extends Component {
           <Col>
             <Box 
             as="section" 
-            role="region" display="flex" justifyContent="center">
+            role="region" 
+            display="flex" 
+            justifyContent="center">
              <Ingredients />
+            </Box>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Box>
+              <Row>
+                <Col xs={12} md={4}>
+                  <Box backgroundColor="yellow" p={20}>
+                    One
+                  </Box>
+                </Col>
+                <Col xs={12} md={4} mt={{ xs: 20, md: 0 }}>
+                  <Box backgroundColor="red" p={20}>
+                    Two
+                  </Box>
+                </Col>
+                <Col xs={12} md={4} mt={{ xs: 20, md: 0 }}>
+                  <Box backgroundColor="green" p={20}>
+                    Three
+                  </Box>
+                </Col>
+              </Row>
+              <Row my={20}>
+                <Col xs={12} md={4}>
+                  <Box backgroundColor="yellow" p={20}>
+                    One
+                  </Box>
+                </Col>
+                <Col xs={12} md={4} mt={{ xs: 20, md: 0 }}>
+                  <Box backgroundColor="red" p={20}>
+                    Two
+                  </Box>
+                </Col>
+                <Col xs={12} md={4} mt={{ xs: 20, md: 0 }}>
+                  <Box backgroundColor="green" p={20}>
+                    Three
+                  </Box>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} md={4}>
+                  <Box backgroundColor="yellow" p={20}>
+                    One
+                  </Box>
+                </Col>
+                <Col xs={12} md={4} mt={{ xs: 20, md: 0 }}>
+                  <Box backgroundColor="red" p={20}>
+                    Two
+                  </Box>
+                </Col>
+                <Col xs={12} md={4} mt={{ xs: 20, md: 0 }}>
+                  <Box backgroundColor="green" p={20}>
+                    Three
+                  </Box>
+                </Col>
+              </Row>
             </Box>
           </Col>
         </Row>
