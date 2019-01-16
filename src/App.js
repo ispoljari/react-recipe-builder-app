@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Title, Form } from './components';
-import { Grid, Row, Col } from '@smooth-ui/core-sc';
+import { Grid, Row, Col, Box } from '@smooth-ui/core-sc';
 
 class App extends Component {
   render() {
@@ -9,16 +9,16 @@ class App extends Component {
       <Grid>
         <Row my={20}>
           <Col>
-            <header role="banner">
+            <Box as="header" role="banner">
               <Title/>
-            </header>
+            </Box>
           </Col>
         </Row>
         <Row>
           <Col>
-            <main role="main">
+            <Box as="section" role="region">
               <Form/>
-            </main>
+            </Box>
           </Col>
         </Row>
       </Grid>
