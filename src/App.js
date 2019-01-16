@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
+import { Title } from './components';
 import { Grid, Row, Col } from '@smooth-ui/core-sc';
 
 class App extends Component {
   render() {
     return (
       <Grid>
-        <Row>
+        <Row my={20}>
           <Col>
-            <div>
-              <h1>Hello World!</h1>
-            </div>
+            <Title/>
           </Col>
         </Row>
       </Grid>
