@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom';
 
 import * as Styled from './global-style';
 
-import App from './App';
+import AppContainer from './AppContainer';
 
 ReactDOM.render(
   <React.Fragment>
     <Styled.Global />
-    <App />
+    <AppContainer />
   </React.Fragment>, 
   document.getElementById('root')
 );
