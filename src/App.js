@@ -9,7 +9,9 @@ class App extends Component {
       <Grid>
         <Row my={20}>
           <Col>
-            <Title/>
+            <header role="Banner">
+              <Title/>
+            </header>
           </Col>
         </Row>
       </Grid>
