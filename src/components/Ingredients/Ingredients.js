@@ -1,17 +1,11 @@
 import React from 'react';
-import { Box } from '@smooth-ui/core-sc';
+import * as Styled from './Ingredients.style';
 
 const Ingredients = () => (
-  <Box>
-    <ul>
-      <li>
-        One
-      </li>
-      <li>
-        Two
-      </li>
-    </ul>
-  </Box>
+  <Styled.List>
+   <li>one</li>
+   <li>two</li>
+  </Styled.List>
 );
 
 export default Ingredients;

@@ -25,7 +25,7 @@ class App extends Component {
             </Box>
           </Col>
         </Row>
-        <Row>
+        <Row my={30}>
           <Col>
             <Box 
             as="section" 

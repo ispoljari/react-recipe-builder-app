@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from '@smooth-ui/core-sc';
-import * as Styled from './style';
+import * as Styled from './Form.style';
 
 const Form = () => (
   <Styled.Form>
