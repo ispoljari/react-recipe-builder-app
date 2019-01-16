@@ -7,12 +7,12 @@ class App extends Component {
   render() {
     return (
       <Grid>
-        <Row my={20}>
+        <Row my={30}>
           <Col>
             <Box 
             as="header" 
-            role="banner">
-            <Title/>
+            role="banner" display="flex" justifyContent="center">
+              <Title/>
             </Box>
           </Col>
         </Row>
