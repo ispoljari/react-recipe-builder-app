@@ -2,6 +2,13 @@ language: node_js
 node_js: node
 cache:
   directories:
-    - node_modules
+  - node_modules
 env:
-  - CI = true
+- CI = true
+deploy:
+  provider: heroku
+  api_key:
+    secure: iG7smsDPXbkLsk04xwrKLLv+/QTL28TWB5SIo4wCLQDQ6aibshL8I+kNxLWJ3spFrxCz8MkP2s6ew8jjOoPi3SNNzMNqiax5KrM2U+H7g3xWbqrXVnWE+WTaF0LndfZRsZRKYBei3ItbqVeBUExGe/D76kfaaOg6Am8QbvLryxFiglW8N5Xrcxj3zWkG6a4CSi+2HXBunaf45/qT6klAIEjtptrAgbxw1aVajMtIgBBeyI5iGuCDnoyFHswXuKmn8PvFG68fwDh4XafZmro/YziFVk9WeoOIRgorsmSV3e4ISTnJ0yxGZKGovDyR575EKM8/RgUOSdTKszDHC4B5aSVPYZC94cUbfIjUl1AnDgHvzQEOiv+JUh8wbj96vmv7ICNyf0wnFLZwSedbIn6yQXUaz+QAn03kI22HNaiEvObdm+7V6vFIzix5+8rAWh9FkqJZfU2TJb6HIhS/wH35rpEcj9lsj0qOQgW4QqzgLO2sajkRNFhjaVMDJvx4k/AQjDXdkTA2X02EcIIAJ33Akr54dpIeq2ojAHFVIDxldxJcTMMciJLCZ7DV/G7G8lTUm1doz/iWJv0/GDd2bGr1wlJFc3LIiVD8UbOYgjNWwe3zcJJvvn8rwGrvZQpuIlopDlHBaM8mIO33GsUgtQF3wlkLVKZNtBw2zJ3cONCrvIg=
+  app: calm-savannah-27155
+  on:
+    repo: ispoljari/react-recipe-builder
