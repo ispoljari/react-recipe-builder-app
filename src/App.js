@@ -9,15 +9,19 @@ class App extends Component {
       <Grid>
         <Row my={20}>
           <Col>
-            <Box as="header" role="banner">
-              <Title/>
+            <Box 
+            as="header" 
+            role="banner">
+            <Title/>
             </Box>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Box as="section" role="region">
-              <Form/>
+            <Box 
+            as="section" 
+            role="region" display="flex" justifyContent="center">
+             <Form/>
             </Box>
           </Col>
         </Row>
