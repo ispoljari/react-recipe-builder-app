@@ -5,9 +5,15 @@ import { Grid, Row, Col } from '@smooth-ui/core-sc';
 class App extends Component {
   render() {
     return (
-      <div>
-        <h1>Hello World!</h1>
-      </div>
+      <Grid>
+        <Row>
+          <Col>
+            <div>
+              <h1>Hello World!</h1>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 };
