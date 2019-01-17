@@ -1,10 +1,9 @@
 import React from 'react';
 import * as Styled from './Ingredients.style';
 
-const Ingredients = () => (
+const Ingredients = ({ingredients}) => (
   <Styled.List>
-   <li>one</li>
-   <li>two</li>
+   {ingredients.map(item => <li>{item}</li>)}
   </Styled.List>
 );
 

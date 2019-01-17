@@ -8,16 +8,27 @@ const INITIAL_STATE = {
   error: null,
   results: [],
   loading: false,
-  value: ''
+  value: '',
+  ingredients: []
 };
 
 class Form extends Component {
   state = {...INITIAL_STATE};
 
   handleChange = e => {
+   const currIngredient = e.target.value;
+
     this.setState({
-      value: e.target.value
+      value: currIngredient,
     });
+
+    if (currIngredient.includes(',')) {
+      this.props.harvestIngredientList(currIngredient.substr(0, currIngredient.indexOf(',')));
+
+      this.setState({
+        value: '',
+      });
+    }
   }
 
   handleSubmit = e => {
@@ -27,9 +38,8 @@ class Form extends Component {
 
   loadRecipes = async () => {
     this.setState({
-      error: null,
-      results: [],
-      loading: true,
+      ...INITIAL_STATE,
+      loading: true
     });
 
     let rawResult;
