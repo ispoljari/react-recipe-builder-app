@@ -3,13 +3,53 @@ import { Input } from '@smooth-ui/core-sc';
 import * as Styled from './Form.style';
 
 class Form extends Component {
+  getInitialState = () => ({
+    error: null,
+    results: null,
+    loading: true,
+  })
+
+  state = this.getInitialState();
+
   handleSubmit = e => {
     e.preventDefault();
     this.loadRecipes();
   }
 
-  loadRecipes = () => {
-    console.log('hello');
+  loadRecipes = async () => {
+    this.setState(this.getInitialState());
+
+    let rawResult;
+    
+    try {
+      rawResult = await fetch(`${URL_RECIPES_API}`);
+    } catch (error) {
+      return this.loadFail();
+    }
+
+    if (rawResult) {
+      const resultJSON = rawResult.json();
+
+      if (resultJSON.recipes) {
+        this.loadSuccess(resultJSON.recipes);
+      } else {
+        return this.loadFail();
+      }
+    }
+  }
+
+  loadSuccess = result => {
+    this.setState({
+      results: result.recipes,
+      loading: false
+    });
+  }
+
+  loadFail = () => {
+    this.setState({
+      error: 'Could not load recipes',
+      loading: false
+    })
   }
 
   render() {
