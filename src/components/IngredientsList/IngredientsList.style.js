@@ -18,6 +18,7 @@ export const List = styled.ul`
     padding: 5px;
     border-radius: 5px;
     background-color: antiquewhite;
+    max-height: 45px;
 
     :last-of-type {
       margin-right: 0;

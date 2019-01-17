@@ -17,15 +17,27 @@ class InputIngredient extends Component {
       value
     }, () => {
       if (value.includes(','))  {
-        this.props.harvestIngredient({
-          value: value.substr(0, value.indexOf(',')),
-          id: uuidv4()
-        }); 
-
-        this.setState(INITIAL_STATE);
+        this.updateState(value, 'change');
       } 
     });
   } 
+
+  handlePress = e => {
+    const value = this.state.value;
+
+    if (e.key === 'Enter') {
+      this.updateState(value, 'press');
+    }
+  }
+
+  updateState = (value, type) => {
+    this.props.harvestIngredient({
+      value: type === 'press' ? value : value.substr(0, value.indexOf(',')),
+      id: uuidv4()
+    });
+    
+    this.setState(INITIAL_STATE);
+  }
  
   render() {
     return (
@@ -35,6 +47,7 @@ class InputIngredient extends Component {
       placeholder="Enter some ingredients..."
       value={this.state.value} 
       onChange={this.handleChange}
+      onKeyDown={this.handlePress}
       required 
       size="md" 
       borderRadius={5} 

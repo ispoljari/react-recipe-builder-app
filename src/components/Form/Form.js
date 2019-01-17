@@ -34,22 +34,28 @@ class Form extends PureComponent {
       try {
         rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=${ingredientValues}&p=${page}`);
       } catch (error) {
-        return this.loadFail();
+        return this.loadFail(error);
       }
   
+      let resultJSON;
+
       if (rawResult) {
-        const resultJSON = await rawResult.json();
-        if (resultJSON.results) {
-          this.loadSuccess(resultJSON.results);
-        } else {
-          return this.loadFail();
+        try {
+          resultJSON = await rawResult.json();
+        } catch (error) {
+          return this.loadFail(error);
         }
+      }
+
+      if (resultJSON.results) {
+        this.loadSuccess(resultJSON.results);
+      } else {
+        return this.loadFail();
       }
     }
   }
 
   loadSuccess = results => {
-    console.log(results);
     this.setState(prevState => ({
       results: [...prevState.results, ...results],
       loading: false
@@ -57,7 +63,7 @@ class Form extends PureComponent {
     );
   }
 
-  loadFail = () => {
+  loadFail = (error='') => {
     this.setState({
       error: 'Could not load recipes',
       loading: false
