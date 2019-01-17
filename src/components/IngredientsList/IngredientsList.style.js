@@ -17,7 +17,7 @@ export const List = styled.ul`
     margin-right: 5px;
     padding: 5px;
     border-radius: 5px;
-    background-color: lightblue;
+    background-color: antiquewhite;
 
     :last-of-type {
       margin-right: 0;

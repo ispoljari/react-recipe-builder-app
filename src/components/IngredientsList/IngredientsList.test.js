@@ -3,7 +3,9 @@ import { shallow } from 'enzyme';
 import IngredientsList from './IngredientsList';
 
 describe('<IngredientsList />', () => {
+  const dummy = ['ingr1', 'ingr2'];
+  
   it('Renders without crashing', () => {
-    shallow(<IngredientsList />);
+    shallow(<IngredientsList ingredients={dummy}/>);
   });
 });

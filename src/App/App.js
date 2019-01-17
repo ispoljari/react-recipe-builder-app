@@ -74,7 +74,9 @@ class App extends Component {
           mx="auto"
           maxWidth= {300}
           >
-          <Form />
+          <Form 
+          ingredients={this.state.ingredients.toString()}
+          page={1}/>
           </Box>
         </Col>
       </Row>

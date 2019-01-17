@@ -13,33 +13,38 @@ const INITIAL_STATE = {
 
 class Form extends Component {
   state = {...INITIAL_STATE};
-
+  
   handleSubmit = e => {
     e.preventDefault();
     this.loadRecipes();
   }
-
+  
   loadRecipes = async () => {
-    this.setState({
-      ...INITIAL_STATE,
-      loading: true
-    });
+    const { ingredients, page } = this.props;
 
-    let rawResult;
-    
-    try {
-      rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=toast&p=3`);
-    } catch (error) {
-      return this.loadFail();
-    }
-
-    if (rawResult) {
-      const resultJSON = await rawResult.json();
-
-      if (resultJSON.results) {
-        this.loadSuccess(resultJSON.results);
-      } else {
+    if (ingredients) {
+      this.setState({
+        ...INITIAL_STATE,
+        loading: true
+      });
+      
+  
+      let rawResult;
+      
+      try {
+        rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=${ingredients}&p=${page}`);
+      } catch (error) {
         return this.loadFail();
+      }
+  
+      if (rawResult) {
+        const resultJSON = await rawResult.json();
+  
+        if (resultJSON.results) {
+          this.loadSuccess(resultJSON.results);
+        } else {
+          return this.loadFail();
+        }
       }
     }
   }
