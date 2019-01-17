@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 
-import { Title, Form, Ingredients } from '../components';
-import { Grid, Row, Col, Box } from '@smooth-ui/core-sc';
+import { 
+  Title, 
+  Form, 
+  Ingredients, 
+  InputIngredient } from '../components';
+
+import { 
+  Grid, 
+  Row, 
+  Col, 
+  Box } from '@smooth-ui/core-sc';
 
 class App extends Component {
   state = {
@@ -24,7 +33,9 @@ class App extends Component {
           as="header" 
           role="banner" 
           display="flex" 
-          justifyContent="center">
+          mx="auto"
+          justifyContent="center"
+          maxWidth={500}>
             <Title />
           </Box>
         </Col>
@@ -34,24 +45,40 @@ class App extends Component {
           <Box 
           as="section" 
           role="region" 
-          display="flex" 
-          justifyContent="center">
-          <Form harvestIngredientList={result => this.updateSelectedIngredients(result)}/>
+          mx="auto"
+          maxWidth= {300}
+          >
+          <InputIngredient 
+          harvestIngredientList={result => this.updateSelectedIngredients(result)}/>
           </Box>
         </Col>
       </Row>
-      <Row my={30}>
+      <Row my={10}>
         <Col>
           <Box 
           as="section" 
           role="region" 
-          display="flex" 
-          justifyContent="center">
-          <Ingredients ingredients={this.state.ingredients}/>
+          mx="auto"
+          maxWidth= {300}
+          >
+          <Ingredients
+          ingredients={this.state.ingredients}/>
           </Box>
         </Col>
       </Row>
       <Row>
+        <Col>
+          <Box 
+          as="section" 
+          role="region" 
+          mx="auto"
+          maxWidth= {300}
+          >
+          <Form />
+          </Box>
+        </Col>
+      </Row>
+      <Row my={30}>
         <Col>
           <Box>
             <Row>

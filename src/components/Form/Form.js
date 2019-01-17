@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from '@smooth-ui/core-sc';
+import { Button } from '@smooth-ui/core-sc';
 import * as Styled from './Form.style';
 
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../../config';
@@ -8,28 +8,11 @@ const INITIAL_STATE = {
   error: null,
   results: [],
   loading: false,
-  value: '',
   ingredients: []
 };
 
 class Form extends Component {
   state = {...INITIAL_STATE};
-
-  handleChange = e => {
-   const currIngredient = e.target.value;
-
-    this.setState({
-      value: currIngredient,
-    });
-
-    if (currIngredient.includes(',')) {
-      this.props.harvestIngredientList(currIngredient.substr(0, currIngredient.indexOf(',')));
-
-      this.setState({
-        value: '',
-      });
-    }
-  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -79,8 +62,16 @@ class Form extends Component {
 
   render() {
     return (
-      <Styled.Form onSubmit={this.handleSubmit}>
-        <Input type="text" name="ingredients" placeholder="Enter some ingredients..." value={this.state.value} onChange={this.handleChange} required size="md" borderRadius={5} control p={10}/>
+      <Styled.Form 
+      onSubmit={this.handleSubmit}>
+        <Button 
+        variant="success" 
+        width={1} 
+        minHeight={40} 
+        fontSize={20} 
+        type="submit">
+          Search
+        </Button>
       </Styled.Form>
     ); 
   }
