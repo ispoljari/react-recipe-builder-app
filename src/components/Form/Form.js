@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Input } from '@smooth-ui/core-sc';
 import * as Styled from './Form.style';
 
+import { URL_RECIPES_API, API_KEY } from '../../config';
+
 class Form extends Component {
   getInitialState = () => ({
     error: null,
@@ -17,6 +19,7 @@ class Form extends Component {
   }
 
   loadRecipes = async () => {
+    console.log(API_KEY);
     this.setState(this.getInitialState());
 
     let rawResult;
