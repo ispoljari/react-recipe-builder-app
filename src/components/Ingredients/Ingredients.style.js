@@ -4,7 +4,7 @@ export const List = styled.ul`
   display: flex;
   border: 2px solid #d6dbdf;
   background-color: white;
-  border-radius: 4px;
+  border-radius: 5px;
   min-height: 30px;
   padding: 5px;
   margin: 0;
@@ -15,6 +15,12 @@ export const List = styled.ul`
 
   li {
     margin-right: 5px;
-    padding: 2px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: lightblue;
+
+    :last-of-type {
+      margin-right: 0;
+    }
   }
 `;

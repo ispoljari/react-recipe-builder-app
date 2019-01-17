@@ -80,7 +80,7 @@ class Form extends Component {
   render() {
     return (
       <Styled.Form onSubmit={this.handleSubmit}>
-        <Input type="text" name="ingredients" placeholder="Enter some ingredients..." value={this.state.value} onChange={this.handleChange} required size="md" control p={10}/>
+        <Input type="text" name="ingredients" placeholder="Enter some ingredients..." value={this.state.value} onChange={this.handleChange} required size="md" borderRadius={5} control p={10}/>
       </Styled.Form>
     ); 
   }
