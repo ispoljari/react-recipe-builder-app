@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Title, Form, Ingredients } from './components';
+import { Title, Form, Ingredients } from '../components';
 import { Grid, Row, Col, Box } from '@smooth-ui/core-sc';
 
 const App = () => (

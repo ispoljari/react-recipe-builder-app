@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import * as Styled from './global-style';
 
-import AppContainer from './AppContainer';
+import AppContainer from './App/AppContainer';
 
 ReactDOM.render(
   <React.Fragment>
