@@ -22,9 +22,5 @@ export const List = styled.ul`
     :last-of-type {
       margin-right: 0;
     }
-
-    span {
-      margin-left: 5px;
-    }
   }
 `;
