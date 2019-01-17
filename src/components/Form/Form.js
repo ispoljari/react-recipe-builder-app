@@ -28,7 +28,6 @@ class Form extends Component {
         loading: true
       });
       
-  
       let rawResult;
       
       try {
@@ -39,7 +38,6 @@ class Form extends Component {
   
       if (rawResult) {
         const resultJSON = await rawResult.json();
-  
         if (resultJSON.results) {
           this.loadSuccess(resultJSON.results);
         } else {
