@@ -12,13 +12,12 @@ const INITIAL_STATE = {
 };
 
 class Form extends Component {
-  state = INITIAL_STATE;
+  state = {...INITIAL_STATE};
 
   handleChange = e => {
-    this.setState(prevState => ({
-      ...prevState,
+    this.setState({
       value: e.target.value
-    }));
+    });
   }
 
   handleSubmit = e => {
@@ -53,6 +52,7 @@ class Form extends Component {
   }
 
   loadSuccess = results => {
+    console.log(results);
     this.setState(prevState => ({
       results: [...prevState.results, ...results],
       loading: false
@@ -64,7 +64,7 @@ class Form extends Component {
     this.setState({
       error: 'Could not load recipes',
       loading: false
-    })
+    });
   }
 
   render() {
