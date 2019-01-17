@@ -10,7 +10,7 @@ export const List = styled.ul`
   margin: 0;
   list-style: none;
   color: black;
-  font-size: 22px;
+  font-size: 20px;
   overflow: -webkit-paged-x;
 
   li {

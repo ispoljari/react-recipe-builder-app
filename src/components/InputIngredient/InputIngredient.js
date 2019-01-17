@@ -51,6 +51,7 @@ class InputIngredient extends Component {
       required 
       size="md" 
       borderRadius={5} 
+      fontSize={20}
       control 
       p={10}/>
     );

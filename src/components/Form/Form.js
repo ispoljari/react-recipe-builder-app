@@ -56,6 +56,7 @@ class Form extends PureComponent {
   }
 
   loadSuccess = results => {
+    console.log(results);
     this.setState(prevState => ({
       results: [...prevState.results, ...results],
       loading: false
