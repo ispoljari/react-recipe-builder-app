@@ -15,7 +15,7 @@ class InputIngredient extends Component {
       value
     }, () => {
       if (value.includes(','))  {
-        this.props.harvestIngredientList(value.substr(0, value.indexOf(','))); 
+        this.props.harvestIngredient(value.substr(0, value.indexOf(','))); 
 
         this.setState(INITIAL_STATE);
       } 

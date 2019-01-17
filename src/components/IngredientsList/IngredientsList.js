@@ -1,9 +1,9 @@
 import React from 'react';
-import * as Styled from './Ingredients.style';
+import * as Styled from './IngredientsList.style';
 
 import uuidv4 from 'uuid/v4';
 
-const Ingredients = ({ingredients}) => (
+const IngredientsList = ({ingredients}) => (
   <Styled.List>
    {ingredients.map(item => 
     <li key={uuidv4()}>
@@ -13,4 +13,4 @@ const Ingredients = ({ingredients}) => (
   </Styled.List>
 );
 
-export default Ingredients;
+export default IngredientsList;

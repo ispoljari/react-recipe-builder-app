@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { 
   Title, 
   Form, 
-  Ingredients, 
+  IngredientsList, 
   InputIngredient } from '../components';
 
 import { 
@@ -49,7 +49,7 @@ class App extends Component {
           maxWidth= {300}
           >
           <InputIngredient 
-          harvestIngredientList={result => this.updateSelectedIngredients(result)}/>
+          harvestIngredient={result => this.updateSelectedIngredients(result)}/>
           </Box>
         </Col>
       </Row>
@@ -61,7 +61,7 @@ class App extends Component {
           mx="auto"
           maxWidth= {300}
           >
-          <Ingredients
+          <IngredientsList
           ingredients={this.state.ingredients}/>
           </Box>
         </Col>
