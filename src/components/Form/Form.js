@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Button } from '@smooth-ui/core-sc';
 import * as Styled from './Form.style';
 
@@ -11,7 +11,7 @@ const INITIAL_STATE = {
   ingredients: []
 };
 
-class Form extends Component {
+class Form extends PureComponent {
   state = {...INITIAL_STATE};
   
   handleSubmit = e => {
@@ -21,8 +21,9 @@ class Form extends Component {
   
   loadRecipes = async () => {
     const { ingredients, page } = this.props;
+    const ingredientValues = ingredients.map(item => item.value).toString();
 
-    if (ingredients) {
+    if (ingredientValues) {
       this.setState({
         ...INITIAL_STATE,
         loading: true
@@ -31,7 +32,7 @@ class Form extends Component {
       let rawResult;
       
       try {
-        rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=${ingredients}&p=${page}`);
+        rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=${ingredientValues}&p=${page}`);
       } catch (error) {
         return this.loadFail();
       }

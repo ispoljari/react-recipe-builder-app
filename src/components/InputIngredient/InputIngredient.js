@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Input } from '@smooth-ui/core-sc';
 
+import uuidv4 from 'uuid/v4';
+
 const INITIAL_STATE = {
   value: ''
 }
@@ -15,7 +17,10 @@ class InputIngredient extends Component {
       value
     }, () => {
       if (value.includes(','))  {
-        this.props.harvestIngredient(value.substr(0, value.indexOf(','))); 
+        this.props.harvestIngredient({
+          value: value.substr(0, value.indexOf(',')),
+          id: uuidv4()
+        }); 
 
         this.setState(INITIAL_STATE);
       } 
