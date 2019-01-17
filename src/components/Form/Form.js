@@ -4,20 +4,21 @@ import * as Styled from './Form.style';
 
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../../config';
 
-class Form extends Component {
-  getInitialState = () => ({
-    error: null,
-    results: null,
-    loading: false,
-    value: ''
-  });
+const INITIAL_STATE = {
+  error: null,
+  results: [],
+  loading: false,
+  value: ''
+};
 
-  state = this.getInitialState();
+class Form extends Component {
+  state = INITIAL_STATE;
 
   handleChange = e => {
-    this.setState({
+    this.setState(prevState => ({
+      ...prevState,
       value: e.target.value
-    });
+    }));
   }
 
   handleSubmit = e => {
@@ -28,7 +29,7 @@ class Form extends Component {
   loadRecipes = async () => {
     this.setState({
       error: null,
-      results: null,
+      results: [],
       loading: true,
     });
 
@@ -51,12 +52,12 @@ class Form extends Component {
     }
   }
 
-  loadSuccess = result => {
-    console.log(result);
-    this.setState({
-      results: result,
+  loadSuccess = results => {
+    this.setState(prevState => ({
+      results: [...prevState.results, ...results],
       loading: false
-    });
+    })
+    );
   }
 
   loadFail = () => {
