@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Input } from '@smooth-ui/core-sc';
 import * as Styled from './Form.style';
 
-import { URL_RECIPES_API, URL_CORS_PROXY, API_KEY } from '../../config';
+import { URL_RECIPES_API, URL_CORS_PROXY } from '../../config';
 
 class Form extends Component {
   getInitialState = () => ({
@@ -24,7 +24,7 @@ class Form extends Component {
     let rawResult;
     
     try {
-      rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?key=${API_KEY}&q=pizza`);
+      rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=toast`);
     } catch (error) {
       return this.loadFail();
     }
@@ -32,8 +32,8 @@ class Form extends Component {
     if (rawResult) {
       const resultJSON = await rawResult.json();
 
-      if (resultJSON.recipes) {
-        this.loadSuccess(resultJSON.recipes);
+      if (resultJSON.results) {
+        this.loadSuccess(resultJSON.results);
       } else {
         return this.loadFail();
       }
