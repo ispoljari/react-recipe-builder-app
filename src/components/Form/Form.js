@@ -8,10 +8,17 @@ class Form extends Component {
   getInitialState = () => ({
     error: null,
     results: null,
-    loading: true,
-  })
+    loading: false,
+    value: ''
+  });
 
   state = this.getInitialState();
+
+  handleChange = e => {
+    this.setState({
+      value: e.target.value
+    });
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -19,12 +26,16 @@ class Form extends Component {
   }
 
   loadRecipes = async () => {
-    this.setState(this.getInitialState());
+    this.setState({
+      error: null,
+      results: null,
+      loading: true,
+    });
 
     let rawResult;
     
     try {
-      rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=toast`);
+      rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=toast&p=3`);
     } catch (error) {
       return this.loadFail();
     }
@@ -41,6 +52,7 @@ class Form extends Component {
   }
 
   loadSuccess = result => {
+    console.log(result);
     this.setState({
       results: result,
       loading: false
@@ -57,7 +69,7 @@ class Form extends Component {
   render() {
     return (
       <Styled.Form onSubmit={this.handleSubmit}>
-        <Input type="text" name="ingredients" placeholder="Enter some ingredients..." required size="md" control p={10}/>
+        <Input type="text" name="ingredients" placeholder="Enter some ingredients..." value={this.state.value} onChange={this.handleChange} required size="md" control p={10}/>
       </Styled.Form>
     ); 
   }
