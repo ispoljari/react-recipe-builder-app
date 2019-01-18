@@ -14,7 +14,7 @@ import {
   Box } from '@smooth-ui/core-sc';
 
 const INITIAL_STATE = {
-  ingredients: []
+  ingredientsList: []
 }
 
 class App extends Component {
@@ -22,14 +22,14 @@ class App extends Component {
 
   updateSelectedIngredients = ingredient => {
     this.setState(prevState => ({
-      ingredients: [...prevState.ingredients, ingredient]
+      ingredientsList: [...prevState.ingredientsList, ingredient]
     })
     );
   }
 
   deleteIngredient = id => {
     this.setState(prevState => ({
-      ingredients: [...prevState.ingredients.filter(item => item.id !== id)]
+      ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)]
     })
     );
   }
@@ -72,7 +72,7 @@ class App extends Component {
           maxWidth= {300}
           >
             <IngredientsList
-            ingredients={this.state.ingredients}
+            ingredientsList={this.state.ingredientsList}
            onClick={id => this.deleteIngredient(id)}/>
           </Box>
         </Col>
@@ -86,7 +86,7 @@ class App extends Component {
           maxWidth= {300}
           >
            <SearchRecipes 
-            ingredients={this.state.ingredients}
+            ingredientsList={this.state.ingredientsList}
             page={1}/>
           </Box>
         </Col>

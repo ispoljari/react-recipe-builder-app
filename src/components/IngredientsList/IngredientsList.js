@@ -3,9 +3,9 @@ import React from 'react';
 import { Button } from '@smooth-ui/core-sc';
 import * as Styled from './IngredientsList.style';
 
-const IngredientsList = ({ingredients, onClick}) => (
+const IngredientsList = ({ingredientsList, onClick}) => (
   <Styled.List>
-   {ingredients.map(item => 
+   {ingredientsList.map(item => 
     <li 
     key={item.id} 
     data-key={item.id}>

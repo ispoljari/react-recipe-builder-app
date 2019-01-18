@@ -5,6 +5,10 @@ import * as Styled from './SearchRecipes.style';
 
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../../config';
 
+import { fetchResults, isError } from '../../util';
+
+const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
+
 const INITIAL_STATE = {
   error: null,
   results: [],
@@ -17,42 +21,37 @@ class SearchRecipes extends Component {
   
   handleSubmit = e => {
     e.preventDefault();
+
     this.loadRecipes();
   }
   
   loadRecipes = async () => {
-    const { ingredients, page } = this.props;
-    const ingredientValues = ingredients.map(item => item.value).toString();
+    const { ingredientsList, page } = this.props;
+    const ingredients = ingredientsList.map(item => item.value).toString();
 
-    if (ingredientValues) {
+    if (ingredients) {
       this.setState({
         ...INITIAL_STATE,
         loading: true
       });
-      
-      let rawResult;
-      
-      try {
-        rawResult = await fetch(`${URL_CORS_PROXY}?${URL_RECIPES_API}?i=${ingredientValues}&p=${page}`);
-      } catch (error) {
-        return this.loadFail(error);
-      }
-  
-      let resultJSON;
 
-      if (rawResult) {
-        try {
-          resultJSON = await rawResult.json();
-        } catch (error) {
-          return this.loadFail(error);
-        }
-      }
+      const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
+      
+      const rawResult = await fetchResults(URL_QUERY);
+      let jsonResult;
 
-      if (resultJSON.results) {
-        this.loadSuccess(resultJSON.results);
+      if (!isError(rawResult)) {
+        jsonResult = await rawResult.transformToJSON();
       } else {
-        return this.loadFail();
+        return this.loadFail(rawResult);
       }
+
+      if (!isError(jsonResult)) {
+        this.loadSuccess(jsonResult.results);
+      } else {
+        return this.loadFail(rawResult);
+      }
+
     }
   }
 
@@ -66,6 +65,7 @@ class SearchRecipes extends Component {
   }
 
   loadFail = (error='') => {
+    console.log('error');
     this.setState({
       error: 'Could not load recipes',
       loading: false
