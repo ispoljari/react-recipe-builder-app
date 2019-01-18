@@ -4,7 +4,8 @@ import {
   Title, 
   SearchRecipes, 
   IngredientsList, 
-  InputIngredient } from '../components';
+  InputIngredient,
+  Results } from '../components';
 
 import { 
   Grid, 
@@ -56,7 +57,7 @@ class App extends Component {
           maxWidth= {300}
           >
           <InputIngredient 
-          harvestIngredient={result => this.updateSelectedIngredients(result)}/>
+            harvestIngredient={result => this.updateSelectedIngredients(result)}/>
           </Box>
         </Col>
       </Row>
@@ -68,9 +69,9 @@ class App extends Component {
           mx="auto"
           maxWidth= {300}
           >
-          <IngredientsList
-          ingredients={this.state.ingredients}
-          onClick={id => this.deleteIngredient(id)}/>
+            <IngredientsList
+            ingredients={this.state.ingredients}
+           onClick={id => this.deleteIngredient(id)}/>
           </Box>
         </Col>
       </Row>
@@ -82,109 +83,20 @@ class App extends Component {
           mx="auto"
           maxWidth= {300}
           >
-          <SearchRecipes 
-          ingredients={this.state.ingredients}
-          page={1}/>
+           <SearchRecipes 
+            ingredients={this.state.ingredients}
+            page={1}/>
           </Box>
         </Col>
       </Row>
       <Row 
       my={30}>
         <Col>
-          <Box>
-            <Row>
-              <Col 
-              xs={12} 
-              md={4}>
-                <Box 
-                backgroundColor="yellow" 
-                p={20}>
-                  One
-                </Box>
-              </Col>
-              <Col 
-              xs={12} 
-              md={4} 
-              mt={{ xs: 20, md: 0 }}>
-                <Box 
-                backgroundColor="red" 
-                p={20}>
-                  Two
-                </Box>
-              </Col>
-              <Col 
-              xs={12} 
-              md={4} 
-              mt={{ xs: 20, md: 0 }}>
-                <Box 
-                backgroundColor="green" 
-                p={20}>
-                  Three
-                </Box>
-              </Col>
-            </Row>
-            <Row 
-            my={20}>
-              <Col 
-              xs={12} 
-              md={4}>
-                <Box 
-                backgroundColor="yellow" 
-                p={20}>
-                  One
-                </Box>
-              </Col>
-              <Col 
-              xs={12} 
-              md={4} 
-              mt={{ xs: 20, md: 0 }}>
-                <Box 
-                backgroundColor="red" 
-                p={20}>
-                  Two
-                </Box>
-              </Col>
-              <Col 
-              xs={12} 
-              md={4} 
-              mt={{ xs: 20, md: 0 }}>
-                <Box 
-                backgroundColor="green" 
-                p={20}>
-                  Three
-                </Box>
-              </Col>
-            </Row>
-            <Row>
-              <Col 
-              xs={12} 
-              md={4}>
-                <Box 
-                backgroundColor="yellow" 
-                p={20}>
-                  One
-                </Box>
-              </Col>
-              <Col 
-              xs={12} 
-              md={4} 
-              mt={{ xs: 20, md: 0 }}>
-                <Box 
-                backgroundColor="red" 
-                p={20}>
-                  Two
-                </Box>
-              </Col>
-              <Col 
-              xs={12} 
-              md={4} 
-              mt={{ xs: 20, md: 0 }}>
-                <Box 
-                backgroundColor="green" p={20}>
-                  Three
-                </Box>
-              </Col>
-            </Row>
+          <Box 
+          as="main" 
+          role="main" 
+          >
+            <Results />
           </Box>
         </Col>
       </Row>
