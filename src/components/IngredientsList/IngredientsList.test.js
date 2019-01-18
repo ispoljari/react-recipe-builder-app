@@ -6,6 +6,6 @@ describe('<IngredientsList />', () => {
   const dummy = ['ingr1', 'ingr2'];
   
   it('Renders without crashing', () => {
-    shallow(<IngredientsList ingredients={dummy}/>);
+    shallow(<IngredientsList ingredientsList={dummy}/>);
   });
 });
