@@ -14,6 +14,9 @@ import {
   Box } from '@smooth-ui/core-sc';
 
 const INITIAL_STATE = {
+  error: null,
+  results: [],
+  loading: false,
   ingredientsList: []
 }
 
@@ -32,6 +35,25 @@ class App extends Component {
       ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)]
     })
     );
+  }
+
+  updateLoadingStatus = status => {
+    this.setState({
+      loading: status
+    });
+  }
+
+  receiveResults = results => {
+    this.setState(prevState => ({
+      results: [...prevState.results, ...results],
+      })
+    );
+  }
+
+  receiveError = error => {
+    this.setState({
+      error: 'Could not load recipes',
+    });
   }
 
   render() {
@@ -73,7 +95,7 @@ class App extends Component {
           >
             <IngredientsList
             ingredientsList={this.state.ingredientsList}
-           onClick={id => this.deleteIngredient(id)}/>
+            onClick={id => this.deleteIngredient(id)}/>
           </Box>
         </Col>
       </Row>
@@ -86,6 +108,9 @@ class App extends Component {
           maxWidth= {300}
           >
            <SearchRecipes 
+            updateLoadingStatus={status => this.updateLoadingStatus(status)}
+            receiveResults = {results => this.receiveResults(results)}
+            receiveError = {error => this.receiveError(error)}
             ingredientsList={this.state.ingredientsList}
             page={1}/>
           </Box>
@@ -98,7 +123,7 @@ class App extends Component {
           as="main" 
           role="main" 
           >
-            <Results />
+            <Results results={this.state.results}/>
           </Box>
         </Col>
       </Row>
