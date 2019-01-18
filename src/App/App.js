@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { 
   Title, 
-  Form, 
+  SearchRecipes, 
   IngredientsList, 
   InputIngredient } from '../components';
 
@@ -17,9 +17,9 @@ class App extends Component {
     ingredients: []
   };
 
-  updateSelectedIngredients = ingredients => {
+  updateSelectedIngredients = ingredient => {
     this.setState(prevState => ({
-      ingredients: [...prevState.ingredients, ingredients]
+      ingredients: [...prevState.ingredients, ingredient]
     })
     );
   }
@@ -42,7 +42,7 @@ class App extends Component {
           display="flex" 
           mx="auto"
           justifyContent="center"
-          maxWidth={500}>
+          maxWidth={300}>
             <Title />
           </Box>
         </Col>
@@ -82,7 +82,7 @@ class App extends Component {
           mx="auto"
           maxWidth= {300}
           >
-          <Form 
+          <SearchRecipes 
           ingredients={this.state.ingredients}
           page={1}/>
           </Box>

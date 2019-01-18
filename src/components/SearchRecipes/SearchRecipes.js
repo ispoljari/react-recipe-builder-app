@@ -1,6 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+
 import { Button } from '@smooth-ui/core-sc';
-import * as Styled from './Form.style';
+import * as Styled from './SearchRecipes.style';
 
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../../config';
 
@@ -11,7 +12,7 @@ const INITIAL_STATE = {
   ingredients: []
 };
 
-class Form extends PureComponent {
+class SearchRecipes extends Component {
   state = {...INITIAL_STATE};
   
   handleSubmit = e => {
@@ -88,4 +89,4 @@ class Form extends PureComponent {
   }
 };
 
-export default Form;
+export default SearchRecipes;
