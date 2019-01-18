@@ -13,10 +13,12 @@ import {
   Col, 
   Box } from '@smooth-ui/core-sc';
 
+const INITIAL_STATE = {
+  ingredients: []
+}
+
 class App extends Component {
-  state = {
-    ingredients: []
-  };
+  state = {...INITIAL_STATE};
 
   updateSelectedIngredients = ingredient => {
     this.setState(prevState => ({
