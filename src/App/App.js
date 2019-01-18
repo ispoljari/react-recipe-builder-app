@@ -16,6 +16,7 @@ import {
 const INITIAL_STATE = {
   error: null,
   results: [],
+  page: 1,
   loading: false,
   ingredientsList: []
 }
@@ -57,6 +58,18 @@ class App extends Component {
   }
 
   render() {
+    // const { ingredientsList, results, page } = this.state;
+    // const resultsDeepCopy = JSON.parse(JSON.stringify(results));
+    // const numResults = resultsDeepCopy.length;
+    // const numRowsWhole = Math.floor(numResults / 3);
+    // const numRowsPartial = numRowsWhole + 1;
+
+    // for (let i = 0; i<numRowsPartial; i++) {
+    //   for (let j = 0; i<3; i++) {
+
+    //   }
+    // }
+
     return (
       <Grid>
       <Row my={30}>
@@ -94,7 +107,7 @@ class App extends Component {
           maxWidth= {300}
           >
             <IngredientsList
-            ingredientsList={this.state.ingredientsList}
+            ingredientsList={ingredientsList}
             onClick={id => this.deleteIngredient(id)}/>
           </Box>
         </Col>
@@ -111,8 +124,8 @@ class App extends Component {
             updateLoadingStatus={status => this.updateLoadingStatus(status)}
             receiveResults = {results => this.receiveResults(results)}
             receiveError = {error => this.receiveError(error)}
-            ingredientsList={this.state.ingredientsList}
-            page={1}/>
+            ingredientsList={ingredientsList}
+            page={page}/>
           </Box>
         </Col>
       </Row>
@@ -123,7 +136,7 @@ class App extends Component {
           as="main" 
           role="main" 
           >
-            <Results results={this.state.results}/>
+            <Results />
           </Box>
         </Col>
       </Row>
