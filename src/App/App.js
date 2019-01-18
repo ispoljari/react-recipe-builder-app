@@ -58,7 +58,7 @@ class App extends Component {
   }
 
   render() {
-    // const { ingredientsList, results, page } = this.state;
+    const { ingredientsList, results, page } = this.state;
     // const resultsDeepCopy = JSON.parse(JSON.stringify(results));
     // const numResults = resultsDeepCopy.length;
     // const numRowsWhole = Math.floor(numResults / 3);
