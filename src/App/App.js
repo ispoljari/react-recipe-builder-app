@@ -84,8 +84,8 @@ class App extends Component {
   }
 
   receiveResults = results => {
-    this.setState(prevState => ({
-      results: [...prevState.results, ...results],
+    this.setState(() => ({
+      results: [...results],
       })
     );
   }
@@ -97,22 +97,16 @@ class App extends Component {
   }
 
   render() {
-    const { ingredientsList, results, value, page } = this.state;
-
-    // const resultsDeepCopy = JSON.parse(JSON.stringify(results));
-    // const numResults = resultsDeepCopy.length;
-    // const numRowsWhole = Math.floor(numResults / 3);
-    // const numRowsPartial = numRowsWhole + 1;
-
-    // for (let i = 0; i<numRowsPartial; i++) {
-    //   for (let j = 0; i<3; i++) {
-
-    //   }
-    // }
+    const { 
+      ingredientsList, 
+      results, 
+      value, 
+      page } = this.state;
 
     return (
       <Grid>
-      <Row my={30}>
+      <Row 
+      my={30}>
         <Col>
           <Box 
           as="header" 
@@ -140,7 +134,8 @@ class App extends Component {
           </Box>
         </Col>
       </Row>
-      <Row my={10}>
+      <Row 
+      my={10}>
         <Col>
           <Box 
           as="section" 
@@ -178,7 +173,8 @@ class App extends Component {
           as="main" 
           role="main" 
           >
-            <Results />
+            <Results 
+            results={results}/>
           </Box>
         </Col>
       </Row>
