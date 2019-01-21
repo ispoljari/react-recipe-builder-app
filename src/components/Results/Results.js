@@ -31,7 +31,7 @@ const wrapContentIntoColumn = content => (
         alt={content.title}/>
         <Typography 
         variant="h3"
-        fontSize={20}
+        fontSize={{xs: 18, lg: 20}}
         color="black"
         ml={20}>
           {content.title}
@@ -47,24 +47,45 @@ const wrapColumnsIntoRow = columns => (
   </Row>
 );
 
+const generateFeedback = feedback => (
+  <Row>
+    <Col>
+      <Typography 
+      variant="h3" 
+      textAlign="center"
+      fontSize={20}
+      fontWeight="normal">
+        {feedback}
+      </Typography>
+    </Col>
+  </Row>
+);
 
-const Results = ({results}) => {
+
+const Results = ({results, error}) => {
   let rowContent = [];
   let gridWrapper = [];
+  let grid;
 
-  const grid = results.map((result, index) => {
-    rowContent.push(wrapContentIntoColumn(result));
-
-    if ((index + 1) % 3 === 0) {
-      gridWrapper.push(wrapColumnsIntoRow(rowContent));
-      rowContent = [];
-    }
-
-    if (index === results.length - 1) {
-      gridWrapper.push(wrapColumnsIntoRow(rowContent));
-      return gridWrapper;
-    }
-  });
+  if (results.length > 0) {
+    grid = results.map((result, index) => {
+      rowContent.push(wrapContentIntoColumn(result));
+  
+      if ((index + 1) % 3 === 0) {
+        gridWrapper.push(wrapColumnsIntoRow(rowContent));
+        rowContent = [];
+      }
+  
+      if (index === results.length - 1) {
+        gridWrapper.push(wrapColumnsIntoRow(rowContent));
+        return gridWrapper;
+      }
+    });
+  } 
+  
+  if (error) {
+    grid = generateFeedback(error);
+  }
   
   return (
     <React.Fragment>

@@ -34,7 +34,7 @@ class App extends Component {
 
   handleChange = e => {
     const value = e.target.value;
- 
+
     this.setState({
       value
     }, () => {
@@ -79,6 +79,13 @@ class App extends Component {
   // Called from <SearchRecipes />
   // -------------------------------
 
+  clearResults = () => {
+    this.setState(() => ({
+      results: Object.assign({}, [])
+    })
+    );
+  }
+
   updateLoadingStatus = status => {
     this.setState({
       loading: status
@@ -105,7 +112,8 @@ class App extends Component {
       results, 
       value, 
       page,
-      loading } = this.state;
+      loading,
+      error } = this.state;
 
     return (
       <Grid>
@@ -150,6 +158,7 @@ class App extends Component {
             >
             <SearchRecipes 
               updateLoadingStatus={status => this.updateLoadingStatus(status)}
+              clearResults={this.clearResults}
               receiveResults = {results => this.receiveResults(results)}
               receiveError = {error => this.receiveError(error)}
               ingredientsList={ingredientsList}
@@ -182,7 +191,8 @@ class App extends Component {
                 loading ? 
                 <Loading /> : 
                 <Results 
-                results={results}/>
+                results={results}
+                error={error}/>
               }
             </Box>
           </Col>
