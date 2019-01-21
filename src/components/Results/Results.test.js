@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Form from './Form';
+import Results from './Results';
 
-describe('<Form />', () => {
+describe('<Results />', () => {
   it('Renders without crashing', () => {
-    shallow(<Form />);
+    shallow(<Results results={[]}/>);
   });
 });
