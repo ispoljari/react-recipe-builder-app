@@ -120,10 +120,10 @@ class App extends Component {
         <Row 
         display="flex"
         alignItems="center"
-        height="100vh !important">
+        mt="15%">
           <Col> 
             <Row 
-            my={20}>
+            mb={40}>
               <Col>
                 <Box 
                 as="header" 
@@ -185,10 +185,10 @@ class App extends Component {
                 </Box>
               </Col>
             </Row>
-            </Col>
-          </Row>
+          </Col>
+        </Row>
         <Row 
-        my={20}>
+        mt={30}>
           <Col>
             <Box 
             as="main" 
