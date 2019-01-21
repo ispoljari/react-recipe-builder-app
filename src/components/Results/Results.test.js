@@ -4,6 +4,6 @@ import Results from './Results';
 
 describe('<Results />', () => {
   it('Renders without crashing', () => {
-    shallow(<Results />);
+    shallow(<Results results={[]}/>);
   });
 });
