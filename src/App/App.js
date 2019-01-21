@@ -13,23 +13,59 @@ import {
   Col, 
   Box } from '@smooth-ui/core-sc';
 
+import uuidv4 from 'uuid/v4';
+
 const INITIAL_STATE = {
   error: null,
   results: [],
   page: 1,
   loading: false,
+  value: '',
   ingredientsList: []
 }
 
 class App extends Component {
   state = {...INITIAL_STATE};
 
-  updateSelectedIngredients = ingredient => {
+  // Called from <InputIngredient />
+  // -------------------------------
+
+  handleChange = e => {
+    const value = e.target.value;
+ 
+    this.setState({
+      value
+    }, () => {
+      if (value.includes(','))  {
+        this.updateState(value, 'change');
+      } 
+    });
+  } 
+
+  handlePress = e => {
+    const value = this.state.value;
+
+    if (e.key === 'Enter') {
+      this.updateState(value, 'press');
+    }
+  }
+
+  updateState = (value, type) => {
+    const ingredient = {
+      value: type === 'press' ? value : value.substr(0, value.indexOf(',')),
+      id: uuidv4()
+    }
+
     this.setState(prevState => ({
-      ingredientsList: [...prevState.ingredientsList, ingredient]
+      ingredientsList: [...prevState.ingredientsList, ingredient],
+      value: ''
     })
     );
   }
+
+
+  // Called from <IngredientList />
+  // -------------------------------
 
   deleteIngredient = id => {
     this.setState(prevState => ({
@@ -37,6 +73,9 @@ class App extends Component {
     })
     );
   }
+
+  // Called from <SearchRecipes />
+  // -------------------------------
 
   updateLoadingStatus = status => {
     this.setState({
@@ -58,7 +97,8 @@ class App extends Component {
   }
 
   render() {
-    const { ingredientsList, results, page } = this.state;
+    const { ingredientsList, results, value, page } = this.state;
+
     // const resultsDeepCopy = JSON.parse(JSON.stringify(results));
     // const numResults = resultsDeepCopy.length;
     // const numRowsWhole = Math.floor(numResults / 3);
@@ -93,8 +133,10 @@ class App extends Component {
           mx="auto"
           maxWidth= {300}
           >
-          <InputIngredient 
-            harvestIngredient={result => this.updateSelectedIngredients(result)}/>
+            <InputIngredient 
+            onChange={e => this.handleChange(e)}
+            onKeyDown={e => this.handlePress(e)}
+            value={value}/>
           </Box>
         </Col>
       </Row>
