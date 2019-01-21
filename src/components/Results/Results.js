@@ -17,7 +17,9 @@ const wrapContentIntoColumn = content => (
   mb={20}
   key={uuidv4()}>
     <Styled.link 
-    href={content.href}>
+    href={content.href}
+    target="_blank"
+    rel="noopener noreferrer">
       <Box
       display="flex"
       alignItems="center"
