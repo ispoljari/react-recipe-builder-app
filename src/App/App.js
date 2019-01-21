@@ -13,6 +13,8 @@ import {
   Col, 
   Box } from '@smooth-ui/core-sc';
 
+import Loading from 'react-loading-animation';
+
 import uuidv4 from 'uuid/v4';
 
 const INITIAL_STATE = {
@@ -102,84 +104,89 @@ class App extends Component {
       ingredientsList, 
       results, 
       value, 
-      page } = this.state;
+      page,
+      loading } = this.state;
 
     return (
       <Grid>
-      <Row 
-      my={20}>
-        <Col>
-          <Box 
-          as="header" 
-          role="banner" 
-          display="flex" 
-          mx="auto"
-          justifyContent="center"
-          maxWidth={300}>
-            <Title />
-          </Box>
-        </Col>
-      </Row>
-      <Row
-      my={10}>
-        <Col>
-          <Box 
-          as="section" 
-          role="region" 
-          mx="auto"
-          maxWidth= {300}
-          >
-            <InputIngredient 
-            onChange={e => this.handleChange(e)}
-            onKeyDown={e => this.handlePress(e)}
-            value={value}/>
-          </Box>
-        </Col>
-      </Row>
-      <Row
-      my={10}>
-        <Col>
-          <Box 
-          as="section" 
-          role="region" 
-          mx="auto"
-          maxWidth= {300}
-          >
-           <SearchRecipes 
-            updateLoadingStatus={status => this.updateLoadingStatus(status)}
-            receiveResults = {results => this.receiveResults(results)}
-            receiveError = {error => this.receiveError(error)}
-            ingredientsList={ingredientsList}
-            page={page}/>
-          </Box>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Box 
-          as="section" 
-          role="region" 
-          mx="auto"
-          maxWidth= {300}
-          >
-            <IngredientsList
-            ingredientsList={ingredientsList}
-            onClick={id => this.deleteIngredient(id)}/>
-          </Box>
-        </Col>
-      </Row>
-      <Row 
-      my={20}>
-        <Col>
-          <Box 
-          as="main" 
-          role="main" 
-          >
-            <Results 
-            results={results}/>
-          </Box>
-        </Col>
-      </Row>
+        <Row 
+        my={20}>
+          <Col>
+            <Box 
+            as="header" 
+            role="banner" 
+            display="flex" 
+            mx="auto"
+            justifyContent="center"
+            maxWidth={300}>
+              <Title />
+            </Box>
+          </Col>
+        </Row>
+        <Row
+        my={10}>
+          <Col>
+            <Box 
+            as="section" 
+            role="region" 
+            mx="auto"
+            maxWidth= {300}
+            >
+              <InputIngredient 
+              onChange={e => this.handleChange(e)}
+              onKeyDown={e => this.handlePress(e)}
+              value={value}/>
+            </Box>
+          </Col>
+        </Row>
+        <Row
+        my={10}>
+          <Col>
+            <Box 
+            as="section" 
+            role="region" 
+            mx="auto"
+            maxWidth= {300}
+            >
+            <SearchRecipes 
+              updateLoadingStatus={status => this.updateLoadingStatus(status)}
+              receiveResults = {results => this.receiveResults(results)}
+              receiveError = {error => this.receiveError(error)}
+              ingredientsList={ingredientsList}
+              page={page}/>
+            </Box>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Box 
+            as="section" 
+            role="region" 
+            mx="auto"
+            maxWidth= {300}
+            >
+              <IngredientsList
+              ingredientsList={ingredientsList}
+              onClick={id => this.deleteIngredient(id)}/>
+            </Box>
+          </Col>
+        </Row>
+        <Row 
+        my={20}>
+          <Col>
+            <Box 
+            as="main" 
+            role="main" 
+            >
+              {
+                loading ? 
+                <Loading /> : 
+                <Results 
+                results={results}/>
+              }
+            </Box>
+          </Col>
+        </Row>
       </Grid>
     );
   }
