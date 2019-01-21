@@ -107,7 +107,7 @@ class App extends Component {
     return (
       <Grid>
       <Row 
-      my={30}>
+      my={20}>
         <Col>
           <Box 
           as="header" 
