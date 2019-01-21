@@ -2,11 +2,9 @@ import styled from 'styled-components';
 
 export const List = styled.ul`
   display: flex;
-  border: 2px solid #d6dbdf;
   background-color: white;
   border-radius: 5px;
-  min-height: 30px;
-  padding: 5px;
+  padding: 0;
   margin: 0;
   list-style: none;
   color: black;
@@ -15,7 +13,7 @@ export const List = styled.ul`
 
   li {
     margin-right: 5px;
-    padding: 5px;
+    padding: 0 5px;
     border-radius: 5px;
     background-color: antiquewhite;
     max-height: 45px;

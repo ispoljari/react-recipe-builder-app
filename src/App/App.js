@@ -85,9 +85,10 @@ class App extends Component {
 
   receiveResults = results => {
     this.setState(() => ({
-      results: [...results],
+      results: [...results]
       })
     );
+    console.log(results);
   }
 
   receiveError = error => {
@@ -119,7 +120,8 @@ class App extends Component {
           </Box>
         </Col>
       </Row>
-      <Row>
+      <Row
+      my={10}>
         <Col>
           <Box 
           as="section" 
@@ -134,22 +136,8 @@ class App extends Component {
           </Box>
         </Col>
       </Row>
-      <Row 
+      <Row
       my={10}>
-        <Col>
-          <Box 
-          as="section" 
-          role="region" 
-          mx="auto"
-          maxWidth= {300}
-          >
-            <IngredientsList
-            ingredientsList={ingredientsList}
-            onClick={id => this.deleteIngredient(id)}/>
-          </Box>
-        </Col>
-      </Row>
-      <Row>
         <Col>
           <Box 
           as="section" 
@@ -166,8 +154,22 @@ class App extends Component {
           </Box>
         </Col>
       </Row>
+      <Row>
+        <Col>
+          <Box 
+          as="section" 
+          role="region" 
+          mx="auto"
+          maxWidth= {300}
+          >
+            <IngredientsList
+            ingredientsList={ingredientsList}
+            onClick={id => this.deleteIngredient(id)}/>
+          </Box>
+        </Col>
+      </Row>
       <Row 
-      my={30}>
+      my={20}>
         <Col>
           <Box 
           as="main" 
