@@ -147,6 +147,25 @@ class App extends Component {
     });
   }
 
+   // Called from <Navigation />
+  // -------------------------------
+
+  navigatePage = e => {
+    const button = e.target.id;
+    
+    if (button === 'prev' && button > 1) {
+      this.setState(prevState => ({
+        page: prevState.page - 1
+      })
+      );
+    } else if (button === 'next') {
+      this.setState(prevState => ({
+        page: prevState.page + 1
+      })
+      );
+    }
+  }
+
   render() {
     const { 
       ingredientsList, 
@@ -244,7 +263,8 @@ class App extends Component {
                 message={message}
                 error={error}/>
                 <Navigation 
-                visible={results.length > 0 ? true : false}/>
+                visible={results.length > 0 ? true : false}
+                onClick={e => this.navigatePage(e)}/>
               </Loading>
             </Box>
           </Col>
