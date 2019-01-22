@@ -6,7 +6,8 @@ import {
   IngredientsList, 
   InputIngredient,
   Results,
-  Navigation } from '../components';
+  Navigation,
+  CaptureImg } from '../components';
 
 import { 
   Grid, 
@@ -255,6 +256,20 @@ class App extends Component {
                 justifyContent="center"
                 maxWidth={500}>
                   <Title />
+                </Box>
+              </Col>
+            </Row>
+            <Row 
+            mb={40}>
+              <Col>
+                <Box 
+                as="header" 
+                role="banner" 
+                display="flex" 
+                mx="auto"
+                justifyContent="center"
+                maxWidth={500}>
+                  <CaptureImg />
                 </Box>
               </Col>
             </Row>
