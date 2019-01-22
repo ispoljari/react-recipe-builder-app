@@ -6,7 +6,7 @@ import * as Styled from './SearchRecipes.style';
 const SearchRecipes = ({handleSubmit}) => {
   return (
     <Styled.Form 
-    onSubmit={e => handleSubmit(e)}>
+    onSubmit={handleSubmit}>
       <Button 
       variant="success" 
       width={1} 
