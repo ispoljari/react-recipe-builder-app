@@ -35,20 +35,23 @@ class App extends Component {
 
   handleChange = e => {
     const value = e.target.value;
+    const onlyComma = (value.split().length === 1 && value.split()[0] === ',');
 
-    this.setState({
-      value
-    }, () => {
-      if (value.includes(','))  {
-        this.updateState(value, 'change');
-      } 
-    });
+    if (!onlyComma) {
+      this.setState({
+        value
+      }, () => {
+        if (value.includes(','))  {
+          this.updateState(value, 'change');
+        } 
+      });
+    }
   } 
 
   handlePress = e => {
     const { value } = this.state;
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && value) {
       this.updateState(value, 'press');
     }
   }
@@ -61,7 +64,8 @@ class App extends Component {
 
     this.setState(prevState => ({
       ingredientsList: [...prevState.ingredientsList, ingredient],
-      value: ''
+      value: '',
+      message: ''
     })
     );
   }
@@ -93,7 +97,7 @@ class App extends Component {
     
     if (ingredientsList.length === 0) {
       this.setState({
-        message: 'Before pressing Search you must select at least 1 ingredient. Add comma or press enter  after each ingredient)'
+        message: 'Before pressing Search you must select at least 1 ingredient. Add comma or press enter  after each ingredient'
       });
     }
   }
@@ -138,7 +142,7 @@ class App extends Component {
         <Row 
         display="flex"
         alignItems="center"
-        mt="10%">
+        mt={{xs: "10%", lg: "5%"}}>
           <Col> 
             <Row 
             mb={40}>
