@@ -18,7 +18,7 @@ const IngredientsList = ({ingredientsList, onClick}) => (
       backgroundColor="transparent" 
       color="black" 
       type="button" 
-      onClick={e => onClick(e.target.parentNode.dataset.key)}>
+      onClick={onClick}>
         &#10006;
       </Button>
     </li>

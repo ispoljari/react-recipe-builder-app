@@ -101,7 +101,9 @@ class App extends Component {
   // Called from <IngredientList />
   // -------------------------------
 
-  deleteIngredient = id => {
+  deleteIngredient = e => {
+    const id = e.target.parentNode.dataset.key
+
     this.setState(prevState => ({
       ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)],
       message: ''
@@ -329,7 +331,7 @@ class App extends Component {
                 >
                   <IngredientsList
                   ingredientsList={ingredientsList}
-                  onClick={id => this.deleteIngredient(id)}/>
+                  onClick={e => this.deleteIngredient(e)}/>
                 </Box>
               </Col>
             </Row>
