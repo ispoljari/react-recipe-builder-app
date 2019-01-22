@@ -45,7 +45,7 @@ class App extends Component {
     const value = e.target.value;
 
     const onlyComma = (value.split().length === 1 && value.split()[0] === ',');
-    const isLetter = value.match(/^[A-Za-z,]+$/i);
+    const isLetter = value ? value.match(/^[A-Za-z,\s]+$/i) : true;
     
     if (!onlyComma && isLetter) {
       this.setState({
@@ -178,7 +178,7 @@ class App extends Component {
       );
     } else {
       this.setState({
-        message: 'Your search produced no results.'
+        message: 'Your search produced no results. Try reloading the page.'
       });
     }
 
