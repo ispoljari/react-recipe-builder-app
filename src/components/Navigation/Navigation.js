@@ -18,7 +18,7 @@ const Navigation = ({visible, onClick}) => {
         minHeight={40} 
         fontSize={20} 
         type="button"
-        onClick={e => onClick(e)}>
+        onClick={onClick}>
           Prev
         </Button>
         <Button
