@@ -5,17 +5,24 @@ import {
   SearchRecipes, 
   IngredientsList, 
   InputIngredient,
-  Results } from '../components';
+  Results,
+  Navigation } from '../components';
 
 import { 
   Grid, 
   Row, 
   Col, 
   Box } from '@smooth-ui/core-sc';
-
+  
 import Loading from 'react-loading-animation';
 
 import uuidv4 from 'uuid/v4';
+
+import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
+
+import { fetchResults, isError } from '../util';
+
+const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
 const INITIAL_STATE = {
   error: null,
@@ -103,12 +110,26 @@ class App extends Component {
   // Called from <SearchRecipes />
   // -------------------------------
 
+  handleSubmit = e => {
+    e.preventDefault();
+    this.clearResults();
+    this.resetPageCount();
+    this.checkIngredientList();
+    this.loadRecipes();
+  }
+
   clearResults = () => {
     this.setState(() => ({
       message: '',
       results: []
     })
     );
+  }
+
+  resetPageCount = () => {
+    this.setState({
+      page: 1
+    });
   }
 
   checkIngredientList = () => {
@@ -121,13 +142,34 @@ class App extends Component {
     }
   }
 
-  updateLoadingStatus = status => {
-    this.setState({
-      loading: status
-    });
+  loadRecipes = async () => {
+    const { ingredientsList, page } = this.state;
+
+    const ingredients = ingredientsList.map(item => item.value).toString();
+
+      if (ingredients) {
+        this.updateLoadingStatus(true);
+
+        const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
+        
+        const rawResult = await fetchResults(URL_QUERY);
+        let jsonResult;
+
+        if (!isError(rawResult)) {
+          jsonResult = await rawResult.transformToJSON();
+        } else {
+          return this.loadFail(rawResult);
+        }
+
+        if (!isError(jsonResult)) {
+          this.loadSuccess(jsonResult.results);
+        } else {
+          return this.loadFail(rawResult);
+        }
+      }
   }
 
-  receiveResults = results => {
+  loadSuccess = results => {
     if (results.length > 0) {
       this.setState(() => ({
         results: [...results]
@@ -138,20 +180,59 @@ class App extends Component {
         message: 'Your search produced no results.'
       });
     }
+
+    this.updateLoadingStatus(false);
   }
 
-  receiveError = error => {
+  loadFail = error => {
     this.setState({
       error: 'Could not load recipes',
     });
+
+    this.updateLoadingStatus(false);
+  }
+
+  updateLoadingStatus = status => {
+    this.setState({
+      loading: status
+    });
+  }
+
+  // Called from <Navigation />
+  // -------------------------------
+
+  navigatePage = e => {
+    const button = e.target.id;
+    const { page } = this.state;
+    
+    if (button === 'prev' && page > 1) {
+      this.setState(prevState => ({
+        page: prevState.page - 1
+      }), () => {
+        this.clearResults();
+        this.checkIngredientList();
+        this.loadRecipes(); 
+      }
+      );
+    }
+    
+    if (button === 'next') {
+      this.setState(prevState => ({
+        page: prevState.page + 1
+      }), () => {
+        this.clearResults();
+        this.checkIngredientList();
+        this.loadRecipes(); 
+      }
+      );
+    }
   }
 
   render() {
     const { 
       ingredientsList, 
       results, 
-      value, 
-      page,
+      value,
       loading,
       error,
       message } = this.state;
@@ -203,13 +284,7 @@ class App extends Component {
                 maxWidth= {300}
                 >
                 <SearchRecipes 
-                  updateLoadingStatus={status => this.updateLoadingStatus(status)}
-                  clearResults={this.clearResults}
-                  receiveResults = {results => this.receiveResults(results)}
-                  checkIngredientList= {this.checkIngredientList}
-                  receiveError = {error => this.receiveError(error)}
-                  ingredientsList={ingredientsList}
-                  page={page}/>
+                  handleSubmit={e => this.handleSubmit(e)}/>
                 </Box>
               </Col>
             </Row>
@@ -242,6 +317,9 @@ class App extends Component {
                 results={results}
                 message={message}
                 error={error}/>
+                <Navigation 
+                visible={results.length > 0 ? true : false}
+                onClick={e => this.navigatePage(e)}/>
               </Loading>
             </Box>
           </Col>

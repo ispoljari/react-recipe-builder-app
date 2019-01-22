@@ -52,7 +52,7 @@ const generateFeedback = feedback => (
     <Col>
       <Typography 
       variant="h3" 
-      textAlign="justify"
+      textAlign="center"
       mx="auto"
       maxWidth={400}
       width={0.9}
