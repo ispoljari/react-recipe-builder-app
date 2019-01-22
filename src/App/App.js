@@ -182,7 +182,7 @@ class App extends Component {
       );
     } else {
       this.setState({
-        message: 'Your search produced no results. Try reloading the page.'
+        message: 'Your search produced no results. Please try again.'
       });
     }
 

@@ -22,7 +22,7 @@ const CaptureImg = ({onChange, capturedImg}) => (
      <Styled.Img 
     src={capturedImg} 
     alt="Camera icon"
-    width="400px" />
+    max-width="400px" />
   </Box>
 );
 
