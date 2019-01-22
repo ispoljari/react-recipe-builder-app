@@ -9,11 +9,12 @@ import { fetchResults, isError } from '../../util';
 
 const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
-const SearchRecipes = ({updateLoadingStatus, receiveResults, receiveError, clearResults, ingredientsList, page}) => {
+const SearchRecipes = ({updateLoadingStatus, receiveResults, receiveError, checkIngredientList, clearResults, ingredientsList, page}) => {
 
   const handleSubmit = e => {
     e.preventDefault();
     clearResults();
+    checkIngredientList();
     loadRecipes();
   }
   

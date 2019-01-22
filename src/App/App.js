@@ -19,6 +19,7 @@ import uuidv4 from 'uuid/v4';
 
 const INITIAL_STATE = {
   error: null,
+  message: '',
   results: [],
   page: 1,
   loading: false,
@@ -45,7 +46,7 @@ class App extends Component {
   } 
 
   handlePress = e => {
-    const value = this.state.value;
+    const { value } = this.state;
 
     if (e.key === 'Enter') {
       this.updateState(value, 'press');
@@ -81,9 +82,20 @@ class App extends Component {
 
   clearResults = () => {
     this.setState(() => ({
+      message: '',
       results: []
     })
     );
+  }
+
+  checkIngredientList = () => {
+    const { ingredientsList } = this.state;
+    
+    if (ingredientsList.length === 0) {
+      this.setState({
+        message: 'Before pressing Search you must select at least 1 ingredient. Add comma or press enter  after each ingredient)'
+      });
+    }
   }
 
   updateLoadingStatus = status => {
@@ -93,11 +105,16 @@ class App extends Component {
   }
 
   receiveResults = results => {
-    this.setState(() => ({
-      results: [...results]
-      })
-    );
-    console.log(results);
+    if (results.length > 0) {
+      this.setState(() => ({
+        results: [...results]
+        })
+      );
+    } else {
+      this.setState({
+        message: 'Your search produced no results.'
+      });
+    }
   }
 
   receiveError = error => {
@@ -113,7 +130,8 @@ class App extends Component {
       value, 
       page,
       loading,
-      error } = this.state;
+      error,
+      message } = this.state;
 
     return (
       <Grid>
@@ -165,6 +183,7 @@ class App extends Component {
                   updateLoadingStatus={status => this.updateLoadingStatus(status)}
                   clearResults={this.clearResults}
                   receiveResults = {results => this.receiveResults(results)}
+                  checkIngredientList= {this.checkIngredientList}
                   receiveError = {error => this.receiveError(error)}
                   ingredientsList={ingredientsList}
                   page={page}/>
@@ -199,6 +218,7 @@ class App extends Component {
                 <Loading /> : 
                 <Results 
                 results={results}
+                message={message}
                 error={error}/>
               }
             </Box>

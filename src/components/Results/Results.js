@@ -52,8 +52,12 @@ const generateFeedback = feedback => (
     <Col>
       <Typography 
       variant="h3" 
-      textAlign="center"
-      fontSize={20}
+      textAlign="justify"
+      mx="auto"
+      maxWidth={400}
+      width={0.9}
+      letterSpacing={1.5}
+      fontSize={{xs: 18, lg: 20}}
       fontWeight="normal">
         {feedback}
       </Typography>
@@ -62,7 +66,7 @@ const generateFeedback = feedback => (
 );
 
 
-const Results = ({results, error}) => {
+const Results = ({results, error, message}) => {
   let rowContent = [];
   let gridWrapper = [];
   let grid;
@@ -85,6 +89,8 @@ const Results = ({results, error}) => {
   
   if (error) {
     grid = generateFeedback(error);
+  } else if (message) {
+    grid = generateFeedback(message);
   }
   
   return (
