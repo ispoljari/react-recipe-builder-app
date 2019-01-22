@@ -5,7 +5,8 @@ import {
   SearchRecipes, 
   IngredientsList, 
   InputIngredient,
-  Results } from '../components';
+  Results,
+  Navigation } from '../components';
 
 import { 
   Grid, 
@@ -242,6 +243,8 @@ class App extends Component {
                 results={results}
                 message={message}
                 error={error}/>
+                <Navigation 
+                visible={results.length > 0 ? true : false}/>
               </Loading>
             </Box>
           </Col>
