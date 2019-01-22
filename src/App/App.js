@@ -237,10 +237,15 @@ class App extends Component {
   // --------------------------
 
   getCapturedImg = e => {
-    console.log(e.target.files[0]);
-    // this.setState({
-    //   capturedImg: e.target.files[0]
-    // });
+    const { capturedImg } = this.state;
+
+    if (capturedImg) {
+      URL.revokeObjectURL(capturedImg);
+    }
+
+    this.setState({
+      capturedImg: URL.createObjectURL(e.target.files[0])
+    });
   }
 
   cap
@@ -276,7 +281,7 @@ class App extends Component {
                 </Box>
               </Col>
             </Row>
-            {/* <Row 
+            <Row 
             mb={30}>
               <Col>
                 <Box 
@@ -291,7 +296,7 @@ class App extends Component {
                   capturedImg = {capturedImg} />
                 </Box>
               </Col>
-            </Row> */}
+            </Row>
             <Row
             my={10}>
               <Col>
