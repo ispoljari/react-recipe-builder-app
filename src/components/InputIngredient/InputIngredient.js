@@ -5,7 +5,7 @@ const InputIngredient = ({onChange, onKeyDown, value}) => (
   <Input 
   type="text" 
   name="ingredients" 
-  placeholder="eggs, bacon, salt, "
+  placeholder="eggs, bacon, salt,"
   value={value} 
   onChange={e => onChange(e)}
   onKeyDown={e => onKeyDown(e)}

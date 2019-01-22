@@ -37,9 +37,9 @@ class App extends Component {
     const value = e.target.value;
 
     const onlyComma = (value.split().length === 1 && value.split()[0] === ',');
-
+    const isLetter = value.match(/^[A-Za-z,]+$/i);
     
-    if (!onlyComma) {
+    if (!onlyComma && isLetter) {
       this.setState({
         value
       }, () => {
