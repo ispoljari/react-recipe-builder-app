@@ -125,7 +125,8 @@ class App extends Component {
   clearResults = () => {
     this.setState(() => ({
       message: '',
-      results: []
+      results: [],
+      error: ''
     })
     );
   }
