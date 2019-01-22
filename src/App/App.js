@@ -35,14 +35,16 @@ class App extends Component {
 
   handleChange = e => {
     const value = e.target.value;
+
     const onlyComma = (value.split().length === 1 && value.split()[0] === ',');
 
+    
     if (!onlyComma) {
       this.setState({
         value
       }, () => {
         if (value.includes(','))  {
-          this.updateState(value, 'change');
+         this.updateState(value, 'change');
         } 
       });
     }
@@ -57,17 +59,33 @@ class App extends Component {
   }
 
   updateState = (value, type) => {
-    const ingredient = {
-      value: type === 'press' ? value : value.substr(0, value.indexOf(',')),
-      id: uuidv4()
+    const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(','));
+    const noDuplicate = this.checkIfDuplicateExists(parsedValue);
+    
+    if (noDuplicate) {
+      const ingredient = {
+        value: parsedValue,
+        id: uuidv4()
+      }
+  
+      this.setState(prevState => ({
+        ingredientsList: [...prevState.ingredientsList, ingredient],
+        value: '',
+        message: ''
+      })
+      );
+    } else {
+      this.setState({
+        value: '',
+        message: `${parsedValue} is already on the list`
+      });
     }
+  }
 
-    this.setState(prevState => ({
-      ingredientsList: [...prevState.ingredientsList, ingredient],
-      value: '',
-      message: ''
-    })
-    );
+  checkIfDuplicateExists = value => {
+    return this.state.ingredientsList.filter(item => (
+      item.value.toLowerCase() === value.toLowerCase()
+    )).length > 0 ? false : true;
   }
 
 
@@ -76,7 +94,8 @@ class App extends Component {
 
   deleteIngredient = id => {
     this.setState(prevState => ({
-      ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)]
+      ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)],
+      message: ''
     })
     );
   }
