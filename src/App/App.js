@@ -24,8 +24,6 @@ import { fetchResults, isError } from '../util';
 
 const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
-
-
 const INITIAL_STATE = {
   error: null,
   message: '',
@@ -115,6 +113,7 @@ class App extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.clearResults();
+    this.resetPageCount();
     this.checkIngredientList();
     this.loadRecipes();
   }
@@ -125,6 +124,12 @@ class App extends Component {
       results: []
     })
     );
+  }
+
+  resetPageCount = () => {
+    this.setState({
+      page: 1
+    });
   }
 
   checkIngredientList = () => {
@@ -193,21 +198,32 @@ class App extends Component {
     });
   }
 
-   // Called from <Navigation />
+  // Called from <Navigation />
   // -------------------------------
 
   navigatePage = e => {
     const button = e.target.id;
+    const { page } = this.state;
     
-    if (button === 'prev' && button > 1) {
+    if (button === 'prev' && page > 1) {
       this.setState(prevState => ({
         page: prevState.page - 1
-      })
+      }), () => {
+        this.clearResults();
+        this.checkIngredientList();
+        this.loadRecipes(); 
+      }
       );
-    } else if (button === 'next') {
+    }
+    
+    if (button === 'next') {
       this.setState(prevState => ({
         page: prevState.page + 1
-      })
+      }), () => {
+        this.clearResults();
+        this.checkIngredientList();
+        this.loadRecipes(); 
+      }
       );
     }
   }
