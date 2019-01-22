@@ -236,14 +236,13 @@ class App extends Component {
             as="main" 
             role="main" 
             >
-              {
-                loading ? 
-                <Loading /> : 
+              <Loading 
+              isLoading={loading}> 
                 <Results 
                 results={results}
                 message={message}
                 error={error}/>
-              }
+              </Loading>
             </Box>
           </Col>
         </Row>
