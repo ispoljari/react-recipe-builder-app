@@ -81,7 +81,7 @@ class App extends Component {
 
   clearResults = () => {
     this.setState(() => ({
-      results: Object.assign({}, [])
+      results: []
     })
     );
   }
