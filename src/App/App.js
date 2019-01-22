@@ -351,9 +351,10 @@ class App extends Component {
                 results={results}
                 message={message}
                 error={error}/>
+                {results.length > 0 ? 
                 <Navigation 
-                visible={results.length > 0 ? true : false}
-                onClick={e => this.navigatePage(e)}/>
+                onClick={e => this.navigatePage(e)}/> : ''
+                }
               </Loading>
             </Box>
           </Col>
