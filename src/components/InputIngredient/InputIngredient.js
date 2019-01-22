@@ -7,8 +7,8 @@ const InputIngredient = ({onChange, onKeyDown, value}) => (
   name="ingredients" 
   placeholder="eggs, bacon, salt,"
   value={value} 
-  onChange={e => onChange(e)}
-  onKeyDown={e => onKeyDown(e)}
+  onChange={onChange}
+  onKeyDown={onKeyDown}
   required 
   size="md" 
   borderRadius={5} 

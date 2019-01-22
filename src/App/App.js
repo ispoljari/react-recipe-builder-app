@@ -32,7 +32,8 @@ const INITIAL_STATE = {
   page: 1,
   loading: false,
   value: '',
-  ingredientsList: []
+  ingredientsList: [],
+  capturedImg: ''
 }
 
 class App extends Component {
@@ -229,6 +230,18 @@ class App extends Component {
     }
   }
 
+  // Called from <CaptureImg />
+  // --------------------------
+
+  getCapturedImg = e => {
+    console.log(e.target.files[0]);
+    // this.setState({
+    //   capturedImg: e.target.files[0]
+    // });
+  }
+
+  cap
+
   render() {
     const { 
       ingredientsList, 
@@ -236,7 +249,8 @@ class App extends Component {
       value,
       loading,
       error,
-      message } = this.state;
+      message,
+      capturedImg } = this.state;
 
     return (
       <Grid>
@@ -246,7 +260,7 @@ class App extends Component {
         mt={{xs: "10%", lg: "5%"}}>
           <Col> 
             <Row 
-            mb={40}>
+            mb={30}>
               <Col>
                 <Box 
                 as="header" 
@@ -259,8 +273,8 @@ class App extends Component {
                 </Box>
               </Col>
             </Row>
-            <Row 
-            mb={40}>
+            {/* <Row 
+            mb={30}>
               <Col>
                 <Box 
                 as="header" 
@@ -269,10 +283,12 @@ class App extends Component {
                 mx="auto"
                 justifyContent="center"
                 maxWidth={500}>
-                  <CaptureImg />
+                  <CaptureImg
+                  onChange={e => this.getCapturedImg(e)}
+                  capturedImg = {capturedImg} />
                 </Box>
               </Col>
-            </Row>
+            </Row> */}
             <Row
             my={10}>
               <Col>
