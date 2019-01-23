@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import camera from '../../svg/camera.svg';
 
 export const Img = styled.img`
   max-width: ${props => props.maxWidth};
@@ -9,6 +10,13 @@ export const Img = styled.img`
 `;
 
 export const Input = styled.input`
-  margin: a auto;
-  width: 220px;
+  color: transparent;
+  width: 130px;
+  height: 0;
+  border-radius: 20px;
+  background: url(${camera}) no-repeat center center;
+  background-size: 110px;
+  overflow: hidden;
+  padding-top: 110px;
+  margin: 0 auto;
 `;

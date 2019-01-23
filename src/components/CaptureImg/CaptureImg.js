@@ -1,6 +1,7 @@
 import React from 'react';
 
 import camera from '../../svg/camera.svg';
+
 import { Box } from '@smooth-ui/core-sc';
 
 import * as Styled from './CaptureImg.style';
