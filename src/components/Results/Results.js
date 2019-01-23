@@ -10,36 +10,65 @@ import * as Styled from './Results.style';
 
 import uuidv4 from 'uuid/v4';
 
-const wrapContentIntoColumn = content => (
-  <Col 
-  xs={12} 
-  md={4} 
-  mb={20}
-  key={uuidv4()}>
-    <Styled.link 
-    href={content.href}
-    target="_blank"
-    rel="noopener noreferrer">
+const wrapContentIntoColumn = content => {
+  const contentCopy = JSON.parse(JSON.stringify(content));
+  const ingredients = contentCopy.ingredients.split(', ').map(item => (
+      <li
+      key={uuidv4()}>
+        {item}
+      </li>
+    ));
+
+  return (
+    <Col 
+    xs={12} 
+    md={4} 
+    mb={20}
+    key={uuidv4()}>
       <Box
       display="flex"
-      alignItems="center"
+      alignItems="flex-start"
       p={15}
       borderRadius={5}
       border="1px solid #c5c7ca">
-        <img 
-        src={content.thumbnail} 
-        alt={content.title}/>
-        <Typography 
-        variant="h3"
-        fontSize={{xs: 18, lg: 20}}
-        color="black"
-        ml={20}>
-          {content.title}
-        </Typography>
+        <Styled.Link 
+        href={content.href}
+        target="_blank"
+        rel="noopener noreferrer">
+          <img 
+          src={content.thumbnail} 
+          alt={content.title}/>
+        </Styled.Link>
+        <Box
+        ml={20}
+        overflow="-webkit-paged-y">
+          <Styled.Link
+          href={content.href}
+          target="_blank"
+          rel="noopener noreferrer">
+            <Typography 
+            variant="h3"
+            fontSize={{xs: 20, lg: 22}}
+            color="black">
+              {content.title}
+            </Typography>
+          </Styled.Link>
+          <Typography 
+          variant="h4"
+          fontSize={{xs: 16, lg: 18}}
+          color="black"
+          mb={0}>
+            Ingredients:
+          </Typography>
+          <hr/>
+          <Styled.List>
+            {ingredients}
+          </Styled.List>
+        </Box>
       </Box>
-    </Styled.link>
-  </Col>
-);
+    </Col>
+  );
+};
 
 const wrapColumnsIntoRow = columns => (
   <Row key={uuidv4()}>

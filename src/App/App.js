@@ -15,13 +15,17 @@ import {
   Col, 
   Box } from '@smooth-ui/core-sc';
   
+import { fetchResults, isError } from '../util';
+
 import Loading from 'react-loading-animation';
 
 import uuidv4 from 'uuid/v4';
 
+import { API_KEY_CLARAFAI } from '../config';
+
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
-import { fetchResults, isError } from '../util';
+import Clarifai from 'clarifai';
 
 const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
@@ -30,7 +34,8 @@ const INITIAL_STATE = {
   message: '',
   results: [],
   page: 1,
-  loading: false,
+  loadingRecipes: false,
+  loadingPredictions: false,
   value: '',
   ingredientsList: [],
   capturedImg: ''
@@ -53,7 +58,7 @@ class App extends Component {
         value
       }, () => {
         if (value.includes(','))  {
-         this.updateState(value, 'change');
+         this.updateIngredientsList(value, 'change');
         } 
       });
     }
@@ -63,32 +68,40 @@ class App extends Component {
     const { value } = this.state;
 
     if (e.key === 'Enter' && value) {
-      this.updateState(value, 'press');
+      this.updateIngredientsList(value, 'press');
     }
   }
 
-  updateState = (value, type) => {
+  updateIngredientsList = (value, type) => {
     const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(','));
     const noDuplicate = this.checkIfDuplicateExists(parsedValue);
     
     if (noDuplicate) {
-      const ingredient = {
-        value: parsedValue,
-        id: uuidv4()
-      }
-  
-      this.setState(prevState => ({
-        ingredientsList: [...prevState.ingredientsList, ingredient],
-        value: '',
-        message: ''
-      })
-      );
+      this.saveNewIngredientsToState(parsedValue);
     } else {
       this.setState({
-        value: '',
         message: `${parsedValue} is already on the list`
       });
     }
+
+    this.setState({
+      value: ''
+    })
+  }
+
+  saveNewIngredientsToState = (...values) => {
+    const ingredients = values.map(value => ({
+      value,
+      id: uuidv4()
+    })
+    );
+
+    this.setState(prevState => ({
+      ingredientsList: [...prevState.ingredientsList, ...ingredients],
+      message: '',
+      error: ''
+    })
+    );
   }
 
   checkIfDuplicateExists = value => {
@@ -115,11 +128,16 @@ class App extends Component {
   // -------------------------------
 
   handleSubmit = e => {
+    const { loadingRecipes, loadingPredictions } = this.state;
+
     e.preventDefault();
-    this.clearResults();
-    this.resetPageCount();
-    this.checkIngredientList();
-    this.loadRecipes();
+
+    if (!loadingRecipes && !loadingPredictions) {
+      this.clearResults();
+      this.resetPageCount();
+      this.checkIngredientList();
+      this.loadRecipes();
+    }
   }
 
   clearResults = () => {
@@ -153,7 +171,7 @@ class App extends Component {
     const ingredients = ingredientsList.map(item => item.value).toString();
 
       if (ingredients) {
-        this.updateLoadingStatus(true);
+        this.updateRecipeLoadingStatus(true);
 
         const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
         
@@ -163,13 +181,16 @@ class App extends Component {
         if (!isError(rawResult)) {
           jsonResult = await rawResult.transformToJSON();
         } else {
-          return this.loadFail(rawResult);
+          this.loadFail('Could not load recipes');
+          return this.updateRecipeLoadingStatus(false);
         }
 
         if (!isError(jsonResult)) {
           this.loadSuccess(jsonResult.results);
+          this.updateRecipeLoadingStatus(false);
         } else {
-          return this.loadFail(rawResult);
+          this.loadFail('Could not load recipes');
+          return this.updateRecipeLoadingStatus(false);
         }
       }
   }
@@ -185,21 +206,17 @@ class App extends Component {
         message: 'Your search produced no results. Please try again.'
       });
     }
-
-    this.updateLoadingStatus(false);
   }
 
   loadFail = error => {
     this.setState({
-      error: 'Could not load recipes',
+      error
     });
-
-    this.updateLoadingStatus(false);
   }
 
-  updateLoadingStatus = status => {
+  updateRecipeLoadingStatus = status => {
     this.setState({
-      loading: status
+      loadingRecipes: status
     });
   }
 
@@ -237,11 +254,14 @@ class App extends Component {
   // --------------------------
 
   previewCapturedImg = e => {
-    const img = e.target.files[0];
-    if (img) {
+    const imgFile = e.target.files[0];
+
+    if (imgFile) {
       this.setState({
-        capturedImg: URL.createObjectURL(img)
+        capturedImg: URL.createObjectURL(imgFile)
       });
+
+      this.getPredictionsFromImage(imgFile);
     }
   }
 
@@ -250,11 +270,65 @@ class App extends Component {
 
     if (capturedImg) {
       URL.revokeObjectURL(capturedImg);
+      this.setState({
+        capturedImg: ''
+      });
     }
 
+  }
+
+  getPredictionsFromImage = (imgFile) => {
+    this.updatePredictionsLoadingStatus(true);
+
+    const reader = new FileReader();
+    reader.readAsDataURL(imgFile);
+
+    reader.onload = () => {
+      const result = reader.result.split('base64,')[1];
+
+      const app = new Clarifai.App({
+        apiKey: `${API_KEY_CLARAFAI}`
+      });
+
+      app.models.predict(Clarifai.FOOD_MODEL, {base64: result}, {maxConcepts: 5, minValue: 0.6})
+      .then(
+        function(response) {
+          const responseArray = response.outputs[0].data.concepts;
+
+          if (responseArray.length > 0) {
+            return responseArray.map(item => (
+              item.name
+            ));
+          }
+
+          return [];
+        },
+        function(error) {
+          return error;
+        }
+      )
+      .then(ingredients => {
+        this.updatePredictionsLoadingStatus(false);
+        if (ingredients.length > 0) {
+          this.saveNewIngredientsToState(...ingredients);
+          this.clearResults();
+          this.resetPageCount();
+          this.loadRecipes();
+        } else {
+          this.loadFail('Cannot detect food.');
+        }
+      })
+      .catch(error => {
+        this.updatePredictionsLoadingStatus(false);
+        this.loadFail('Cannot parse image.');
+      })
+    }
+  }
+
+  updatePredictionsLoadingStatus = status => {
     this.setState({
-      capturedImg: ''
-    });
+      loadingPredictions: status
+    })
   }
 
   render() {
@@ -262,7 +336,8 @@ class App extends Component {
       ingredientsList, 
       results, 
       value,
-      loading,
+      loadingRecipes,
+      loadingPredictions,
       error,
       message,
       capturedImg } = this.state;
@@ -343,9 +418,12 @@ class App extends Component {
                 mx="auto"
                 maxWidth= {300}
                 >
-                  <IngredientsList
-                  ingredientsList={ingredientsList}
-                  onClick={e => this.deleteIngredient(e)}/>
+                  <Loading 
+                  isLoading={loadingPredictions}> 
+                    <IngredientsList
+                    ingredientsList={ingredientsList}
+                    onClick={e => this.deleteIngredient(e)}/>
+                  </Loading>
                 </Box>
               </Col>
             </Row>
@@ -359,7 +437,7 @@ class App extends Component {
             role="main" 
             >
               <Loading 
-              isLoading={loading}> 
+              isLoading={loadingRecipes}> 
                 <Results 
                 results={results}
                 message={message}

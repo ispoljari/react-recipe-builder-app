@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@smooth-ui/core-sc": "^7.1.1",
+    "clarifai": "^2.9.0",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-loading-animation": "^1.4.0",
