@@ -89,6 +89,7 @@ class App extends Component {
   }
 
   saveNewIngredientsToState = (...values) => {
+    console.log('Hello');
     const ingredients = values.map(value => ({
       value,
       id: uuidv4()
@@ -290,17 +291,31 @@ class App extends Component {
       app.models.predict(Clarifai.FOOD_MODEL, {base64: result})
       .then(
         function(response) {
-          // this.updateLoadingStatus(false);
-          console.log(response);
+          const filteredResponse = response.outputs[0].data.concepts.filter(item => (
+            item.value > 0.5
+          )
+          );
 
+          const limitedResponse = filteredResponse.length > 5 ? filteredResponse.slice(0,5) : filteredResponse;
+
+          const ingredientList = limitedResponse.map(item => (
+            item.name
+          ));
+
+          return ingredientList;
         },
         function(error) {
-          // this.updateLoadingStatus(false);
-          // this.setState({
-          //   error: 'Cannot parse image'
-          // })
+          return error;
         }
-      );
+      )
+      .then(ingredients => {
+        // this.updateLoadingStatus(false);
+        this.saveNewIngredientsToState(...ingredients);
+      })
+      .catch(error => {
+        // this.updateLoadingStatus(false);
+        // add error message
+      })
     }
   }
 
