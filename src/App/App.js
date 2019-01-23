@@ -57,7 +57,7 @@ class App extends Component {
         value
       }, () => {
         if (value.includes(','))  {
-         this.updateState(value, 'change');
+         this.updateIngredientsList(value, 'change');
         } 
       });
     }
@@ -67,32 +67,40 @@ class App extends Component {
     const { value } = this.state;
 
     if (e.key === 'Enter' && value) {
-      this.updateState(value, 'press');
+      this.updateIngredientsList(value, 'press');
     }
   }
 
-  updateState = (value, type) => {
+  updateIngredientsList = (value, type) => {
     const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(','));
     const noDuplicate = this.checkIfDuplicateExists(parsedValue);
     
     if (noDuplicate) {
-      const ingredient = {
-        value: parsedValue,
-        id: uuidv4()
-      }
-  
-      this.setState(prevState => ({
-        ingredientsList: [...prevState.ingredientsList, ingredient],
-        value: '',
-        message: ''
-      })
-      );
+      this.saveNewIngredientsToState(parsedValue);
     } else {
       this.setState({
-        value: '',
         message: `${parsedValue} is already on the list`
       });
     }
+
+    this.setState({
+      value: ''
+    })
+  }
+
+  saveNewIngredientsToState = (...values) => {
+    const ingredients = values.map(value => ({
+      value,
+      id: uuidv4()
+    })
+    );
+
+    this.setState(prevState => ({
+      ingredientsList: [...prevState.ingredientsList, ...ingredients],
+      message: '',
+      error: ''
+    })
+    );
   }
 
   checkIfDuplicateExists = value => {
@@ -265,23 +273,32 @@ class App extends Component {
   }
 
   getPredictionsFromImage = (imgFile) => {
-    const reader = new FileReader();
+    // this.updateLoadingStatus(true);
+    // this.clearResults();
+    // this.resetPageCount();
 
+    const reader = new FileReader();
     reader.readAsDataURL(imgFile);
-    reader.onload = e => {
+
+    reader.onload = () => {
       const result = reader.result.split('base64,')[1];
-      console.log(result);
 
       const app = new Clarifai.App({
         apiKey: `${API_KEY_CLARAFAI}`
       });
 
-      app.models.predict(Clarifai.FOOD_MODEL, {base64: result}).then(
+      app.models.predict(Clarifai.FOOD_MODEL, {base64: result})
+      .then(
         function(response) {
+          // this.updateLoadingStatus(false);
           console.log(response);
+
         },
         function(error) {
-          console.log(error);
+          // this.updateLoadingStatus(false);
+          // this.setState({
+          //   error: 'Cannot parse image'
+          // })
         }
       );
     }
