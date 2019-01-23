@@ -237,9 +237,12 @@ class App extends Component {
   // --------------------------
 
   previewCapturedImg = e => {
-    this.setState({
-      capturedImg: URL.createObjectURL(e.target.files[0])
-    });
+    const img = e.target.files[0];
+    if (img) {
+      this.setState({
+        capturedImg: URL.createObjectURL(img)
+      });
+    }
   }
 
   removeCapturedImg = () => {
@@ -248,7 +251,7 @@ class App extends Component {
     if (capturedImg) {
       URL.revokeObjectURL(capturedImg);
     }
-    
+
     this.setState({
       capturedImg: ''
     });
