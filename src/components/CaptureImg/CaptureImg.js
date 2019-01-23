@@ -2,9 +2,8 @@ import React from 'react';
 
 import { Box, Typography } from '@smooth-ui/core-sc';
 import * as Styled from './CaptureImg.style';
-import { css }from 'styled-components';
 
-const CaptureImg = ({onChange, capturedImg}) => (
+const CaptureImg = ({onChange, capturedImg, onClick}) => (
   <Box
   display="flex"
   flexDirection="column"
@@ -27,7 +26,8 @@ const CaptureImg = ({onChange, capturedImg}) => (
       show={capturedImg ? true : false}
       type="button" 
       name="remove" 
-      aria-label="Remove image">
+      aria-label="Remove image"
+      onClick={onClick}>
         &times;
       </Styled.Button>
     </Box>

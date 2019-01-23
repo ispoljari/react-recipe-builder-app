@@ -237,14 +237,20 @@ class App extends Component {
   // --------------------------
 
   previewCapturedImg = e => {
+    this.setState({
+      capturedImg: URL.createObjectURL(e.target.files[0])
+    });
+  }
+
+  removeCapturedImg = () => {
     const { capturedImg } = this.state;
 
     if (capturedImg) {
       URL.revokeObjectURL(capturedImg);
     }
-
+    
     this.setState({
-      capturedImg: URL.createObjectURL(e.target.files[0])
+      capturedImg: ''
     });
   }
 
@@ -291,6 +297,7 @@ class App extends Component {
                 maxWidth={500}>
                   <CaptureImg
                   onChange={e => this.previewCapturedImg(e)}
+                  onClick={this.removeCapturedImg}
                   capturedImg = {capturedImg} />
                 </Box>
               </Col>
