@@ -27,13 +27,11 @@ import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
 import Clarifai from 'clarifai';
 
-const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
-
-const app = new Clarifai.App({
+const clarifaiApp = new Clarifai.App({
   apiKey: API_KEY_CLARAFAI
 })
 
-
+const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
 const INITIAL_STATE = {
   error: null,
@@ -247,11 +245,23 @@ class App extends Component {
   // --------------------------
 
   previewCapturedImg = e => {
-    const img = e.target.files[0];
-    if (img) {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+
+      const imgFile = e.target.files[0];
+
+      if (imgFile) {
+        this.setState({
+          capturedImg: URL.createObjectURL(imgFile)
+        });
+      }
+
+      this.getPredictionsFromImage(imgFile);
+    } else {
+
       this.setState({
-        capturedImg: URL.createObjectURL(img)
+        message: 'This browser does not support the capture image functionality'
       });
+      
     }
   }
 
@@ -265,6 +275,16 @@ class App extends Component {
     this.setState({
       capturedImg: ''
     });
+  }
+
+  getPredictionsFromImage = (imgFile) => {
+    const reader = new FileReader();
+
+    reader.readAsBinaryString(imgFile);
+    reader.onload = e => {
+      console.log(reader.result);
+    }
+
   }
 
   render() {
