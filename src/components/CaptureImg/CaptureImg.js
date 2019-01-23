@@ -16,11 +16,21 @@ const CaptureImg = ({onChange, capturedImg}) => (
     accept="image/*" 
     capture="environment"
     onChange={onChange} />
-     <Styled.Img 
-    src={capturedImg} 
-    alt="Camera icon"
-    maxWidth="400px"
-    show={capturedImg ? true : false} />
+    <Box
+    position="relative">
+      <Styled.Img 
+      src={capturedImg} 
+      alt="Camera icon"
+      maxWidth="400px"
+      show={capturedImg ? true : false} />
+      <Styled.Button 
+      show={capturedImg ? true : false}
+      type="button" 
+      name="remove" 
+      aria-label="Remove image">
+        &times;
+      </Styled.Button>
+    </Box>
     <Typography 
     display= {capturedImg ? "none" : "block" }
     variant="h2" 
