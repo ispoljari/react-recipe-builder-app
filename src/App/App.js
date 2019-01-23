@@ -128,11 +128,16 @@ class App extends Component {
   // -------------------------------
 
   handleSubmit = e => {
+    const { loadingRecipes, loadingPredictions } = this.state;
+
     e.preventDefault();
-    this.clearResults();
-    this.resetPageCount();
-    this.checkIngredientList();
-    this.loadRecipes();
+
+    if (!loadingRecipes && !loadingPredictions) {
+      this.clearResults();
+      this.resetPageCount();
+      this.checkIngredientList();
+      this.loadRecipes();
+    }
   }
 
   clearResults = () => {

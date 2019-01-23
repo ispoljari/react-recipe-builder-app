@@ -11,12 +11,13 @@ import * as Styled from './Results.style';
 import uuidv4 from 'uuid/v4';
 
 const wrapContentIntoColumn = content => {
-
-  const ingredients = content.ingredients.split(', ').map(item => (
-      <Styled.List
+  const contentCopy = JSON.parse(JSON.stringify(content));
+  console.log(contentCopy);
+  const ingredients = contentCopy.ingredients.split(', ').map(item => (
+      <li
       key={uuidv4()}>
         {item}
-      </Styled.List>
+      </li>
     ));
 
   return (
@@ -25,43 +26,47 @@ const wrapContentIntoColumn = content => {
     md={4} 
     mb={20}
     key={uuidv4()}>
-      <Styled.Link 
-      href={content.href}
-      target="_blank"
-      rel="noopener noreferrer">
-        <Box
-        display="flex"
-        alignItems="center"
-        p={15}
-        borderRadius={5}
-        border="1px solid #c5c7ca">
+      <Box
+      display="flex"
+      alignItems="flex-start"
+      p={15}
+      borderRadius={5}
+      border="1px solid #c5c7ca">
+        <Styled.Link 
+        href={content.href}
+        target="_blank"
+        rel="noopener noreferrer">
           <img 
           src={content.thumbnail} 
           alt={content.title}/>
-          <Box>
+        </Styled.Link>
+        <Box
+        ml={20}
+        overflow="-webkit-paged-y">
+          <Styled.Link
+          href={content.href}
+          target="_blank"
+          rel="noopener noreferrer">
             <Typography 
             variant="h3"
-            fontSize={{xs: 18, lg: 20}}
-            color="black"
-            ml={20}>
+            fontSize={{xs: 20, lg: 22}}
+            color="black">
               {content.title}
             </Typography>
-            <Typography 
-            variant="h4"
-            fontSize={{xs: 16, lg: 18}}
-            color="black"
-            ml={20}>
-              <small>
-                Ingredients:
-              </small>
-              <br />
-              <ul>
-                {ingredients}
-              </ul>
-            </Typography>
-          </Box>
+          </Styled.Link>
+          <Typography 
+          variant="h4"
+          fontSize={{xs: 16, lg: 18}}
+          color="black"
+          mb={0}>
+            Ingredients:
+          </Typography>
+          <hr/>
+          <Styled.List>
+            {ingredients}
+          </Styled.List>
         </Box>
-      </Styled.Link>
+      </Box>
     </Col>
   );
 };
