@@ -236,7 +236,7 @@ class App extends Component {
   // Called from <CaptureImg />
   // --------------------------
 
-  getCapturedImg = e => {
+  previewCapturedImg = e => {
     const { capturedImg } = this.state;
 
     if (capturedImg) {
@@ -247,8 +247,6 @@ class App extends Component {
       capturedImg: URL.createObjectURL(e.target.files[0])
     });
   }
-
-  cap
 
   render() {
     const { 
@@ -292,7 +290,7 @@ class App extends Component {
                 justifyContent="center"
                 maxWidth={500}>
                   <CaptureImg
-                  onChange={e => this.getCapturedImg(e)}
+                  onChange={e => this.previewCapturedImg(e)}
                   capturedImg = {capturedImg} />
                 </Box>
               </Col>
