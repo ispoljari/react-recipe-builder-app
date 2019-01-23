@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box, Typography } from '@smooth-ui/core-sc';
 import * as Styled from './CaptureImg.style';
+import { css }from 'styled-components';
 
 const CaptureImg = ({onChange, capturedImg}) => (
   <Box
@@ -9,6 +10,7 @@ const CaptureImg = ({onChange, capturedImg}) => (
   flexDirection="column"
   alignItems="center">
     <Styled.Input
+    show={capturedImg ? false : true}
     type="file" 
     name="image" 
     accept="image/*" 
@@ -20,6 +22,7 @@ const CaptureImg = ({onChange, capturedImg}) => (
     maxWidth="400px"
     show={capturedImg ? true : false} />
     <Typography 
+    display= {capturedImg ? "none" : "block" }
     variant="h2" 
     textAlign="left" 
     fontSize={{xs: 22, md: 24}} 

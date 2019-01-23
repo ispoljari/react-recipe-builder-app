@@ -4,12 +4,13 @@ import camera from '../../svg/camera.svg';
 export const Img = styled.img`
   max-width: ${props => props.maxWidth};
   display: ${props => props.show ? "block" : "none"};
-  margin-top: 30px;
+  margin-top: 10px;
   width: 100%;
   border-radius: 5px;
 `;
 
 export const Input = styled.input`
+  display: ${props => props.show ? "block" : "none"};
   color: transparent;
   width: 130px;
   height: 0;
