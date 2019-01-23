@@ -245,23 +245,14 @@ class App extends Component {
   // --------------------------
 
   previewCapturedImg = e => {
-    if (window.File && window.FileReader && window.FileList && window.Blob) {
+    const imgFile = e.target.files[0];
 
-      const imgFile = e.target.files[0];
-
-      if (imgFile) {
-        this.setState({
-          capturedImg: URL.createObjectURL(imgFile)
-        });
-      }
+    if (imgFile) {
+      this.setState({
+        capturedImg: URL.createObjectURL(imgFile)
+      });
 
       this.getPredictionsFromImage(imgFile);
-    } else {
-
-      this.setState({
-        message: 'This browser does not support the capture image functionality'
-      });
-      
     }
   }
 
