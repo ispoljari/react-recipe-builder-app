@@ -17,6 +17,7 @@ export const List = styled.ul`
     border-radius: 5px;
     background-color: antiquewhite;
     max-height: 45px;
+    white-space: nowrap;
 
     :last-of-type {
       margin-right: 0;

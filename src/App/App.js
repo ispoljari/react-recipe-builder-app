@@ -272,11 +272,11 @@ class App extends Component {
       const result = reader.result.split('base64,')[1];
       console.log(result);
 
-      const clarifaiApp = new Clarifai.App({
-        apiKey: API_KEY_CLARAFAI
+      const app = new Clarifai.App({
+        apiKey: `${API_KEY_CLARAFAI}`
       });
 
-      clarifaiApp.models.predict(Clarifai.FOOD_MODEL, {base64: result}).then(
+      app.models.predict(Clarifai.FOOD_MODEL, {base64: result}).then(
         function(response) {
           console.log(response);
         },
