@@ -6,7 +6,8 @@ import {
   IngredientsList, 
   InputIngredient,
   Results,
-  Navigation } from '../components';
+  Navigation,
+  CaptureImg } from '../components';
 
 import { 
   Grid, 
@@ -31,7 +32,8 @@ const INITIAL_STATE = {
   page: 1,
   loading: false,
   value: '',
-  ingredientsList: []
+  ingredientsList: [],
+  capturedImg: ''
 }
 
 class App extends Component {
@@ -44,7 +46,7 @@ class App extends Component {
     const value = e.target.value;
 
     const onlyComma = (value.split().length === 1 && value.split()[0] === ',');
-    const isLetter = value.match(/^[A-Za-z,]+$/i);
+    const isLetter = value ? value.match(/^[A-Za-z,\s]+$/i) : true;
     
     if (!onlyComma && isLetter) {
       this.setState({
@@ -99,7 +101,9 @@ class App extends Component {
   // Called from <IngredientList />
   // -------------------------------
 
-  deleteIngredient = id => {
+  deleteIngredient = e => {
+    const id = e.target.parentNode.dataset.key
+
     this.setState(prevState => ({
       ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)],
       message: ''
@@ -121,7 +125,8 @@ class App extends Component {
   clearResults = () => {
     this.setState(() => ({
       message: '',
-      results: []
+      results: [],
+      error: ''
     })
     );
   }
@@ -177,7 +182,7 @@ class App extends Component {
       );
     } else {
       this.setState({
-        message: 'Your search produced no results.'
+        message: 'Your search produced no results. Please try again.'
       });
     }
 
@@ -228,6 +233,21 @@ class App extends Component {
     }
   }
 
+  // Called from <CaptureImg />
+  // --------------------------
+
+  previewCapturedImg = e => {
+    const { capturedImg } = this.state;
+
+    if (capturedImg) {
+      URL.revokeObjectURL(capturedImg);
+    }
+
+    this.setState({
+      capturedImg: URL.createObjectURL(e.target.files[0])
+    });
+  }
+
   render() {
     const { 
       ingredientsList, 
@@ -235,7 +255,8 @@ class App extends Component {
       value,
       loading,
       error,
-      message } = this.state;
+      message,
+      capturedImg } = this.state;
 
     return (
       <Grid>
@@ -245,7 +266,7 @@ class App extends Component {
         mt={{xs: "10%", lg: "5%"}}>
           <Col> 
             <Row 
-            mb={40}>
+            mb={10}>
               <Col>
                 <Box 
                 as="header" 
@@ -255,6 +276,22 @@ class App extends Component {
                 justifyContent="center"
                 maxWidth={500}>
                   <Title />
+                </Box>
+              </Col>
+            </Row>
+            <Row 
+            mb={20}>
+              <Col>
+                <Box 
+                as="header" 
+                role="banner" 
+                display="flex" 
+                mx="auto"
+                justifyContent="center"
+                maxWidth={500}>
+                  <CaptureImg
+                  onChange={e => this.previewCapturedImg(e)}
+                  capturedImg = {capturedImg} />
                 </Box>
               </Col>
             </Row>
@@ -298,7 +335,7 @@ class App extends Component {
                 >
                   <IngredientsList
                   ingredientsList={ingredientsList}
-                  onClick={id => this.deleteIngredient(id)}/>
+                  onClick={e => this.deleteIngredient(e)}/>
                 </Box>
               </Col>
             </Row>
@@ -317,9 +354,10 @@ class App extends Component {
                 results={results}
                 message={message}
                 error={error}/>
+                {results.length > 0 ? 
                 <Navigation 
-                visible={results.length > 0 ? true : false}
-                onClick={e => this.navigatePage(e)}/>
+                onClick={e => this.navigatePage(e)}/> : ''
+                }
               </Loading>
             </Box>
           </Col>
