@@ -12,7 +12,6 @@ import uuidv4 from 'uuid/v4';
 
 const wrapContentIntoColumn = content => {
   const contentCopy = JSON.parse(JSON.stringify(content));
-  console.log(contentCopy);
   const ingredients = contentCopy.ingredients.split(', ').map(item => (
       <li
       key={uuidv4()}>
