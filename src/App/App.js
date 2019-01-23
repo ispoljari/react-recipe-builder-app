@@ -166,7 +166,7 @@ class App extends Component {
     const ingredients = ingredientsList.map(item => item.value).toString();
 
       if (ingredients) {
-        this.updateLoadingStatus(true);
+        this.updateRecipeLoadingStatus(true);
 
         const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
         
@@ -176,13 +176,16 @@ class App extends Component {
         if (!isError(rawResult)) {
           jsonResult = await rawResult.transformToJSON();
         } else {
-          return this.loadFail(rawResult);
+          this.loadFail('Could not load recipes');
+          return this.updateRecipeLoadingStatus(false);
         }
 
         if (!isError(jsonResult)) {
           this.loadSuccess(jsonResult.results);
+          this.updateRecipeLoadingStatus(false);
         } else {
-          return this.loadFail(rawResult);
+          this.loadFail('Could not load recipes');
+          return this.updateRecipeLoadingStatus(false);
         }
       }
   }
@@ -198,19 +201,15 @@ class App extends Component {
         message: 'Your search produced no results. Please try again.'
       });
     }
-
-    this.updateLoadingStatus(false);
   }
 
   loadFail = error => {
     this.setState({
-      error: 'Could not load recipes',
+      error
     });
-
-    this.updateLoadingStatus(false);
   }
 
-  updateLoadingStatus = status => {
+  updateRecipeLoadingStatus = status => {
     this.setState({
       loading: status
     });
@@ -274,7 +273,7 @@ class App extends Component {
   }
 
   getPredictionsFromImage = (imgFile) => {
-    // this.updateLoadingStatus(true);
+    // this.updateRecipeLoadingStatus(true);
     // this.clearResults();
     // this.resetPageCount();
 
@@ -309,12 +308,11 @@ class App extends Component {
         }
       )
       .then(ingredients => {
-        // this.updateLoadingStatus(false);
+        // this.updateRecipeLoadingStatus(false);
         this.saveNewIngredientsToState(...ingredients);
       })
       .catch(error => {
-        // this.updateLoadingStatus(false);
-        // add error message
+        this.loadFail('Could not parse image');
       })
     }
   }

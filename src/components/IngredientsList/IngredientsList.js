@@ -4,7 +4,8 @@ import { Button } from '@smooth-ui/core-sc';
 import * as Styled from './IngredientsList.style';
 
 const IngredientsList = ({ingredientsList, onClick}) => (
-  <Styled.List>
+  <Styled.List
+  visible={ingredientsList.length>0}>
    {ingredientsList.map(item => 
     <li 
     key={item.id} 
