@@ -34,7 +34,8 @@ const INITIAL_STATE = {
   message: '',
   results: [],
   page: 1,
-  loading: false,
+  loadingRecipes: false,
+  loadingPredictions: false,
   value: '',
   ingredientsList: [],
   capturedImg: ''
@@ -89,7 +90,6 @@ class App extends Component {
   }
 
   saveNewIngredientsToState = (...values) => {
-    console.log('Hello');
     const ingredients = values.map(value => ({
       value,
       id: uuidv4()
@@ -211,7 +211,7 @@ class App extends Component {
 
   updateRecipeLoadingStatus = status => {
     this.setState({
-      loading: status
+      loadingRecipes: status
     });
   }
 
@@ -265,17 +265,15 @@ class App extends Component {
 
     if (capturedImg) {
       URL.revokeObjectURL(capturedImg);
+      this.setState({
+        capturedImg: ''
+      });
     }
 
-    this.setState({
-      capturedImg: ''
-    });
   }
 
   getPredictionsFromImage = (imgFile) => {
-    // this.updateRecipeLoadingStatus(true);
-    // this.clearResults();
-    // this.resetPageCount();
+    this.updatePredictionsLoadingStatus(true);
 
     const reader = new FileReader();
     reader.readAsDataURL(imgFile);
@@ -287,34 +285,45 @@ class App extends Component {
         apiKey: `${API_KEY_CLARAFAI}`
       });
 
-      app.models.predict(Clarifai.FOOD_MODEL, {base64: result})
+      app.models.predict(Clarifai.FOOD_MODEL, {base64: result}, {maxConcepts: 5, minValue: 0.6})
       .then(
         function(response) {
-          const filteredResponse = response.outputs[0].data.concepts.filter(item => (
-            item.value > 0.5
-          )
-          );
+          const responseArray = response.outputs[0].data.concepts;
 
-          const limitedResponse = filteredResponse.length > 5 ? filteredResponse.slice(0,5) : filteredResponse;
+          if (responseArray.length > 0) {
+            return responseArray.map(item => (
+              item.name
+            ));
+          }
 
-          const ingredientList = limitedResponse.map(item => (
-            item.name
-          ));
-
-          return ingredientList;
+          return [];
         },
         function(error) {
           return error;
         }
       )
       .then(ingredients => {
-        // this.updateRecipeLoadingStatus(false);
-        this.saveNewIngredientsToState(...ingredients);
+        this.updatePredictionsLoadingStatus(false);
+        if (ingredients.length > 0) {
+          this.saveNewIngredientsToState(...ingredients);
+          this.clearResults();
+          this.resetPageCount();
+          this.loadRecipes();
+        } else {
+          this.loadFail('Cannot detect food.');
+        }
       })
       .catch(error => {
-        this.loadFail('Could not parse image');
+        this.updatePredictionsLoadingStatus(false);
+        this.loadFail('Cannot parse image.');
       })
     }
+  }
+
+  updatePredictionsLoadingStatus = status => {
+    this.setState({
+      loadingPredictions: status
+    })
   }
 
   render() {
@@ -322,7 +331,8 @@ class App extends Component {
       ingredientsList, 
       results, 
       value,
-      loading,
+      loadingRecipes,
+      loadingPredictions,
       error,
       message,
       capturedImg } = this.state;
@@ -403,9 +413,12 @@ class App extends Component {
                 mx="auto"
                 maxWidth= {300}
                 >
-                  <IngredientsList
-                  ingredientsList={ingredientsList}
-                  onClick={e => this.deleteIngredient(e)}/>
+                  <Loading 
+                  isLoading={loadingPredictions}> 
+                    <IngredientsList
+                    ingredientsList={ingredientsList}
+                    onClick={e => this.deleteIngredient(e)}/>
+                  </Loading>
                 </Box>
               </Col>
             </Row>
@@ -419,7 +432,7 @@ class App extends Component {
             role="main" 
             >
               <Loading 
-              isLoading={loading}> 
+              isLoading={loadingRecipes}> 
                 <Results 
                 results={results}
                 message={message}
