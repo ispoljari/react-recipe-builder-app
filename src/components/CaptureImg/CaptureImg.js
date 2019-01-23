@@ -1,9 +1,6 @@
 import React from 'react';
 
-import camera from '../../svg/camera.svg';
-
-import { Box } from '@smooth-ui/core-sc';
-
+import { Box, Typography } from '@smooth-ui/core-sc';
 import * as Styled from './CaptureImg.style';
 
 const CaptureImg = ({onChange, capturedImg}) => (
@@ -11,9 +8,6 @@ const CaptureImg = ({onChange, capturedImg}) => (
   display="flex"
   flexDirection="column"
   alignItems="center">
-    {/* <Styled.Img 
-    src={camera} 
-    alt="Camera icon" /> */}
     <Styled.Input
     type="file" 
     name="image" 
@@ -25,6 +19,17 @@ const CaptureImg = ({onChange, capturedImg}) => (
     alt="Camera icon"
     maxWidth="400px"
     show={capturedImg ? true : false} />
+    <Typography 
+    variant="h2" 
+    textAlign="left" 
+    fontSize={{xs: 22, md: 24}} 
+    fontWeight="bold" 
+    lineHeight={1.5} 
+    m={0} px={18} 
+    mt={20} 
+    letterSpacing={1.5}>
+      OR 
+    </Typography>
   </Box>
 );
 

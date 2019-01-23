@@ -266,7 +266,7 @@ class App extends Component {
         mt={{xs: "10%", lg: "5%"}}>
           <Col> 
             <Row 
-            mb={30}>
+            mb={10}>
               <Col>
                 <Box 
                 as="header" 
@@ -280,7 +280,7 @@ class App extends Component {
               </Col>
             </Row>
             <Row 
-            mb={30}>
+            mb={20}>
               <Col>
                 <Box 
                 as="header" 
