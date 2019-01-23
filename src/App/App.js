@@ -19,6 +19,14 @@ import Loading from 'react-loading-animation';
 
 import uuidv4 from 'uuid/v4';
 
+import API_KEY_CLARAFAI from '../config';
+
+import Clarifai from 'clarifai';
+
+const app = new Clarifai.app({
+  apiKey: API_KEY_CLARAFAI
+})
+
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
 import { fetchResults, isError } from '../util';
