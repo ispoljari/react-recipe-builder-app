@@ -27,10 +27,6 @@ import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
 import Clarifai from 'clarifai';
 
-const clarifaiApp = new Clarifai.App({
-  apiKey: API_KEY_CLARAFAI
-})
-
 const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
 const INITIAL_STATE = {
@@ -271,11 +267,24 @@ class App extends Component {
   getPredictionsFromImage = (imgFile) => {
     const reader = new FileReader();
 
-    reader.readAsBinaryString(imgFile);
+    reader.readAsDataURL(imgFile);
     reader.onload = e => {
-      console.log(reader.result);
-    }
+      const result = reader.result.split('base64,')[1];
+      console.log(result);
 
+      const clarifaiApp = new Clarifai.App({
+        apiKey: API_KEY_CLARAFAI
+      });
+
+      clarifaiApp.models.predict(Clarifai.FOOD_MODEL, {base64: result}).then(
+        function(response) {
+          console.log(response);
+        },
+        function(error) {
+          console.log(error);
+        }
+      );
+    }
   }
 
   render() {
