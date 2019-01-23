@@ -12,6 +12,6 @@ deploy:
   app: calm-savannah-27155
   on:
     repo: ispoljari/react-recipe-builder-app
-  branches:
-    only:
-      - master
+    branches:
+      only:
+        - master
