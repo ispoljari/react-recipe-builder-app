@@ -22,5 +22,3 @@ export const List = styled.ul`
   color: black;
   overflow: -webkit-paged-y;
 `;
-
-export const 
