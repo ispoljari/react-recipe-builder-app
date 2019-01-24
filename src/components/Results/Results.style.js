@@ -21,18 +21,6 @@ export const List = styled.ul`
   list-style: none;
   color: black;
   overflow: -webkit-paged-y;
-
-  li {
-    margin-right: 5px;
-    white-space: nowrap;
-    font-size: 16px;
-
-    @media (min-width: 992px) {
-      font-size: 18px;
-    }
-
-    :last-of-type {
-      margin-right: 0;
-    }
-  }
 `;
+
+export const 

@@ -1,14 +1,12 @@
 import React from 'react';
+import uuidv4 from 'uuid/v4';
 
 import { 
   Row, 
   Col, 
   Box,
   Typography } from '@smooth-ui/core-sc';
-
 import * as Styled from './Results.style';
-
-import uuidv4 from 'uuid/v4';
 
 const Results = ({results, ingredientsList, error, message}) => {
   let rowContent = [];

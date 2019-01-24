@@ -20,22 +20,18 @@ import { fetchResults, isError } from '../util';
 import { API_KEY_CLARAFAI } from '../config';
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
-const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
-
-const INITIAL_STATE = {
-  error: null,
-  message: '',
-  results: [],
-  page: 1,
-  loadingRecipes: false,
-  loadingPredictions: false,
-  value: '',
-  ingredientsList: [],
-  capturedImg: ''
-}
-
-class App extends Component {
-  state = {...INITIAL_STATE};
+export default class App extends Component {
+  state = {
+    error: null,
+    message: '',
+    results: [],
+    page: 1,
+    loadingRecipes: false,
+    loadingPredictions: false,
+    value: '',
+    ingredientsList: [],
+    capturedImg: ''
+  };
 
   // Called from <InputIngredient />
   // -------------------------------
@@ -166,6 +162,7 @@ class App extends Component {
       if (ingredients) {
         this.updateRecipeLoadingStatus(true);
 
+        const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
         const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
         
         const rawResult = await fetchResults(URL_QUERY);
@@ -448,5 +445,3 @@ class App extends Component {
     );
   }
 };
-
-export default App;
