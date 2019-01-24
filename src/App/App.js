@@ -290,7 +290,7 @@ class App extends Component {
         apiKey: `${API_KEY_CLARAFAI}`
       });
 
-      app.models.predict(Clarifai.FOOD_MODEL, {base64: result}, {maxConcepts: 5, minValue: 0.6})
+      app.models.predict(Clarifai.FOOD_MODEL, {base64: result}, {maxConcepts: 5, minValue: 0.9})
       .then(
         function(response) {
           const responseArray = response.outputs[0].data.concepts;
