@@ -39,7 +39,7 @@ const CaptureImg = ({onChange, capturedImg, onClick}) => (
     fontWeight="bold" 
     lineHeight={1.5} 
     m={0} px={18} 
-    mt={20} 
+    mt={10} 
     letterSpacing={1.5}>
       OR 
     </Typography>

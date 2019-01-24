@@ -364,7 +364,7 @@ class App extends Component {
               </Col>
             </Row>
             <Row 
-            mb={20}>
+            mb={15}>
               <Col>
                 <Box 
                 as="header" 
