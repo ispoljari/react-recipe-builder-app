@@ -1,4 +1,12 @@
 import React, { Component } from 'react';
+import { 
+  Grid, 
+  Row, 
+  Col, 
+  Box } from '@smooth-ui/core-sc';
+import Loading from 'react-loading-animation';
+import uuidv4 from 'uuid/v4';
+import Clarifai from 'clarifai';
 
 import { 
   Title, 
@@ -8,24 +16,9 @@ import {
   Results,
   Navigation,
   CaptureImg } from '../components';
-
-import { 
-  Grid, 
-  Row, 
-  Col, 
-  Box } from '@smooth-ui/core-sc';
-  
 import { fetchResults, isError } from '../util';
-
-import Loading from 'react-loading-animation';
-
-import uuidv4 from 'uuid/v4';
-
 import { API_KEY_CLARAFAI } from '../config';
-
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
-
-import Clarifai from 'clarifai';
 
 const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
 
@@ -440,9 +433,10 @@ class App extends Component {
               isLoading={loadingRecipes}> 
                 <Results 
                 results={results}
+                ingredientsList={ingredientsList}
                 message={message}
                 error={error}/>
-                {results.length > 0 ? 
+                {(results.length > 0 && !message && !error) ? 
                 <Navigation 
                 onClick={e => this.navigatePage(e)}/> : ''
                 }
