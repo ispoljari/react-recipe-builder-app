@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { Button } from '@smooth-ui/core-sc';
+
 import Form from './SearchRecipes.style';
 
 const SearchRecipes = React.memo(({ handleSubmit }) => (

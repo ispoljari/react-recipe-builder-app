@@ -5,7 +5,6 @@
   "dependencies": {
     "@smooth-ui/core-sc": "^7.1.1",
     "clarifai": "^2.9.0",
-    "memoize-one": "^5.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
