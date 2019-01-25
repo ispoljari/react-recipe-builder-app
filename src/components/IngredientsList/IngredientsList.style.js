@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const List = styled.ul`
-  display: ${props => props.visible ? "flex" : "none"};
+const List = styled.ul`
+  display: ${props => (props.visible ? 'flex' : 'none')};
   background-color: white;
   border: 1px solid #E3E2E6;
   border-radius: 5px;
@@ -26,3 +26,5 @@ export const List = styled.ul`
     }
   }
 `;
+
+export default List;

@@ -412,7 +412,7 @@ export default class App extends Component {
                   isLoading={loadingPredictions}> 
                     <IngredientsList
                     ingredientsList={ingredientsList}
-                    onClick={e => this.deleteIngredient(e)}/>
+                    onClick={this.deleteIngredient}/>
                   </Loading>
                 </Box>
               </Col>
