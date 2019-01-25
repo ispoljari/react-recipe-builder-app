@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Button } from '@smooth-ui/core-sc';
 import * as Styled from './SearchRecipes.style';
@@ -15,6 +16,10 @@ const SearchRecipes = React.memo(({handleSubmit}) => (
       Search
     </Button>
   </Styled.Form>
-)); 
+));
+
+SearchRecipes.propTypes = {
+  handleSubmit: PropTypes.func.isRequired
+};
 
 export default SearchRecipes;
