@@ -435,7 +435,7 @@ export default class App extends Component {
                 error={error}/>
                 {(results.length > 0 && !message && !error) ? 
                 <Navigation 
-                onClick={e => this.navigatePage(e)}/> : ''
+                onClick={this.navigatePage}/> : ''
                 }
               </Loading>
             </Box>
