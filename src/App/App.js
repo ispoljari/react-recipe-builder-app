@@ -349,7 +349,7 @@ export default class App extends Component {
                 mx="auto"
                 justifyContent="center"
                 maxWidth={500}>
-                  <Title />
+                  <Title text="Recipe Builder"/>
                 </Box>
               </Col>
             </Row>
