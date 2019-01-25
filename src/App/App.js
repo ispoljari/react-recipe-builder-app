@@ -380,8 +380,8 @@ export default class App extends Component {
                 maxWidth= {300}
                 >
                   <InputIngredient 
-                  onChange={e => this.handleChange(e)}
-                  onKeyDown={e => this.handlePress(e)}
+                  onChange={this.handleChange}
+                  onKeyDown={this.handlePress}
                   value={value}/>
                 </Box>
               </Col>
