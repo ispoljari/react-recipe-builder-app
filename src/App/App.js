@@ -396,7 +396,7 @@ export default class App extends Component {
                 maxWidth= {300}
                 >
                 <SearchRecipes 
-                  handleSubmit={e => this.handleSubmit(e)}/>
+                  handleSubmit={this.handleSubmit}/>
                 </Box>
               </Col>
             </Row>

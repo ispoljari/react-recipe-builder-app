@@ -3,7 +3,7 @@ import React from 'react';
 import { Button } from '@smooth-ui/core-sc';
 import * as Styled from './SearchRecipes.style';
 
-const SearchRecipes = ({handleSubmit}) => (
+const SearchRecipes = React.memo(({handleSubmit}) => (
   <Styled.Form 
   onSubmit={handleSubmit}>
     <Button 
@@ -15,6 +15,6 @@ const SearchRecipes = ({handleSubmit}) => (
       Search
     </Button>
   </Styled.Form>
-); 
+)); 
 
 export default SearchRecipes;
