@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button } from '@smooth-ui/core-sc';
-import * as Styled from './SearchRecipes.style';
+import Form from './SearchRecipes.style';
 
 const SearchRecipes = React.memo(({ handleSubmit }) => (
-  <Styled.Form
+  <Form
     onSubmit={handleSubmit}
   >
     <Button
@@ -17,7 +17,7 @@ const SearchRecipes = React.memo(({ handleSubmit }) => (
     >
       Search
     </Button>
-  </Styled.Form>
+  </Form>
 ));
 
 SearchRecipes.propTypes = {
