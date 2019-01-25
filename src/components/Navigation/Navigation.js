@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Button, Box } from '@smooth-ui/core-sc';
 
-const Navigation = ({ onClick }) => (
+const Navigation = React.memo(({ onClick }) => (
   <Box
     display="flex"
     justifyContent="center"
@@ -36,7 +36,7 @@ const Navigation = ({ onClick }) => (
       Next
     </Button>
   </Box>
-);
+));
 
 Navigation.propTypes = {
   onClick: PropTypes.func.isRequired,
