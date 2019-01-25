@@ -1,4 +1,4 @@
-export const fetchResults = async (urlWithQuery) => {
+const fetchResults = async (urlWithQuery) => {
   let rawData, resultJSON;
 
   try {
@@ -24,7 +24,12 @@ export const fetchResults = async (urlWithQuery) => {
   }
 }
 
-export const isError = obj => {
+const isError = obj => {
   const result = obj instanceof Error ? true : false;
   return result;
+}
+
+export {
+  fetchResults,
+  isError
 }
