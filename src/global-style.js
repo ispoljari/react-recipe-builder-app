@@ -1,5 +1,7 @@
 import { globalStyle, createGlobalStyle } from '@smooth-ui/core-sc';
 
-export const Global = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   ${globalStyle()}
 `;
+
+export default GlobalStyle;
