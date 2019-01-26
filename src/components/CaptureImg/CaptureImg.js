@@ -12,7 +12,6 @@ const CaptureImg = ({ onChange, capturedImg, onClick }) => (
     alignItems="center"
   >
     <Styled.Input
-      id="image"
       aria-label="Capture image"
       aria-hidden="true"
       show={!capturedImg}
@@ -37,6 +36,7 @@ const CaptureImg = ({ onChange, capturedImg, onClick }) => (
         type="button"
         name="remove"
         aria-label="Remove image"
+        aria-hidden="true"
         onClick={onClick}
       >
         &times;
