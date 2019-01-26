@@ -364,9 +364,9 @@ export default class App extends Component {
                 justifyContent="center"
                 maxWidth={500}>
                   <CaptureImg
-                  onChange={e => this.previewCapturedImg(e)}
+                  onChange={this.previewCapturedImg}
                   onClick={this.removeCapturedImg}
-                  capturedImg = {capturedImg} />
+                  capturedImg={capturedImg} />
                 </Box>
               </Col>
             </Row>

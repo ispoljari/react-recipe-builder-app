@@ -22,11 +22,7 @@ const InputIngredient = ({ onChange, onKeyDown, value }) => (
 InputIngredient.propTypes = {
   onChange: PropTypes.func.isRequired,
   onKeyDown: PropTypes.func.isRequired,
-  value: PropTypes.string,
-};
-
-InputIngredient.defaultProps = {
-  value: '',
+  value: PropTypes.string.isRequired,
 };
 
 export default InputIngredient;
