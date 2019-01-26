@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@smooth-ui/core-sc';
 import PropTypes from 'prop-types';
 
+import withRowContent from '../../hocs/RowContent';
 import List from './IngredientsList.style';
 
 const IngredientsList = ({ ingredientsList, onClick }) => (
@@ -39,5 +40,16 @@ IngredientsList.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
+const rowContentSetup = {
+  rowMargin: {},
+  boxConfig: {
+    as: 'section',
+    role: 'region',
+    mx: 'auto',
+    maxWidth: '300px',
+  },
+};
 
-export default IngredientsList;
+const WrappedIngredientsList = withRowContent(rowContentSetup)(IngredientsList);
+
+export default WrappedIngredientsList;

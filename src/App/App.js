@@ -11,7 +11,7 @@ import Loading from 'react-loading-animation';
 import {
   WrappedTitle,
   WrappedSearchRecipes,
-  IngredientsList,
+  WrappedIngredientsList,
   WrappedInputIngredient,
   Results,
   Navigation,
@@ -64,25 +64,14 @@ const App = (props) => {
           <WrappedSearchRecipes
             handleSubmit={handleSubmit}
           />
-          <Row>
-            <Col>
-              <Box
-                as="section"
-                role="region"
-                mx="auto"
-                maxWidth={300}
-              >
-                <Loading
-                  isLoading={loadingPredictions}
-                >
-                  <IngredientsList
-                    ingredientsList={ingredientsList}
-                    onClick={deleteIngredient}
-                  />
-                </Loading>
-              </Box>
-            </Col>
-          </Row>
+          <Loading
+            isLoading={loadingPredictions}
+          >
+            <WrappedIngredientsList
+              ingredientsList={ingredientsList}
+              onClick={deleteIngredient}
+            />
+          </Loading>
         </Col>
       </Row>
       <Row
