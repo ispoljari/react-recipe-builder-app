@@ -2,12 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import GlobalStyle from './global-style';
-import App from './App/App';
+import AppContainer from './App/AppContainer';
 
 ReactDOM.render(
   <React.Fragment>
     <GlobalStyle />
-    <App />
+    <AppContainer />
   </React.Fragment>,
   document.getElementById('root'),
 );
