@@ -8,6 +8,7 @@ import {
 } from '@smooth-ui/core-sc';
 import PropTypes from 'prop-types';
 
+import withRowContent from '../../hocs/RowContent';
 import * as Styled from './Results.style';
 
 const wrapColumnsIntoRow = columns => (
@@ -151,4 +152,14 @@ Results.defaultProps = {
   message: '',
 };
 
-export default Results;
+const rowContentSetup = {
+  rowMargin: {},
+  boxConfig: {
+    as: 'main',
+    role: 'main',
+  },
+};
+
+const WrappedResults = withRowContent(rowContentSetup)(Results);
+
+export default WrappedResults;

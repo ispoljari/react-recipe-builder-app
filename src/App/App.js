@@ -13,7 +13,7 @@ import {
   WrappedSearchRecipes,
   WrappedIngredientsList,
   WrappedInputIngredient,
-  Results,
+  WrappedResults,
   Navigation,
   WrappedCaptureImg,
 } from '../components';
@@ -75,36 +75,32 @@ const App = (props) => {
         </Col>
       </Row>
       <Row
-        my={30}
+        my={10}
       >
         <Col>
-          <Box
-            as="main"
-            role="main"
+          <Loading
+            isLoading={loadingRecipes}
           >
-            <Loading
-              isLoading={loadingRecipes}
-            >
-              <Results
-                results={results}
-                ingredientsList={ingredientsList}
-                message={message}
-                error={error}
-              />
-              {(results.length > 0 && !message && !error)
-                ? (
-                  <Navigation
-                    onClick={navigatePage}
-                  />
-                ) : ''
-              }
-            </Loading>
-          </Box>
+            <WrappedResults
+              results={results}
+              ingredientsList={ingredientsList}
+              message={message}
+              error={error}
+            />
+          </Loading>
         </Col>
       </Row>
     </Grid>
   );
 };
+
+// {(results.length > 0 && !message && !error)
+//   ? (
+//     <Navigation
+//       onClick={navigatePage}
+//     />
+//   ) : ''
+// }
 
 App.propTypes = {
   handleChange: PropTypes.func.isRequired,
