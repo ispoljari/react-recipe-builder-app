@@ -2,6 +2,8 @@ import React from 'react';
 import { Input } from '@smooth-ui/core-sc';
 import PropTypes from 'prop-types';
 
+import withRowContent from '../../hocs/RowContent';
+
 const InputIngredient = ({ onChange, onKeyDown, value }) => (
   <Input
     type="text"
@@ -25,4 +27,19 @@ InputIngredient.propTypes = {
   value: PropTypes.string.isRequired,
 };
 
-export default InputIngredient;
+const rowContentSetup = {
+  rowMargin: {
+    my: '10px',
+  },
+  boxConfig: {
+    as: 'section',
+    role: 'region',
+    mx: 'auto',
+    maxWidth: '300px',
+  },
+};
+
+const WrappedInputIngredient = withRowContent(rowContentSetup)(InputIngredient);
+
+
+export default WrappedInputIngredient;

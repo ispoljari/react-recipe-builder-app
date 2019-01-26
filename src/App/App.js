@@ -12,23 +12,25 @@ import {
   WrappedTitle,
   SearchRecipes,
   IngredientsList,
-  InputIngredient,
+  WrappedInputIngredient,
   Results,
   Navigation,
   WrappedCaptureImg,
 } from '../components';
 
 
-const App = ({
-  appState,
-  handleChange,
-  handlePress,
-  handleSubmit,
-  previewCapturedImg,
-  removeCapturedImg,
-  deleteIngredient,
-  navigatePage,
-}) => {
+const App = (props) => {
+  const {
+    appState,
+    handleChange,
+    handlePress,
+    handleSubmit,
+    previewCapturedImg,
+    removeCapturedImg,
+    deleteIngredient,
+    navigatePage,
+  } = props;
+
   const {
     ingredientsList,
     results,
@@ -54,24 +56,11 @@ const App = ({
             onClick={removeCapturedImg}
             capturedImg={capturedImg}
           />
-          <Row
-            my={10}
-          >
-            <Col>
-              <Box
-                as="section"
-                role="region"
-                mx="auto"
-                maxWidth={300}
-              >
-                <InputIngredient
-                  onChange={handleChange}
-                  onKeyDown={handlePress}
-                  value={value}
-                />
-              </Box>
-            </Col>
-          </Row>
+          <WrappedInputIngredient
+            onChange={handleChange}
+            onKeyDown={handlePress}
+            value={value}
+          />
           <Row
             my={10}
           >
