@@ -313,7 +313,8 @@ export default class AppContainer extends Component {
       handlePress={this.handlePress}
       handleSubmit={this.handleSubmit}
       deleteIngredient={this.deleteIngredient}
-      navigatePage={this.navigatePage}/>
+      navigatePage={this.navigatePage}
+      />
     );
   }
 }

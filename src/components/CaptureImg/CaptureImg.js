@@ -12,6 +12,9 @@ const CaptureImg = ({ onChange, capturedImg, onClick }) => (
     alignItems="center"
   >
     <Styled.Input
+      id="image"
+      aria-label="Capture image"
+      aria-hidden="true"
       show={!capturedImg}
       type="file"
       name="image"
@@ -25,6 +28,7 @@ const CaptureImg = ({ onChange, capturedImg, onClick }) => (
       <Styled.Img
         src={capturedImg}
         alt="Camera icon"
+        aria-hidden="true"
         maxWidth="400px"
         show={!!capturedImg}
       />
@@ -40,6 +44,7 @@ const CaptureImg = ({ onChange, capturedImg, onClick }) => (
     </Box>
     <Typography
       display={capturedImg ? 'none' : 'block'}
+      aria-hidden="true"
       variant="h2"
       textAlign="left"
       fontSize={{ xs: 22, md: 24 }}

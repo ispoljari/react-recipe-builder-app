@@ -48,8 +48,8 @@ const rowContentSetup = {
     mb: '20px',
   },
   boxConfig: {
-    as: 'main',
-    role: 'main',
+    as: 'section',
+    role: 'region',
   },
 };
 
