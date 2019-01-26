@@ -20,8 +20,14 @@ import {
 
 
 const App = ({
-  appState, handleChange, handlePress, handleSubmit,
-  previewCapturedImg, removeCapturedImg, deleteIngredient, navigatePage,
+  appState,
+  handleChange,
+  handlePress,
+  handleSubmit,
+  previewCapturedImg,
+  removeCapturedImg,
+  deleteIngredient,
+  navigatePage,
 }) => {
   const {
     ingredientsList,
