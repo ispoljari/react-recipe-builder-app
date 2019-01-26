@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography } from '@smooth-ui/core-sc';
 import PropTypes from 'prop-types';
 
+import withRowContent from '../../hocs/RowContent';
 import * as Styled from './CaptureImg.style';
 
 const CaptureImg = ({ onChange, capturedImg, onClick }) => (
@@ -60,4 +61,6 @@ CaptureImg.propTypes = {
   capturedImg: PropTypes.string.isRequired,
 };
 
-export default CaptureImg;
+const WrappedCaptureImg = withRowContent(CaptureImg);
+
+export default WrappedCaptureImg;

@@ -15,7 +15,7 @@ import {
   InputIngredient,
   Results,
   Navigation,
-  CaptureImg,
+  WrappedCaptureImg,
 } from '../components';
 
 
@@ -49,26 +49,11 @@ const App = ({
       >
         <Col>
           <WrappedTitle />
-          <Row
-            mb={15}
-          >
-            <Col>
-              <Box
-                as="header"
-                role="banner"
-                display="flex"
-                mx="auto"
-                justifyContent="center"
-                maxWidth={500}
-              >
-                <CaptureImg
-                  onChange={previewCapturedImg}
-                  onClick={removeCapturedImg}
-                  capturedImg={capturedImg}
-                />
-              </Box>
-            </Col>
-          </Row>
+          <WrappedCaptureImg
+            onChange={previewCapturedImg}
+            onClick={removeCapturedImg}
+            capturedImg={capturedImg}
+          />
           <Row
             my={10}
           >
