@@ -8,6 +8,7 @@ import List from './IngredientsList.style';
 const IngredientsList = ({ ingredientsList, onClick }) => (
   <List
     visible={ingredientsList.length > 0}
+    aria-live="assertive"
   >
     {ingredientsList.map(item => (
       <li
@@ -18,6 +19,7 @@ const IngredientsList = ({ ingredientsList, onClick }) => (
           {item.value}
         </span>
         <Button
+          aria-label="Remove ingredient from list"
           p="5px"
           display="inline-block"
           backgroundColor="transparent"
