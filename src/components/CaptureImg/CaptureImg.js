@@ -61,6 +61,20 @@ CaptureImg.propTypes = {
   capturedImg: PropTypes.string.isRequired,
 };
 
-const WrappedCaptureImg = withRowContent(CaptureImg);
+const rowContentSetup = {
+  rowMargin: {
+    mb: '10px',
+  },
+  boxConfig: {
+    as: 'section',
+    role: 'region',
+    display: 'flex',
+    mx: 'auto',
+    justifyContent: 'center',
+    maxWidth: '500px',
+  },
+};
+
+const WrappedCaptureImg = withRowContent(rowContentSetup)(CaptureImg);
 
 export default WrappedCaptureImg;

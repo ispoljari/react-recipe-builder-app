@@ -1,23 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   Row,
   Col,
   Box,
 } from '@smooth-ui/core-sc';
 
-const withRowContent = (WrappedComponent) => {
+const withRowContent = setup => (WrappedComponent) => {
+  const { rowMargin, boxConfig } = setup;
+
   const HOSFC = props => (
     <Row
-      mb={10}
+      {...rowMargin}
     >
       <Col>
         <Box
-          as="header"
-          role="banner"
-          display="flex"
-          mx="auto"
-          justifyContent="center"
-          maxWidth={500}
+          {...boxConfig}
         >
           <WrappedComponent {...props} />
         </Box>

@@ -16,6 +16,20 @@ const Title = React.memo(() => (
   </Box>
 ));
 
-const WrappedTitle = withRowContent(Title);
+const rowContentSetup = {
+  rowMargin: {
+    mb: '10px',
+  },
+  boxConfig: {
+    as: 'header',
+    role: 'banner',
+    display: 'flex',
+    mx: 'auto',
+    justifyContent: 'center',
+    maxWidth: '500px',
+  },
+};
+
+const WrappedTitle = withRowContent(rowContentSetup)(Title);
 
 export default WrappedTitle;
