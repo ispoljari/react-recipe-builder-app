@@ -10,7 +10,7 @@ import Loading from 'react-loading-animation';
 
 import {
   WrappedTitle,
-  SearchRecipes,
+  WrappedSearchRecipes,
   IngredientsList,
   WrappedInputIngredient,
   Results,
@@ -61,22 +61,9 @@ const App = (props) => {
             onKeyDown={handlePress}
             value={value}
           />
-          <Row
-            my={10}
-          >
-            <Col>
-              <Box
-                as="section"
-                role="region"
-                mx="auto"
-                maxWidth={300}
-              >
-                <SearchRecipes
-                  handleSubmit={handleSubmit}
-                />
-              </Box>
-            </Col>
-          </Row>
+          <WrappedSearchRecipes
+            handleSubmit={handleSubmit}
+          />
           <Row>
             <Col>
               <Box

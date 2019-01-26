@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@smooth-ui/core-sc';
 
+import withRowContent from '../../hocs/RowContent';
 import Form from './SearchRecipes.style';
 
 const SearchRecipes = React.memo(({ handleSubmit }) => (
@@ -24,4 +25,18 @@ SearchRecipes.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
-export default SearchRecipes;
+const rowContentSetup = {
+  rowMargin: {
+    my: '10px',
+  },
+  boxConfig: {
+    as: 'section',
+    role: 'region',
+    mx: 'auto',
+    maxWidth: '300px',
+  },
+};
+
+const WrappedSearchRecipes = withRowContent(rowContentSetup)(SearchRecipes);
+
+export default WrappedSearchRecipes;
