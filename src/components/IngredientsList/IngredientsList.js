@@ -8,7 +8,6 @@ import List from './IngredientsList.style';
 const IngredientsList = ({ ingredientsList, onClick }) => (
   <List
     visible={ingredientsList.length > 0}
-    aria-live="assertive"
   >
     {ingredientsList.map(item => (
       <li
@@ -47,6 +46,7 @@ const rowContentSetup = {
   boxConfig: {
     as: 'section',
     role: 'region',
+    'aria-live': 'assertive',
     mx: 'auto',
     maxWidth: '300px',
   },
