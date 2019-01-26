@@ -6,6 +6,7 @@ import withRowContent from '../../hocs/RowContent';
 
 const InputIngredient = ({ onChange, onKeyDown, value }) => (
   <Input
+    aria-label="Input field for entering ingredients"
     type="text"
     name="ingredients"
     placeholder="eggs, bacon, salt,"
