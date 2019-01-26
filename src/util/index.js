@@ -1,5 +1,7 @@
+/* eslint-disable no-param-reassign */
 const fetchResults = async (urlWithQuery) => {
-  let rawData, resultJSON;
+  let rawData; let
+    resultJSON;
 
   try {
     rawData = await fetch(urlWithQuery);
@@ -17,19 +19,45 @@ const fetchResults = async (urlWithQuery) => {
     }
 
     return resultJSON;
-  }
+  };
 
   return {
-    transformToJSON
-  }
-}
+    transformToJSON,
+  };
+};
 
-const isError = obj => {
-  const result = obj instanceof Error ? true : false;
+const isError = (obj) => {
+  const result = obj instanceof Error;
   return result;
-}
+};
+
+const tagSelectedIngredients = (results, ingredientsList) => {
+  const resultsCopy = JSON.parse(JSON.stringify(results));
+
+  resultsCopy.forEach((result) => {
+    result.ingredients = result.ingredients.split(', ');
+  });
+
+  resultsCopy.forEach((result) => {
+    result.ingredients.forEach((resultIngredient, index) => {
+      if (ingredientsList.map(selectedIngredient => selectedIngredient.value).includes(resultIngredient)) {
+        result.ingredients[index] = {
+          value: resultIngredient,
+          chosen: true,
+        };
+      } else {
+        result.ingredients[index] = {
+          value: resultIngredient,
+        };
+      }
+    });
+  });
+
+  return resultsCopy;
+};
 
 export {
   fetchResults,
-  isError
-}
+  isError,
+  tagSelectedIngredients,
+};

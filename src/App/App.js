@@ -16,14 +16,17 @@ import {
   Results,
   Navigation,
   CaptureImg } from '../components';
-import { fetchResults, isError } from '../util';
+import { 
+  fetchResults, 
+  isError, 
+  tagSelectedIngredients } from '../util';
 import { API_KEY_CLARAFAI } from '../config';
 import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
 export default class App extends Component {
   state = {
     error: null,
-    message: '',
+    message: null,
     results: [],
     page: 1,
     loadingRecipes: false,
@@ -186,9 +189,12 @@ export default class App extends Component {
   }
 
   loadSuccess = results => {
-    if (results.length > 0) {
+    const { ingredientsList } = this.state;
+    const resultsTaggedIngredients = tagSelectedIngredients(results, ingredientsList);
+
+    if (resultsTaggedIngredients.length > 0) {
       this.setState(() => ({
-        results: [...results]
+        results: [...resultsTaggedIngredients]
         })
       );
     } else {

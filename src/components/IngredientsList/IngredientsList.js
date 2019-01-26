@@ -35,15 +35,8 @@ IngredientsList.propTypes = {
   ingredientsList: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string,
     value: PropTypes.string,
-  })),
+  })).isRequired,
   onClick: PropTypes.func.isRequired,
-};
-
-IngredientsList.defaultProps = {
-  ingredientsList: [{
-    id: '',
-    value: '',
-  }],
 };
 
 export default IngredientsList;
