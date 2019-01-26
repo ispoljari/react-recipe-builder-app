@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button, Box } from '@smooth-ui/core-sc';
 
+import withRowContent from '../../hocs/RowContent';
+
 const Navigation = React.memo(({ onClick }) => (
   <Box
     display="flex"
@@ -41,4 +43,16 @@ Navigation.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default Navigation;
+const rowContentSetup = {
+  rowMargin: {
+    mb: '20px',
+  },
+  boxConfig: {
+    as: 'main',
+    role: 'main',
+  },
+};
+
+const WrappedNavigation = withRowContent(rowContentSetup)(Navigation);
+
+export default WrappedNavigation;

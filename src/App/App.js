@@ -4,7 +4,6 @@ import {
   Grid,
   Row,
   Col,
-  Box,
 } from '@smooth-ui/core-sc';
 import Loading from 'react-loading-animation';
 
@@ -14,7 +13,7 @@ import {
   WrappedIngredientsList,
   WrappedInputIngredient,
   WrappedResults,
-  Navigation,
+  WrappedNavigation,
   WrappedCaptureImg,
 } from '../components';
 
@@ -47,7 +46,7 @@ const App = (props) => {
       <Row
         display="flex"
         alignItems="center"
-        mt={{ xs: '10%', lg: '5%' }}
+        mt="5%"
       >
         <Col>
           <WrappedTitle />
@@ -87,6 +86,12 @@ const App = (props) => {
               message={message}
               error={error}
             />
+            {(results.length > 0 && !message && !error)
+              ? (
+                <WrappedNavigation
+                  onClick={navigatePage}
+                />
+              ) : ''}
           </Loading>
         </Col>
       </Row>
@@ -94,13 +99,6 @@ const App = (props) => {
   );
 };
 
-// {(results.length > 0 && !message && !error)
-//   ? (
-//     <Navigation
-//       onClick={navigatePage}
-//     />
-//   ) : ''
-// }
 
 App.propTypes = {
   handleChange: PropTypes.func.isRequired,
