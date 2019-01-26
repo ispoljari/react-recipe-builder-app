@@ -9,7 +9,7 @@ import {
 import Loading from 'react-loading-animation';
 
 import {
-  Title,
+  WrappedTitle,
   SearchRecipes,
   IngredientsList,
   InputIngredient,
@@ -48,22 +48,7 @@ const App = ({
         mt={{ xs: '10%', lg: '5%' }}
       >
         <Col>
-          <Row
-            mb={10}
-          >
-            <Col>
-              <Box
-                as="header"
-                role="banner"
-                display="flex"
-                mx="auto"
-                justifyContent="center"
-                maxWidth={500}
-              >
-                <Title text="Recipe Builder" />
-              </Box>
-            </Col>
-          </Row>
+          <WrappedTitle />
           <Row
             mb={15}
           >

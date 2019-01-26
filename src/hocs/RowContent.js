@@ -6,7 +6,7 @@ import {
 } from '@smooth-ui/core-sc';
 
 const withRowContent = (WrappedComponent) => {
-  const HOC = props => (
+  const HOSFC = props => (
     <Row
       mb={10}
     >
@@ -25,7 +25,7 @@ const withRowContent = (WrappedComponent) => {
     </Row>
   );
 
-  return HOC;
+  return HOSFC;
 };
 
 export default withRowContent;
