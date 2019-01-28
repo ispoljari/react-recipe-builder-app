@@ -41,6 +41,7 @@ const App = (props) => {
     message,
     capturedImg,
     a11yIngredients,
+    a11yResults,
   } = appState;
 
   return (
@@ -89,6 +90,10 @@ const App = (props) => {
             <Loading
               isLoading={loadingRecipes}
             >
+              <LiveMessage
+                message={a11yResults}
+                aria-live="assertive"
+              />
               <WrappedResults
                 results={results}
                 ingredientsList={ingredientsList}

@@ -23,7 +23,8 @@ export default class AppContainer extends Component {
     value: '',
     ingredientsList: [],
     capturedImg: '',
-    a11yIngredients: ''
+    a11yIngredients: '',
+    a11yResults: ''
   };
 
   // Called from <InputIngredient />
@@ -59,9 +60,10 @@ export default class AppContainer extends Component {
     if (noDuplicate) {
       await this.saveNewIngredientsToState(parsedValue);
     } else {
+      const messageString = `${parsedValue} is already on the list`;
       this.setState({
-        message: `${parsedValue} is already on the list`,
-        a11yIngredients: `${parsedValue} is already on the list`
+        message: messageString,
+        a11yIngredients: messageString
       });
     }
 
@@ -82,10 +84,10 @@ export default class AppContainer extends Component {
       `${values[0]} has been added to the ingredients list`;
   
       this.setState(prevState => ({
+        a11yIngredients: ariaMessage,
         ingredientsList: [...prevState.ingredientsList, ...ingredients],
         message: '',
         error: '',
-        a11yIngredients: ariaMessage
       }), () => {
         resolve();
       });
@@ -133,6 +135,8 @@ export default class AppContainer extends Component {
       message: '',
       results: [],
       error: '',
+      a11yIngredients: '',
+      a11yResults: ''
     }));
   }
 
@@ -144,10 +148,12 @@ export default class AppContainer extends Component {
 
   checkIngredientList = () => {
     const { ingredientsList } = this.state;
+    const messageString = 'Before pressing Search you must select at least 1 ingredient. Add comma or press enter  after each ingredient';
 
     if (ingredientsList.length === 0) {
       this.setState({
-        message: 'Before pressing Search you must select at least 1 ingredient. Add comma or press enter  after each ingredient',
+        message: messageString ,
+        a11yIngredients: messageString 
       });
     }
   }
@@ -184,14 +190,17 @@ export default class AppContainer extends Component {
   loadSuccess = results => {
     const { ingredientsList } = this.state;
     const resultsTaggedIngredients = tagSelectedIngredients(results, ingredientsList);
+    const messageString = 'Your search produced no results. Please try again.';
 
     if (resultsTaggedIngredients.length > 0) {
       this.setState(() => ({
         results: [...resultsTaggedIngredients],
+        a11yResults: `Search finnished. ${resultsTaggedIngredients.length} results available.`
       }));
     } else {
       this.setState({
-        message: 'Your search produced no results. Please try again.',
+        message: messageString,
+        a11yResults: messageString
       });
     }
   }
@@ -199,6 +208,7 @@ export default class AppContainer extends Component {
   loadFail = error => {
     this.setState({
       error,
+      a11yResults: error
     });
   }
 

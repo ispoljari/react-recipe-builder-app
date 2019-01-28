@@ -11,6 +11,7 @@ const Navigation = React.memo(({ onClick }) => (
   >
     <Button
       id="prev"
+      aria-label="Go to previous page"
       variant="secondary"
       size="sm"
       width={0.4}
@@ -24,6 +25,7 @@ const Navigation = React.memo(({ onClick }) => (
     </Button>
     <Button
       id="next"
+      aria-label="Go to next page"
       variant="dark"
       size="sm"
       width={0.4}
