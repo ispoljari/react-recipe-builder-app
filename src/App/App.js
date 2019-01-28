@@ -73,7 +73,7 @@ const App = (props) => {
             >
               <LiveMessage
                 message={a11yIngredients}
-                aria-live="polite"
+                aria-live="assertive"
               />
               <WrappedIngredientsList
                 ingredientsList={ingredientsList}

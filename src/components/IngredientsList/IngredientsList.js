@@ -18,7 +18,7 @@ const IngredientsList = ({ ingredientsList, onClick }) => (
           {item.value}
         </span>
         <Button
-          aria-label="Button. Remove selected ingredient from list"
+          aria-label={`Remove ${item.value} from list`}
           p="5px"
           display="inline-block"
           backgroundColor="transparent"

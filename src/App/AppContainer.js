@@ -61,6 +61,7 @@ export default class AppContainer extends Component {
     } else {
       this.setState({
         message: `${parsedValue} is already on the list`,
+        a11yIngredients: `${parsedValue} is already on the list`
       });
     }
 
@@ -78,7 +79,7 @@ export default class AppContainer extends Component {
 
       const ariaMessage = values.length > 1 ? 
       `${values.toString()} have been added to the ingredients list` : 
-      `${values} has been added to the ingredients list`;
+      `${values[0]} has been added to the ingredients list`;
   
       this.setState(prevState => ({
         ingredientsList: [...prevState.ingredientsList, ...ingredients],
@@ -98,13 +99,11 @@ export default class AppContainer extends Component {
     const { ingredientsList } = this.state;
     const id = e.target.parentNode.dataset.key;
 
-    const targetIngredient = ingredientsList.filter(item => item.id === id);
-    console.log(targetIngredient);
-    
-    const ariaMessage = `${targetIngredient[0].value} has been removed from the ingredients list`;
+    const targetIngredient = ingredientsList.filter(item => item.id === id)[0].value;
+    const ariaMessage = `${targetIngredient} has been removed from the ingredients list`;
 
     this.setState(prevState => ({
-      ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)],
+      ingredientsList: [...prevState.ingredientsList.filter(item => item.value !== targetIngredient)],
       message: '',
       a11yIngredients: ariaMessage
     }));
