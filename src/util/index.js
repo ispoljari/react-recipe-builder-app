@@ -40,7 +40,8 @@ const tagSelectedIngredients = (results, ingredientsList) => {
 
   resultsCopy.forEach((result) => {
     result.ingredients.forEach((resultIngredient, index) => {
-      if (ingredientsList.map(selectedIngredient => selectedIngredient.value).includes(resultIngredient)) {
+      if (ingredientsList.map(selectedIngredient => selectedIngredient.value)
+        .includes(resultIngredient)) {
         result.ingredients[index] = {
           value: resultIngredient,
           chosen: true,
@@ -56,8 +57,13 @@ const tagSelectedIngredients = (results, ingredientsList) => {
   return resultsCopy;
 };
 
+const checkIfDuplicateExists = (value, ingredientsList) => (!(ingredientsList.filter(item => (
+  item.value.toLowerCase() === value.toLowerCase()
+)).length > 0));
+
 export {
   fetchResults,
   isError,
+  checkIfDuplicateExists,
   tagSelectedIngredients,
 };

@@ -6,6 +6,7 @@ import App from './App';
 import {
   fetchResults,
   isError,
+  checkIfDuplicateExists,
   tagSelectedIngredients,
 } from '../util';
 import { API_KEY_CLARAFAI } from '../config';
@@ -52,7 +53,7 @@ export default class AppContainer extends Component {
 
   updateIngredientsList = (value, type) => {
     const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(',')); // if enter is pressed the ingredientList is updated with the current value, if comma is added the ingredientList is updated with the value before comma
-    const noDuplicate = this.checkIfDuplicateExists(parsedValue); // check if the ingredient is already on the list
+    const noDuplicate = checkIfDuplicateExists(parsedValue, this.state.ingredientsList); // check if the ingredient is already on the list
 
     if (noDuplicate) {
       this.saveNewIngredientsToState(parsedValue);
@@ -80,15 +81,10 @@ export default class AppContainer extends Component {
     }));
   };
 
-  checkIfDuplicateExists = value => (!(this.state.ingredientsList.filter(item => (
-      item.value.toLowerCase() === value.toLowerCase()
-    )).length > 0));
-
-
   // Called from <IngredientList />
   // -------------------------------
 
-  deleteIngredient = (e) => {
+  deleteIngredient = e => {
     const id = e.target.parentNode.dataset.key;
 
     this.setState(prevState => ({
@@ -100,10 +96,9 @@ export default class AppContainer extends Component {
   // Called from <SearchRecipes />
   // -------------------------------
 
-  handleSubmit = (e) => {
-    const { loadingRecipes, loadingPredictions } = this.state;
-
+  handleSubmit = e => {
     e.preventDefault();
+    const { loadingRecipes, loadingPredictions } = this.state;
 
     if (!loadingRecipes && !loadingPredictions) {
       this.clearResults();
@@ -168,7 +163,7 @@ export default class AppContainer extends Component {
     }
   }
 
-  loadSuccess = (results) => {
+  loadSuccess = results => {
     const { ingredientsList } = this.state;
     const resultsTaggedIngredients = tagSelectedIngredients(results, ingredientsList);
 
@@ -183,13 +178,13 @@ export default class AppContainer extends Component {
     }
   }
 
-  loadFail = (error) => {
+  loadFail = error => {
     this.setState({
       error,
     });
   }
 
-  updateRecipeLoadingStatus = (status) => {
+  updateRecipeLoadingStatus = status => {
     this.setState({
       loadingRecipes: status,
     });
@@ -198,7 +193,7 @@ export default class AppContainer extends Component {
   // Called from <Navigation />
   // -------------------------------
 
-  navigatePage = (e) => {
+  navigatePage = e => {
     const button = e.target.id;
     const { page } = this.state;
 
@@ -226,7 +221,7 @@ export default class AppContainer extends Component {
   // Called from <CaptureImg />
   // --------------------------
 
-  previewCapturedImg = (e) => {
+  previewCapturedImg = e => {
     const imgFile = e.target.files[0];
 
     if (imgFile) {
@@ -249,7 +244,7 @@ export default class AppContainer extends Component {
     }
   }
 
-  getPredictionsFromImage = (imgFile) => {
+  getPredictionsFromImage = imgFile => {
     this.updatePredictionsLoadingStatus(true);
 
     const reader = new FileReader();
@@ -262,17 +257,15 @@ export default class AppContainer extends Component {
         apiKey: `${API_KEY_CLARAFAI}`,
       });
 
-      app.models.predict(Clarifai.FOOD_MODEL, { base64: result }, { maxConcepts: 5, minValue: 0.9 })
+      app.models.predict(Clarifai.FOOD_MODEL, { base64: result }, { maxConcepts: 5, minValue: 0.95 })
         .then(
           (response) => {
             const responseArray = response.outputs[0].data.concepts;
-
             if (responseArray.length > 0) {
               return responseArray.map(item => (
                 item.name
               ));
             }
-
             return [];
           },
           error => error,
