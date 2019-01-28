@@ -68,6 +68,8 @@ CaptureImg.propTypes = {
   onChange: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   capturedImg: PropTypes.string.isRequired,
+  loadingPredictions: PropTypes.bool.isRequired,
+  loadingRecipes: PropTypes.bool.isRequired,
 };
 
 const rowContentSetup = {
