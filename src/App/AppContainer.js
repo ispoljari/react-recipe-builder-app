@@ -100,7 +100,7 @@ export default class AppContainer extends Component {
     e.preventDefault();
     const { loadingRecipes, loadingPredictions } = this.state;
 
-    if (!loadingRecipes && !loadingPredictions) {
+    if (!(loadingRecipes || loadingPredictions)) {
       this.clearResults();
       this.resetPageCount();
       this.checkIngredientList();
