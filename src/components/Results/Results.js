@@ -157,7 +157,6 @@ const rowContentSetup = {
   boxConfig: {
     as: 'main',
     role: 'main',
-    'aria-live': 'assertive',
   },
 };
 

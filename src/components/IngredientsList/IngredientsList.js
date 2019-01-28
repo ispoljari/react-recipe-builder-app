@@ -46,7 +46,6 @@ const rowContentSetup = {
   boxConfig: {
     as: 'section',
     role: 'region',
-    'aria-live': 'assertive',
     mx: 'auto',
     maxWidth: '300px',
   },

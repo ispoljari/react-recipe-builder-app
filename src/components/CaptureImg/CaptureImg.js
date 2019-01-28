@@ -5,7 +5,10 @@ import PropTypes from 'prop-types';
 import withRowContent from '../../hocs/RowContent';
 import * as Styled from './CaptureImg.style';
 
-const CaptureImg = ({ onChange, capturedImg, onClick }) => (
+const CaptureImg = ({
+  onChange, capturedImg, onClick, loadingRecipes,
+  loadingPredictions,
+}) => (
   <Box
     display="flex"
     flexDirection="column"
@@ -14,6 +17,7 @@ const CaptureImg = ({ onChange, capturedImg, onClick }) => (
     <Styled.Input
       aria-label="Capture image"
       aria-hidden="true"
+      disabled={loadingRecipes || loadingPredictions}
       show={!capturedImg}
       type="file"
       name="image"

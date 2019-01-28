@@ -134,7 +134,6 @@ export default class AppContainer extends Component {
 
   loadRecipes = async () => {
     const { ingredientsList, page } = this.state;
-
     const ingredients = ingredientsList.map(item => item.value).toString();
 
     if (ingredients) {
@@ -142,7 +141,6 @@ export default class AppContainer extends Component {
 
       const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
       const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
-
       const rawResult = await fetchResults(URL_QUERY);
       let jsonResult;
 

@@ -54,6 +54,8 @@ const App = (props) => {
             onChange={previewCapturedImg}
             onClick={removeCapturedImg}
             capturedImg={capturedImg}
+            loadingRecipes={loadingRecipes}
+            loadingPredictions={loadingPredictions}
           />
           <WrappedInputIngredient
             onChange={handleChange}
