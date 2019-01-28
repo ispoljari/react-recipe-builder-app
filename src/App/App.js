@@ -132,17 +132,10 @@ App.propTypes = {
     value: PropTypes.string.isRequired,
     loadingRecipes: PropTypes.bool.isRequired,
     loadingPredictions: PropTypes.bool.isRequired,
-    error: PropTypes.string,
-    message: PropTypes.string,
+    error: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
     capturedImg: PropTypes.string.isRequired,
-  }),
-};
-
-App.defaultProps = {
-  appState: {
-    error: '',
-    message: '',
-  },
+  }).isRequired,
 };
 
 export default App;
