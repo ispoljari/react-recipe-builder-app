@@ -5,6 +5,7 @@ import {
   Row,
   Col,
 } from '@smooth-ui/core-sc';
+import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
 import Loading from 'react-loading-animation';
 
 import {
@@ -39,65 +40,72 @@ const App = (props) => {
     error,
     message,
     capturedImg,
+    a11yIngredients,
   } = appState;
 
   return (
-    <Grid>
-      <Row
-        display="flex"
-        alignItems="center"
-        mt="5%"
-      >
-        <Col>
-          <WrappedTitle />
-          <WrappedCaptureImg
-            onChange={previewCapturedImg}
-            onClick={removeCapturedImg}
-            capturedImg={capturedImg}
-            loadingRecipes={loadingRecipes}
-            loadingPredictions={loadingPredictions}
-          />
-          <WrappedInputIngredient
-            onChange={handleChange}
-            onKeyDown={handlePress}
-            value={value}
-          />
-          <WrappedSearchRecipes
-            handleSubmit={handleSubmit}
-          />
-          <Loading
-            isLoading={loadingPredictions}
-          >
-            <WrappedIngredientsList
-              ingredientsList={ingredientsList}
-              onClick={deleteIngredient}
+    <LiveAnnouncer>
+      <Grid>
+        <Row
+          display="flex"
+          alignItems="center"
+          mt="5%"
+        >
+          <Col>
+            <WrappedTitle />
+            <WrappedCaptureImg
+              onChange={previewCapturedImg}
+              onClick={removeCapturedImg}
+              capturedImg={capturedImg}
+              loadingRecipes={loadingRecipes}
+              loadingPredictions={loadingPredictions}
             />
-          </Loading>
-        </Col>
-      </Row>
-      <Row
-        my={10}
-      >
-        <Col>
-          <Loading
-            isLoading={loadingRecipes}
-          >
-            <WrappedResults
-              results={results}
-              ingredientsList={ingredientsList}
-              message={message}
-              error={error}
+            <WrappedInputIngredient
+              onChange={handleChange}
+              onKeyDown={handlePress}
+              value={value}
             />
-            {(results.length > 0 && !message && !error)
-              ? (
-                <WrappedNavigation
-                  onClick={navigatePage}
-                />
-              ) : ''}
-          </Loading>
-        </Col>
-      </Row>
-    </Grid>
+            <WrappedSearchRecipes
+              handleSubmit={handleSubmit}
+            />
+            <Loading
+              isLoading={loadingPredictions}
+            >
+              <LiveMessage
+                message={a11yIngredients}
+                aria-live="polite"
+              />
+              <WrappedIngredientsList
+                ingredientsList={ingredientsList}
+                onClick={deleteIngredient}
+              />
+            </Loading>
+          </Col>
+        </Row>
+        <Row
+          my={10}
+        >
+          <Col>
+            <Loading
+              isLoading={loadingRecipes}
+            >
+              <WrappedResults
+                results={results}
+                ingredientsList={ingredientsList}
+                message={message}
+                error={error}
+              />
+              {(results.length > 0 && !message && !error)
+                ? (
+                  <WrappedNavigation
+                    onClick={navigatePage}
+                  />
+                ) : ''}
+            </Loading>
+          </Col>
+        </Row>
+      </Grid>
+    </LiveAnnouncer>
   );
 };
 

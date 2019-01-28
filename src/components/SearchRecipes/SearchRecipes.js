@@ -10,7 +10,7 @@ const SearchRecipes = React.memo(({ handleSubmit }) => (
     onSubmit={handleSubmit}
   >
     <Button
-      aria-label="Search recipes button"
+      aria-label="Submit button. Search for recipes."
       variant="success"
       width={1}
       minHeight={40}

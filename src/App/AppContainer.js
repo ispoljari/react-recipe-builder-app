@@ -14,8 +14,8 @@ import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
 
 export default class AppContainer extends Component {
   state = {
-    error: null,
-    message: null,
+    error: '',
+    message: '',
     results: [],
     page: 1,
     loadingRecipes: false,
@@ -23,6 +23,7 @@ export default class AppContainer extends Component {
     value: '',
     ingredientsList: [],
     capturedImg: '',
+    a11yIngredients: ''
   };
 
   // Called from <InputIngredient />
@@ -74,11 +75,16 @@ export default class AppContainer extends Component {
         value,
         id: uuidv4(),
       }));
+
+      const ariaMessage = values.length > 1 ? 
+      `${values.toString()} have been added to the ingredients list` : 
+      `${values} has been added to the ingredients list`;
   
       this.setState(prevState => ({
         ingredientsList: [...prevState.ingredientsList, ...ingredients],
         message: '',
         error: '',
+        a11yIngredients: ariaMessage
       }), () => {
         resolve();
       });
@@ -89,11 +95,18 @@ export default class AppContainer extends Component {
   // -------------------------------
 
   deleteIngredient = e => {
+    const { ingredientsList } = this.state;
     const id = e.target.parentNode.dataset.key;
+
+    const targetIngredient = ingredientsList.filter(item => item.id === id);
+    console.log(targetIngredient);
+    
+    const ariaMessage = `${targetIngredient[0].value} has been removed from the ingredients list`;
 
     this.setState(prevState => ({
       ingredientsList: [...prevState.ingredientsList.filter(item => item.id !== id)],
       message: '',
+      a11yIngredients: ariaMessage
     }));
   }
 
