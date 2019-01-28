@@ -27,34 +27,32 @@ export default class AppContainer extends Component {
   // Called from <InputIngredient />
   // -------------------------------
 
-  handleChange = (e) => {
-    const value = e.target.value;
-
-    const onlyComma = (value.split().length === 1 && value.split()[0] === ',');
-    const isLetter = value ? value.match(/^[A-Za-z,\s]+$/i) : true;
+  handleChange = e => {
+    const value = e.target.value; // current input value
+    const onlyComma = (value.split().length === 1 && value.split()[0] === ','); // true if only char in value is comma
+    const isLetter = value ? value.match(/^[A-Za-z,\s]+$/i) : true; // true if chars from current value are letters or there is no value
 
     if (!onlyComma && isLetter) {
-      this.setState({
+      this.setState({ 
         value,
       }, () => {
-        if (value.includes(',')) {
+        if (value.includes(',')) { // if user adds a comma the ingredient list is updated
           this.updateIngredientsList(value, 'change');
         }
       });
     }
-  }
+  };
 
-  handlePress = (e) => {
+  handlePress = e => {
     const { value } = this.state;
-
     if (e.key === 'Enter' && value) {
       this.updateIngredientsList(value, 'press');
     }
-  }
+  };
 
   updateIngredientsList = (value, type) => {
-    const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(','));
-    const noDuplicate = this.checkIfDuplicateExists(parsedValue);
+    const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(',')); // if enter is pressed the ingredientList is updated with the current value, if comma is added the ingredientList is updated with the value before comma
+    const noDuplicate = this.checkIfDuplicateExists(parsedValue); // check if the ingredient is already on the list
 
     if (noDuplicate) {
       this.saveNewIngredientsToState(parsedValue);
@@ -67,7 +65,7 @@ export default class AppContainer extends Component {
     this.setState({
       value: '',
     });
-  }
+  };
 
   saveNewIngredientsToState = (...values) => {
     const ingredients = values.map(value => ({
@@ -80,11 +78,11 @@ export default class AppContainer extends Component {
       message: '',
       error: '',
     }));
-  }
+  };
 
   checkIfDuplicateExists = value => (!(this.state.ingredientsList.filter(item => (
       item.value.toLowerCase() === value.toLowerCase()
-    )).length > 0))
+    )).length > 0));
 
 
   // Called from <IngredientList />
