@@ -51,12 +51,12 @@ export default class AppContainer extends Component {
     }
   };
 
-  updateIngredientsList = (value, type) => {
+  updateIngredientsList = async (value, type) => {
     const parsedValue = type === 'press' ? value : value.substr(0, value.indexOf(',')); // if enter is pressed the ingredientList is updated with the current value, if comma is added the ingredientList is updated with the value before comma
     const noDuplicate = checkIfDuplicateExists(parsedValue, this.state.ingredientsList); // check if the ingredient is already on the list
 
     if (noDuplicate) {
-      this.saveNewIngredientsToState(parsedValue);
+      await this.saveNewIngredientsToState(parsedValue);
     } else {
       this.setState({
         message: `${parsedValue} is already on the list`,
@@ -69,16 +69,20 @@ export default class AppContainer extends Component {
   };
 
   saveNewIngredientsToState = (...values) => {
-    const ingredients = values.map(value => ({
-      value,
-      id: uuidv4(),
-    }));
-
-    this.setState(prevState => ({
-      ingredientsList: [...prevState.ingredientsList, ...ingredients],
-      message: '',
-      error: '',
-    }));
+    return new Promise(resolve => {
+      const ingredients = values.map(value => ({
+        value,
+        id: uuidv4(),
+      }));
+  
+      this.setState(prevState => ({
+        ingredientsList: [...prevState.ingredientsList, ...ingredients],
+        message: '',
+        error: '',
+      }), () => {
+        resolve();
+      });
+    });
   };
 
   // Called from <IngredientList />
@@ -96,11 +100,15 @@ export default class AppContainer extends Component {
   // Called from <SearchRecipes />
   // -------------------------------
 
-  handleSubmit = e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    const { loadingRecipes, loadingPredictions } = this.state;
+    const { loadingRecipes, loadingPredictions, value } = this.state;
 
-    if (!(loadingRecipes || loadingPredictions)) {
+    if (!(loadingRecipes || loadingPredictions)) { // check if app is loading results
+      if (value) { // if there is a value in input field
+        await this.updateIngredientsList(value, 'press');; // call the handlePress function to submit the value to ingredientsList
+      }
+
       this.clearResults();
       this.resetPageCount();
       this.checkIngredientList();
