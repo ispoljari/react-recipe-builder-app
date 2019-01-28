@@ -8,10 +8,15 @@ const Title = React.memo(() => (
     <Typography
       variant="h1"
       textAlign="center"
+      color="white"
+      fontSize={{ xs: 50, lg: 80 }}
+      lineHeight={{ xs: '50px', lg: '80px' }}
+      fontWeight={700}
+      textAlign="left"
       m={0}
       letterSpacing={1.5}
     >
-      Recipe Builder
+      THE RECIPE BUILDER APP
     </Typography>
   </Box>
 ));
@@ -20,13 +25,17 @@ const rowContentSetup = {
   rowConfig: {
     mb: '10px',
   },
-  colConfig: {},
+  colConfig: {
+    p: '70px',
+    backgroundColor: '#1865f4',
+    display: 'flex',
+    justifyContent: { xs: 'center', lg: 'left' },
+  },
   boxConfig: {
     as: 'header',
     role: 'banner',
-    display: 'flex',
-    mx: 'auto',
-    justifyContent: 'center',
+    textAlign: 'center',
+    mx: 0,
     maxWidth: '500px',
   },
 };

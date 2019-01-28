@@ -50,7 +50,6 @@ const App = (props) => {
         <Row
           display="flex"
           alignItems="center"
-          mt="5%"
         >
           <Col>
             <WrappedTitle />
