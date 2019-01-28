@@ -3,6 +3,7 @@
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
       },
+    "plugins": ["jsx-a11y"],
     "env": {
         "browser": true
     }
