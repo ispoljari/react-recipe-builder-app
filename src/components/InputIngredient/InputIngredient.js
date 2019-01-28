@@ -29,9 +29,10 @@ InputIngredient.propTypes = {
 };
 
 const rowContentSetup = {
-  rowMargin: {
+  rowConfig: {
     my: '10px',
   },
+  colConfig: {},
   boxConfig: {
     as: 'section',
     role: 'region',

@@ -27,9 +27,10 @@ SearchRecipes.propTypes = {
 };
 
 const rowContentSetup = {
-  rowMargin: {
-    my: '10px',
+  rowConfig: {
+    mt: '10px',
   },
+  colConfig: {},
   boxConfig: {
     as: 'section',
     role: 'region',

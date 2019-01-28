@@ -42,7 +42,8 @@ IngredientsList.propTypes = {
 };
 
 const rowContentSetup = {
-  rowMargin: {},
+  rowConfig: {},
+  colConfig: {},
   boxConfig: {
     as: 'section',
     role: 'region',

@@ -6,13 +6,15 @@ import {
 } from '@smooth-ui/core-sc';
 
 const withRowContent = setup => (WrappedComponent) => {
-  const { rowMargin, boxConfig } = setup;
+  const { rowConfig, colConfig, boxConfig } = setup;
 
   const HOSFC = props => (
     <Row
-      {...rowMargin}
+      {...rowConfig}
     >
-      <Col>
+      <Col
+        {...colConfig}
+      >
         <Box
           {...boxConfig}
         >

@@ -17,9 +17,10 @@ const Title = React.memo(() => (
 ));
 
 const rowContentSetup = {
-  rowMargin: {
+  rowConfig: {
     mb: '10px',
   },
+  colConfig: {},
   boxConfig: {
     as: 'header',
     role: 'banner',

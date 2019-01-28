@@ -46,9 +46,10 @@ Navigation.propTypes = {
 };
 
 const rowContentSetup = {
-  rowMargin: {
+  rowConfig: {
     mb: '20px',
   },
+  colConfig: {},
   boxConfig: {
     as: 'section',
     role: 'region',

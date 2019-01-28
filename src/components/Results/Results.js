@@ -153,7 +153,8 @@ Results.defaultProps = {
 };
 
 const rowContentSetup = {
-  rowMargin: {},
+  rowConfig: {},
+  colConfig: {},
   boxConfig: {
     as: 'main',
     role: 'main',

@@ -73,9 +73,10 @@ CaptureImg.propTypes = {
 };
 
 const rowContentSetup = {
-  rowMargin: {
+  rowConfig: {
     mb: '10px',
   },
+  colConfig: {},
   boxConfig: {
     as: 'section',
     role: 'region',
