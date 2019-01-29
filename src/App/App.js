@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Grid,
@@ -25,169 +25,176 @@ import {
 import meal1 from '../img/meal1.jpg';
 
 
-const App = (props) => {
-  const {
-    appState,
-    handleChange,
-    handlePress,
-    handleSubmit,
-    previewCapturedImg,
-    removeCapturedImg,
-    deleteIngredient,
-    navigatePage,
-  } = props;
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.refButton = React.createRef();
+  }
 
-  const {
-    ingredientsList,
-    results,
-    value,
-    loadingRecipes,
-    loadingPredictions,
-    error,
-    message,
-    capturedImg,
-    a11yIngredients,
-    a11yResults,
-    firstIngredientLoaded,
-    firstResultLoaded,
-  } = appState;
+  render() {
+    const {
+      appState,
+      handleChange,
+      handlePress,
+      handleSubmit,
+      previewCapturedImg,
+      removeCapturedImg,
+      deleteIngredient,
+      navigatePage,
+    } = this.props;
 
-  return (
-    <LiveAnnouncer>
-      <Grid>
-        <Row
-          display="flex"
-          alignItems="center"
-        >
-          <Col>
-            <WrappedTitle
-              variant="h1"
-              color="white"
-              text="THE RECIPE BUILDER APP"
-              textAlign="left"
-              fontSizeXS={50}
-              fontSizeLG={80}
-            />
-            <ScrollAnimation
-              animateIn="fadeIn"
-              animateOnce
-              offset={230}
-            >
-              <WrappedSubTitle
-                variant="h2"
-                color="black"
-                text="if you're looking for some inspiration for your next meal..."
-                textAlign="center"
-                fontSizeXS={40}
-                fontSizeLG={60}
+    const {
+      ingredientsList,
+      results,
+      value,
+      loadingRecipes,
+      loadingPredictions,
+      error,
+      message,
+      capturedImg,
+      a11yIngredients,
+      a11yResults,
+      firstIngredientLoaded,
+      firstResultLoaded,
+    } = appState;
+
+    return (
+      <LiveAnnouncer>
+        <Grid>
+          <Row
+            display="flex"
+            alignItems="center"
+          >
+            <Col>
+              <WrappedTitle
+                variant="h1"
+                color="white"
+                text="THE RECIPE BUILDER APP"
+                textAlign="left"
+                fontSizeXS={50}
+                fontSizeLG={80}
+                setRef={this.refButton}
               />
-            </ScrollAnimation>
-            <ScrollAnimation
-              animateIn="fadeIn"
-              animateOnce
-              offset={230}
-            >
-              <WrappedImage
-                imgSrc={meal1}
-              />
-            </ScrollAnimation>
-            <ScrollAnimation
-              animateIn="fadeIn"
-              animateOnce
-              offset={230}
-            >
-              <WrappedSubTitle
-                variant="h2"
-                color="black"
-                text="...then you've definitely come to the right place"
-                textAlign="center"
-                fontSizeXS={40}
-                fontSizeLG={60}
-              />
-            </ScrollAnimation>
-            <ScrollAnimation
-              animateIn="fadeIn"
-              animateOnce
-              offset={230}
-            >
-              <WrappedInstructions
-                variant="h2"
-                color="black"
-                text="to find some recipes, just take a picture of the ingredients you have available"
-                textAlign="center"
-                fontSizeXS={40}
-                fontSizeLG={60}
-              />
-            </ScrollAnimation>
-            <WrappedCaptureImg
-              onChange={previewCapturedImg}
-              onClick={removeCapturedImg}
-              capturedImg={capturedImg}
-              loadingRecipes={loadingRecipes}
-              loadingPredictions={loadingPredictions}
-            />
-            <Loading
-              isLoading={loadingPredictions}
-            >
-              <LiveMessage
-                message={a11yIngredients}
-                aria-live="assertive"
-              />
-              <WrappedIngredientsList
-                ingredientsList={ingredientsList}
-                onClick={deleteIngredient}
-              />
-            </Loading>
-            {firstIngredientLoaded ? (
-              <React.Fragment>
-                <WrappedInputIngredient
-                  onChange={handleChange}
-                  onKeyDown={handlePress}
-                  value={value}
+              <ScrollAnimation
+                animateIn="fadeIn"
+                animateOnce
+                offset={230}
+              >
+                <WrappedSubTitle
+                  variant="h2"
+                  color="black"
+                  text="if you're looking for some inspiration for your next meal..."
+                  textAlign="center"
+                  fontSizeXS={40}
+                  fontSizeLG={60}
                 />
-                <WrappedSearchRecipes
-                  handleSubmit={handleSubmit}
+              </ScrollAnimation>
+              <ScrollAnimation
+                animateIn="fadeIn"
+                animateOnce
+                offset={230}
+              >
+                <WrappedImage
+                  imgSrc={meal1}
                 />
-              </React.Fragment>
-            ) : ''}
-          </Col>
-        </Row>
-        <Row
-          my={10}
-        >
-          <Col>
-            <Loading
-              isLoading={loadingRecipes}
-            >
-              <LiveMessage
-                message={a11yResults}
-                aria-live="assertive"
+              </ScrollAnimation>
+              <ScrollAnimation
+                animateIn="fadeIn"
+                animateOnce
+                offset={230}
+              >
+                <WrappedSubTitle
+                  variant="h2"
+                  color="black"
+                  text="...then you've definitely come to the right place"
+                  textAlign="center"
+                  fontSizeXS={40}
+                  fontSizeLG={60}
+                />
+              </ScrollAnimation>
+              <ScrollAnimation
+                animateIn="fadeIn"
+                animateOnce
+                offset={230}
+              >
+                <WrappedInstructions
+                  variant="h2"
+                  color="black"
+                  text="to find some recipes, just take a picture of the ingredients you have available"
+                  textAlign="center"
+                  fontSizeXS={40}
+                  fontSizeLG={60}
+                />
+              </ScrollAnimation>
+              <WrappedCaptureImg
+                onChange={previewCapturedImg}
+                onClick={removeCapturedImg}
+                capturedImg={capturedImg}
+                loadingRecipes={loadingRecipes}
+                loadingPredictions={loadingPredictions}
               />
-              {firstResultLoaded ? (
+              <Loading
+                isLoading={loadingPredictions}
+              >
+                <LiveMessage
+                  message={a11yIngredients}
+                  aria-live="assertive"
+                />
+                <WrappedIngredientsList
+                  ingredientsList={ingredientsList}
+                  onClick={deleteIngredient}
+                />
+              </Loading>
+              {firstIngredientLoaded ? (
                 <React.Fragment>
-                  {(results.length > 0 || message || error) ? (
-                    <WrappedResults
-                      results={results}
-                      ingredientsList={ingredientsList}
-                      message={message}
-                      error={error}
-                    />
-                  ) : ''}
-                  {(results.length > 0 && !message && !error ? (
-                    <WrappedNavigation
-                      onClick={navigatePage}
-                    />
-                  ) : '')}
+                  <WrappedInputIngredient
+                    onChange={handleChange}
+                    onKeyDown={handlePress}
+                    value={value}
+                  />
+                  <WrappedSearchRecipes
+                    handleSubmit={handleSubmit}
+                  />
                 </React.Fragment>
               ) : ''}
-            </Loading>
-          </Col>
-        </Row>
-      </Grid>
-    </LiveAnnouncer>
-  );
-};
-
+            </Col>
+          </Row>
+          <Row
+            my={10}
+          >
+            <Col>
+              <Loading
+                isLoading={loadingRecipes}
+              >
+                <LiveMessage
+                  message={a11yResults}
+                  aria-live="assertive"
+                />
+                {firstResultLoaded ? (
+                  <React.Fragment>
+                    {(results.length > 0 || message || error) ? (
+                      <WrappedResults
+                        results={results}
+                        ingredientsList={ingredientsList}
+                        message={message}
+                        error={error}
+                      />
+                    ) : ''}
+                    {(results.length > 0 && !message && !error ? (
+                      <WrappedNavigation
+                        onClick={navigatePage}
+                      />
+                    ) : '')}
+                  </React.Fragment>
+                ) : ''}
+              </Loading>
+            </Col>
+          </Row>
+        </Grid>
+      </LiveAnnouncer>
+    );
+  }
+}
 
 App.propTypes = {
   handleChange: PropTypes.func.isRequired,
@@ -211,5 +218,3 @@ App.propTypes = {
     capturedImg: PropTypes.string.isRequired,
   }).isRequired,
 };
-
-export default App;

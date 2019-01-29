@@ -4,7 +4,7 @@ import { Typography, Box, Button } from '@smooth-ui/core-sc';
 import withRowContent from '../../hocs/RowContent';
 
 export const Title = React.memo(({
-  text, variant, color, fontSizeXS, fontSizeLG, textAlign,
+  text, variant, color, fontSizeXS, fontSizeLG, textAlign, setRef,
 }) => (
   <Box>
     <Typography
@@ -32,6 +32,7 @@ export const Title = React.memo(({
           position="absolute"
           bottom="15px"
           right="15px"
+          ref={setRef}
         >
       Skip Description
         </Button>
