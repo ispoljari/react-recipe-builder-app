@@ -10,6 +10,7 @@ import Loading from 'react-loading-animation';
 
 import {
   WrappedTitle,
+  WrappedSubTitle,
   WrappedSearchRecipes,
   WrappedIngredientsList,
   WrappedInputIngredient,
@@ -52,7 +53,20 @@ const App = (props) => {
           alignItems="center"
         >
           <Col>
-            <WrappedTitle />
+            <WrappedTitle
+              variant="h1"
+              color="white"
+              text="THE RECIPE BUILDER APP"
+              fontSizeXS="50px"
+              fontSizeLG="80px"
+            />
+            <WrappedSubTitle
+              variant="h2"
+              color="black"
+              text="finding a perfect recipe has never been easier"
+              fontSizeXS="40px"
+              fontSizeLG="60px"
+            />
             <WrappedCaptureImg
               onChange={previewCapturedImg}
               onClick={removeCapturedImg}

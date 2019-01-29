@@ -1,4 +1,5 @@
 export { default as WrappedTitle } from './Title/Title';
+export { default as WrappedSubTitle } from './SubTitle/SubTitle';
 export { default as WrappedSearchRecipes } from './SearchRecipes/SearchRecipes';
 export { default as WrappedIngredientsList } from './IngredientsList/IngredientsList';
 export { default as WrappedInputIngredient } from './InputIngredient/InputIngredient';

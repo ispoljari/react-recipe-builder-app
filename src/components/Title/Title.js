@@ -3,32 +3,31 @@ import { Typography, Box } from '@smooth-ui/core-sc';
 
 import withRowContent from '../../hocs/RowContent';
 
-const Title = React.memo(() => (
+export const Title = React.memo(({
+  text, variant, color, fontSizeXS, fontSizeLG,
+}) => (
   <Box>
     <Typography
-      variant="h1"
-      textAlign="center"
-      color="white"
-      fontSize={{ xs: 50, lg: 80 }}
-      lineHeight={{ xs: '50px', lg: '80px' }}
+      variant={variant}
+      color={color}
+      fontSize={{ xs: fontSizeXS, lg: fontSizeLG }}
+      lineHeight={{ xs: fontSizeXS, lg: fontSizeLG }}
       fontWeight={700}
       textAlign="left"
       m={0}
       letterSpacing={1.5}
     >
-      THE RECIPE BUILDER APP
+      {text}
     </Typography>
   </Box>
 ));
 
 const rowContentSetup = {
-  rowConfig: {
-    mb: '10px',
-  },
+  rowConfig: {},
   colConfig: {
-    p: '70px',
-    backgroundColor: '#1865f4',
+    p: '50px',
     display: 'flex',
+    backgroundColor: '#1865f4',
     justifyContent: { xs: 'center', lg: 'left' },
   },
   boxConfig: {
