@@ -30,8 +30,8 @@ export const Title = React.memo(({
           backgroundColor="#ffb142"
           borderRadius="20px"
           position="absolute"
-          bottom="8%"
-          right="5%"
+          bottom="15px"
+          right="15px"
         >
       Skip Description
         </Button>
