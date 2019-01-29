@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Box, Button } from '@smooth-ui/core-sc';
+import PropTypes from 'prop-types';
 
 import withRowContent from '../../hocs/RowContent';
 
@@ -39,6 +40,16 @@ export const Title = React.memo(({
       ) : ''}
   </Box>
 ));
+
+Title.propTypes = {
+  text: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  fontSizeXS: PropTypes.number.isRequired,
+  fontSizeLG: PropTypes.number.isRequired,
+  textAlign: PropTypes.string.isRequired,
+  onClick: PropTypes.func,
+};
 
 const rowContentSetup = {
   rowConfig: {},

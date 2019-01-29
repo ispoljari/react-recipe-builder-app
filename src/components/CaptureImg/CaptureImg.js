@@ -56,6 +56,7 @@ CaptureImg.propTypes = {
   capturedImg: PropTypes.string.isRequired,
   loadingPredictions: PropTypes.bool.isRequired,
   loadingRecipes: PropTypes.bool.isRequired,
+  setRef: PropTypes.instanceOf(Object).isRequired,
 };
 
 const rowContentSetup = {

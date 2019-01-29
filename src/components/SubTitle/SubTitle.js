@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Title } from '../Title/Title';
 import withRowContent from '../../hocs/RowContent';
@@ -15,6 +16,15 @@ const SubTitle = React.memo(({
     fontSizeLG={fontSizeLG}
   />
 ));
+
+SubTitle.propTypes = {
+  text: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  textAlign: PropTypes.string.isRequired,
+  fontSizeXS: PropTypes.number.isRequired,
+  fontSizeLG: PropTypes.number.isRequired,
+};
 
 const rowContentSetup = {
   rowConfig: {},
