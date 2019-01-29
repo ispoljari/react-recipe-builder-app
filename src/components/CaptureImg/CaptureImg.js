@@ -46,21 +46,6 @@ const CaptureImg = ({
         &times;
       </Styled.Button>
     </Box>
-    <Typography
-      display={capturedImg ? 'none' : 'block'}
-      aria-hidden="true"
-      variant="h2"
-      textAlign="left"
-      fontSize={{ xs: 22, md: 24 }}
-      fontWeight="bold"
-      lineHeight={1.5}
-      m={0}
-      px={18}
-      mt={10}
-      letterSpacing={1.5}
-    >
-      OR
-    </Typography>
   </Box>
 );
 

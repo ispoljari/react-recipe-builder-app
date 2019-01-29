@@ -110,8 +110,8 @@ const App = (props) => {
             >
               <WrappedInstructions
                 variant="h2"
-                color="white"
-                text="The recipe builder app makes it incredibly easy to find recipes"
+                color="black"
+                text="to find some recipes, just take a picture of the ingredients you have available"
                 textAlign="center"
                 fontSizeXS={40}
                 fontSizeLG={60}
