@@ -13,6 +13,7 @@ import ScrollAnimation from 'react-animate-on-scroll';
 import {
   WrappedTitle,
   WrappedSubTitle,
+  WrappedInstructions,
   WrappedImage,
   WrappedSearchRecipes,
   WrappedIngredientsList,
@@ -97,6 +98,20 @@ const App = (props) => {
                 variant="h2"
                 color="black"
                 text="...then you've definitely come to the right place"
+                textAlign="center"
+                fontSizeXS={40}
+                fontSizeLG={60}
+              />
+            </ScrollAnimation>
+            <ScrollAnimation
+              animateIn="fadeIn"
+              animateOnce
+              offset={230}
+            >
+              <WrappedInstructions
+                variant="h2"
+                color="white"
+                text="The recipe builder app makes it incredibly easy to find recipes"
                 textAlign="center"
                 fontSizeXS={40}
                 fontSizeLG={60}
