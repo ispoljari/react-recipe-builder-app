@@ -8,9 +8,8 @@ import {
   isError,
   checkIfDuplicateExists,
   tagSelectedIngredients,
-} from '../util';
-import { API_KEY_CLARAFAI } from '../config';
-import { URL_RECIPES_API, URL_CORS_PROXY } from '../config';
+} from './util';
+import { URL_RECIPES_API, URL_CORS_PROXY, API_KEY_CLARAFAI } from './config';
 
 export default class AppContainer extends Component {
   state = {
@@ -26,19 +25,19 @@ export default class AppContainer extends Component {
     a11yIngredients: '',
     a11yResults: '',
     firstIngredientLoaded: false,
-    firstResultLoaded: false
+    firstResultLoaded: false,
   };
 
   // Called from <InputIngredient />
   // -------------------------------
 
-  handleChange = e => {
+  handleChange = (e) => {
     const value = e.target.value; // current input value
     const onlyComma = (value.split().length === 1 && value.split()[0] === ','); // true if only char in value is comma
     const isLetter = value ? value.match(/^[A-Za-z,\s]+$/i) : true; // true if chars from current value are letters or there is no value
 
     if (!onlyComma && isLetter) {
-      this.setState({ 
+      this.setState({
         value,
       }, () => {
         if (value.includes(',')) { // if user adds a comma the ingredient list is updated
@@ -48,7 +47,7 @@ export default class AppContainer extends Component {
     }
   };
 
-  handlePress = e => {
+  handlePress = (e) => {
     const { value } = this.state;
     if (e.key === 'Enter' && value) {
       this.updateIngredientsList(value, 'press');
@@ -65,7 +64,7 @@ export default class AppContainer extends Component {
       const messageString = `${parsedValue} is already on the list`;
       this.setState({
         message: messageString,
-        a11yIngredients: messageString
+        a11yIngredients: messageString,
       });
     }
 
@@ -74,33 +73,31 @@ export default class AppContainer extends Component {
     });
   };
 
-  saveNewIngredientsToState = (...values) => {
-    return new Promise(resolve => {
-      const ingredients = values.map(value => ({
-        value,
-        id: uuidv4(),
-      }));
+  saveNewIngredientsToState = (...values) => new Promise((resolve) => {
+    const ingredients = values.map(value => ({
+      value,
+      id: uuidv4(),
+    }));
 
-      const ariaMessage = values.length > 1 ? 
-      `${values.toString()} have been added to the ingredients list` : 
-      `${values[0]} has been added to the ingredients list`;
-  
-      this.setState(prevState => ({
-        a11yIngredients: ariaMessage,
-        ingredientsList: [...prevState.ingredientsList, ...ingredients],
-        firstIngredientLoaded: true,
-        message: '',
-        error: '',
-      }), () => {
-        resolve();
-      });
+    const ariaMessage = values.length > 1
+      ? `${values.toString()} have been added to the ingredients list`
+      : `${values[0]} has been added to the ingredients list`;
+
+    this.setState(prevState => ({
+      a11yIngredients: ariaMessage,
+      ingredientsList: [...prevState.ingredientsList, ...ingredients],
+      firstIngredientLoaded: true,
+      message: '',
+      error: '',
+    }), () => {
+      resolve();
     });
-  };
+  });
 
   // Called from <IngredientList />
   // -------------------------------
 
-  deleteIngredient = e => {
+  deleteIngredient = (e) => {
     const { ingredientsList } = this.state;
     const id = e.target.parentNode.dataset.key;
 
@@ -110,7 +107,7 @@ export default class AppContainer extends Component {
     this.setState(prevState => ({
       ingredientsList: [...prevState.ingredientsList.filter(item => item.value !== targetIngredient)],
       message: '',
-      a11yIngredients: ariaMessage
+      a11yIngredients: ariaMessage,
     }));
   }
 
@@ -123,7 +120,7 @@ export default class AppContainer extends Component {
 
     if (!(loadingRecipes || loadingPredictions)) { // check if app is loading results
       if (value) { // if there is a value in input field
-        await this.updateIngredientsList(value, 'press');; // call the handlePress function to submit the value to ingredientsList
+        await this.updateIngredientsList(value, 'press'); // call the handlePress function to submit the value to ingredientsList
       }
 
       this.clearResults();
@@ -139,7 +136,7 @@ export default class AppContainer extends Component {
       results: [],
       error: '',
       a11yIngredients: '',
-      a11yResults: ''
+      a11yResults: '',
     }));
   }
 
@@ -155,8 +152,8 @@ export default class AppContainer extends Component {
 
     if (ingredientsList.length === 0) {
       this.setState({
-        message: messageString ,
-        a11yIngredients: messageString 
+        message: messageString,
+        a11yIngredients: messageString,
       });
     }
   }
@@ -190,7 +187,7 @@ export default class AppContainer extends Component {
     }
   }
 
-  loadSuccess = results => {
+  loadSuccess = (results) => {
     const { ingredientsList } = this.state;
     const resultsTaggedIngredients = tagSelectedIngredients(results, ingredientsList);
     const messageString = 'Your search produced no results. Please try again.';
@@ -199,26 +196,26 @@ export default class AppContainer extends Component {
       this.setState(() => ({
         results: [...resultsTaggedIngredients],
         a11yResults: `Search finnished. ${resultsTaggedIngredients.length} results available.`,
-        firstResultLoaded: true
+        firstResultLoaded: true,
       }));
     } else {
       this.setState({
         message: messageString,
         a11yResults: messageString,
-        firstResultLoaded: true
+        firstResultLoaded: true,
       });
     }
   }
 
-  loadFail = error => {
+  loadFail = (error) => {
     this.setState({
       error,
       a11yResults: error,
-      firstResultLoaded: true
+      firstResultLoaded: true,
     });
   }
 
-  updateRecipeLoadingStatus = status => {
+  updateRecipeLoadingStatus = (status) => {
     this.setState({
       loadingRecipes: status,
     });
@@ -227,7 +224,7 @@ export default class AppContainer extends Component {
   // Called from <Navigation />
   // -------------------------------
 
-  navigatePage = e => {
+  navigatePage = (e) => {
     const button = e.target.id;
     const { page } = this.state;
 
@@ -255,7 +252,7 @@ export default class AppContainer extends Component {
   // Called from <CaptureImg />
   // --------------------------
 
-  previewCapturedImg = e => {
+  previewCapturedImg = (e) => {
     const imgFile = e.target.files[0];
 
     if (imgFile) {
@@ -278,7 +275,7 @@ export default class AppContainer extends Component {
     }
   }
 
-  getPredictionsFromImage = imgFile => {
+  getPredictionsFromImage = (imgFile) => {
     this.updatePredictionsLoadingStatus(true);
 
     const reader = new FileReader();
@@ -315,7 +312,7 @@ export default class AppContainer extends Component {
             this.loadFail('Cannot detect food.');
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.updatePredictionsLoadingStatus(false);
           this.loadFail('Cannot parse image.');
         });
@@ -330,15 +327,15 @@ export default class AppContainer extends Component {
 
   render() {
     return (
-      <App 
-      appState={this.state} 
-      handleChange={this.handleChange}
-      previewCapturedImg={this.previewCapturedImg}
-      removeCapturedImg={this.removeCapturedImg}
-      handlePress={this.handlePress}
-      handleSubmit={this.handleSubmit}
-      deleteIngredient={this.deleteIngredient}
-      navigatePage={this.navigatePage}
+      <App
+        appState={this.state}
+        handleChange={this.handleChange}
+        previewCapturedImg={this.previewCapturedImg}
+        removeCapturedImg={this.removeCapturedImg}
+        handlePress={this.handlePress}
+        handleSubmit={this.handleSubmit}
+        deleteIngredient={this.deleteIngredient}
+        navigatePage={this.navigatePage}
       />
     );
   }

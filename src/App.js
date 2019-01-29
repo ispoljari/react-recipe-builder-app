@@ -22,19 +22,19 @@ import {
   WrappedResults,
   WrappedNavigation,
   WrappedCaptureImg,
-} from '../components';
-import meal1 from '../img/meal1.jpg';
+} from './components';
+import meal1 from './img/meal1.jpg';
 
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.cameraRef = React.createRef()
-  };
+    this.cameraRef = React.createRef();
+  }
 
   scrollToCameraInput = () => {
     scrollToComponent(this.cameraRef.current, {
-      duration: 2000
+      duration: 2000,
     });
   }
 
