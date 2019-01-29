@@ -204,7 +204,8 @@ export default class AppContainer extends Component {
     } else {
       this.setState({
         message: messageString,
-        a11yResults: messageString
+        a11yResults: messageString,
+        firstResultLoaded: true
       });
     }
   }
@@ -212,7 +213,8 @@ export default class AppContainer extends Component {
   loadFail = error => {
     this.setState({
       error,
-      a11yResults: error
+      a11yResults: error,
+      firstResultLoaded: true
     });
   }
 

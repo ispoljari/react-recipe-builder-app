@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, flex } from '@smooth-ui/core-sc';
+import { Box } from '@smooth-ui/core-sc';
 import PropTypes from 'prop-types';
 
 import withRowContent from '../../hocs/RowContent';

@@ -82,7 +82,7 @@ const wrapContentIntoColumn = (content) => {
           >
             <Typography
               variant="h3"
-              fontSize={{ xs: 20, lg: 22 }}
+              fontSize={{ xs: 24, lg: 28 }}
               color="black"
             >
               {content.title}
@@ -90,7 +90,7 @@ const wrapContentIntoColumn = (content) => {
           </Styled.Link>
           <Typography
             variant="h4"
-            fontSize={{ xs: 16, lg: 18 }}
+            fontSize={{ xs: 18, lg: 20 }}
             color="black"
             mb={0}
           >
@@ -154,7 +154,8 @@ Results.defaultProps = {
 
 const rowContentSetup = {
   rowConfig: {
-    my: '50px',
+    mt: '50px',
+    mb: '10px',
   },
   colConfig: {},
   boxConfig: {

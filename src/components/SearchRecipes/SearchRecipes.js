@@ -35,7 +35,7 @@ const rowContentSetup = {
     as: 'section',
     role: 'region',
     mx: 'auto',
-    maxWidth: '300px',
+    maxWidth: '400px',
   },
 };
 
