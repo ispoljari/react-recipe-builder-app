@@ -48,6 +48,8 @@ const App = (props) => {
     capturedImg,
     a11yIngredients,
     a11yResults,
+    firstIngredientLoaded,
+    firstResultLoaded,
   } = appState;
 
   return (
@@ -124,14 +126,6 @@ const App = (props) => {
               loadingRecipes={loadingRecipes}
               loadingPredictions={loadingPredictions}
             />
-            <WrappedInputIngredient
-              onChange={handleChange}
-              onKeyDown={handlePress}
-              value={value}
-            />
-            <WrappedSearchRecipes
-              handleSubmit={handleSubmit}
-            />
             <Loading
               isLoading={loadingPredictions}
             >
@@ -144,6 +138,18 @@ const App = (props) => {
                 onClick={deleteIngredient}
               />
             </Loading>
+            {firstIngredientLoaded ? (
+              <React.Fragment>
+                <WrappedInputIngredient
+                  onChange={handleChange}
+                  onKeyDown={handlePress}
+                  value={value}
+                />
+                <WrappedSearchRecipes
+                  handleSubmit={handleSubmit}
+                />
+              </React.Fragment>
+            ) : ''}
           </Col>
         </Row>
         <Row
@@ -157,18 +163,23 @@ const App = (props) => {
                 message={a11yResults}
                 aria-live="assertive"
               />
-              <WrappedResults
-                results={results}
-                ingredientsList={ingredientsList}
-                message={message}
-                error={error}
-              />
-              {(results.length > 0 && !message && !error)
-                ? (
-                  <WrappedNavigation
-                    onClick={navigatePage}
-                  />
-                ) : ''}
+              {firstResultLoaded ? (
+                <React.Fragment>
+                  {(results.length > 0 || message || error) ? (
+                    <WrappedResults
+                      results={results}
+                      ingredientsList={ingredientsList}
+                      message={message}
+                      error={error}
+                    />
+                  ) : ''}
+                  {(results.length > 0 && !message && !error ? (
+                    <WrappedNavigation
+                      onClick={navigatePage}
+                    />
+                  ) : '')}
+                </React.Fragment>
+              ) : ''}
             </Loading>
           </Col>
         </Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography } from '@smooth-ui/core-sc';
+import { Box, Typography, flex } from '@smooth-ui/core-sc';
 import PropTypes from 'prop-types';
 
 import withRowContent from '../../hocs/RowContent';
@@ -59,9 +59,13 @@ CaptureImg.propTypes = {
 
 const rowContentSetup = {
   rowConfig: {
-    mb: '10px',
+    my: '40px',
   },
-  colConfig: {},
+  colConfig: {
+    minHeight: '200px',
+    display: 'flex',
+    alignItems: 'center',
+  },
   boxConfig: {
     as: 'section',
     role: 'region',

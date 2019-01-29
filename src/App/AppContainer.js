@@ -24,7 +24,9 @@ export default class AppContainer extends Component {
     ingredientsList: [],
     capturedImg: '',
     a11yIngredients: '',
-    a11yResults: ''
+    a11yResults: '',
+    firstIngredientLoaded: false,
+    firstResultLoaded: false
   };
 
   // Called from <InputIngredient />
@@ -86,6 +88,7 @@ export default class AppContainer extends Component {
       this.setState(prevState => ({
         a11yIngredients: ariaMessage,
         ingredientsList: [...prevState.ingredientsList, ...ingredients],
+        firstIngredientLoaded: true,
         message: '',
         error: '',
       }), () => {
@@ -195,7 +198,8 @@ export default class AppContainer extends Component {
     if (resultsTaggedIngredients.length > 0) {
       this.setState(() => ({
         results: [...resultsTaggedIngredients],
-        a11yResults: `Search finnished. ${resultsTaggedIngredients.length} results available.`
+        a11yResults: `Search finnished. ${resultsTaggedIngredients.length} results available.`,
+        firstResultLoaded: true
       }));
     } else {
       this.setState({
