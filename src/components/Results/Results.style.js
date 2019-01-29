@@ -10,7 +10,7 @@ export const Link = styled.a`
     height: 80px;
     border-radius: 5px;
   }
-`; 
+`;
 
 export const List = styled.ul`
   display: flex;
@@ -19,8 +19,9 @@ export const List = styled.ul`
   background-color: white;
   padding: 0 10px 0 0;
   list-style: none;
-  color: black;
   overflow: -webkit-paged-y;
 `;
 
-export const 
+export const ListItem = styled.li`
+  color: ${props => props.color};
+`;

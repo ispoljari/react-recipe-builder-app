@@ -1,14 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import * as Styled from './global-style';
-
-import App from './App/App';
+import GlobalStyle from './global-style';
+import AppContainer from './AppContainer';
 
 ReactDOM.render(
   <React.Fragment>
-    <Styled.Global />
-    <App />
-  </React.Fragment>, 
-  document.getElementById('root')
+    <GlobalStyle />
+    <AppContainer />
+  </React.Fragment>,
+  document.getElementById('root'),
 );

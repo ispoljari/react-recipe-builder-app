@@ -1,30 +1,57 @@
 import React from 'react';
-
 import { Button } from '@smooth-ui/core-sc';
-import * as Styled from './IngredientsList.style';
+import PropTypes from 'prop-types';
 
-const IngredientsList = ({ingredientsList, onClick}) => (
-  <Styled.List
-  visible={ingredientsList.length>0}>
-   {ingredientsList.map(item => 
-    <li 
-    key={item.id} 
-    data-key={item.id}>
-      <span>
-        {item.value}
-      </span>
-      <Button 
-      p="5px" 
-      display="inline-block" 
-      backgroundColor="transparent" 
-      color="black" 
-      type="button" 
-      onClick={onClick}>
+import withRowContent from '../../hocs/RowContent';
+import List from './IngredientsList.style';
+
+const IngredientsList = ({ ingredientsList, onClick }) => (
+  <List
+    visible={ingredientsList.length > 0}
+  >
+    {ingredientsList.map(item => (
+      <li
+        key={item.id}
+        data-key={item.id}
+      >
+        <span>
+          {item.value}
+        </span>
+        <Button
+          aria-label={`Remove ${item.value} from list`}
+          p="5px"
+          display="inline-block"
+          backgroundColor="transparent"
+          color="black"
+          type="button"
+          onClick={onClick}
+        >
         &#10006;
-      </Button>
-    </li>
-   )}
-  </Styled.List>
+        </Button>
+      </li>
+    ))}
+  </List>
 );
 
-export default IngredientsList;
+IngredientsList.propTypes = {
+  ingredientsList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    value: PropTypes.string,
+  })).isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+const rowContentSetup = {
+  rowConfig: {},
+  colConfig: {},
+  boxConfig: {
+    as: 'section',
+    role: 'region',
+    mx: 'auto',
+    maxWidth: '400px',
+  },
+};
+
+const WrappedIngredientsList = withRowContent(rowContentSetup)(IngredientsList);
+
+export default WrappedIngredientsList;

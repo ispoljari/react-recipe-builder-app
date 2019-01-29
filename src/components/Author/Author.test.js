@@ -1,9 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Results from './Results';
 
-describe('<Results />', () => {
+import Author from './Author';
+
+describe('Author />', () => {
+  // smoke test
   it('Renders without crashing', () => {
-    shallow(<Results results={[]}/>);
+    shallow(<Author />);
   });
 });
