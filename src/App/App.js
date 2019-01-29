@@ -33,7 +33,9 @@ export default class App extends Component {
   };
 
   scrollToCameraInput = () => {
-    scrollToComponent(this.cameraRef.current);
+    scrollToComponent(this.cameraRef.current, {
+      duration: 2000
+    });
   }
 
   render() {
@@ -131,14 +133,20 @@ export default class App extends Component {
                   fontSizeLG={60}
                 />
               </ScrollAnimation>
-              <WrappedCaptureImg
-                onChange={previewCapturedImg}
-                onClick={removeCapturedImg}
-                capturedImg={capturedImg}
-                loadingRecipes={loadingRecipes}
-                loadingPredictions={loadingPredictions}
-                setRef={this.cameraRef}
-              />
+              <ScrollAnimation
+                animateIn="fadeIn"
+                animateOnce
+                offset={230}
+              >
+                <WrappedCaptureImg
+                  onChange={previewCapturedImg}
+                  onClick={removeCapturedImg}
+                  capturedImg={capturedImg}
+                  loadingRecipes={loadingRecipes}
+                  loadingPredictions={loadingPredictions}
+                  setRef={this.cameraRef}
+                />
+              </ScrollAnimation>
               <Loading
                 isLoading={loadingPredictions}
               >
