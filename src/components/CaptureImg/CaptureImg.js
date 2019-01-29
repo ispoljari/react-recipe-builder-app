@@ -7,7 +7,7 @@ import * as Styled from './CaptureImg.style';
 
 const CaptureImg = ({
   onChange, capturedImg, onClick, loadingRecipes,
-  loadingPredictions,
+  loadingPredictions, setRef,
 }) => (
   <Box
     display="flex"
@@ -25,6 +25,7 @@ const CaptureImg = ({
       capture="environment"
       onChange={onChange}
     />
+    <div ref={setRef} />
     <Box
       position="relative"
     >

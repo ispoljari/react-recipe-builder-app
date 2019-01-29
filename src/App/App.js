@@ -9,6 +9,7 @@ import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
 import Loading from 'react-loading-animation';
 import 'animate.css/animate.min.css';
 import ScrollAnimation from 'react-animate-on-scroll';
+import scrollToComponent from 'react-scroll-to-component';
 
 import {
   WrappedTitle,
@@ -28,7 +29,11 @@ import meal1 from '../img/meal1.jpg';
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.refButton = React.createRef();
+    this.cameraRef = React.createRef()
+  };
+
+  scrollToCameraInput = () => {
+    scrollToComponent(this.cameraRef.current);
   }
 
   render() {
@@ -73,7 +78,7 @@ export default class App extends Component {
                 textAlign="left"
                 fontSizeXS={50}
                 fontSizeLG={80}
-                setRef={this.refButton}
+                onClick={this.scrollToCameraInput}
               />
               <ScrollAnimation
                 animateIn="fadeIn"
@@ -132,6 +137,7 @@ export default class App extends Component {
                 capturedImg={capturedImg}
                 loadingRecipes={loadingRecipes}
                 loadingPredictions={loadingPredictions}
+                setRef={this.cameraRef}
               />
               <Loading
                 isLoading={loadingPredictions}
