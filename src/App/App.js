@@ -11,6 +11,7 @@ import Loading from 'react-loading-animation';
 import {
   WrappedTitle,
   WrappedSubTitle,
+  WrappedImage,
   WrappedSearchRecipes,
   WrappedIngredientsList,
   WrappedInputIngredient,
@@ -18,6 +19,7 @@ import {
   WrappedNavigation,
   WrappedCaptureImg,
 } from '../components';
+import meal1 from '../img/meal1.jpg';
 
 
 const App = (props) => {
@@ -57,13 +59,26 @@ const App = (props) => {
               variant="h1"
               color="white"
               text="THE RECIPE BUILDER APP"
+              textAlign="left"
               fontSizeXS={50}
               fontSizeLG={80}
             />
             <WrappedSubTitle
               variant="h2"
               color="black"
-              text="if you're looking for some inspiration, then you've come to the right place"
+              text="if you're looking for some inspiration for your next meal..."
+              textAlign="center"
+              fontSizeXS={40}
+              fontSizeLG={60}
+            />
+            <WrappedImage
+              imgSrc={meal1}
+            />
+            <WrappedSubTitle
+              variant="h2"
+              color="black"
+              text="...then you've definitely come to the right place"
+              textAlign="center"
               fontSizeXS={40}
               fontSizeLG={60}
             />

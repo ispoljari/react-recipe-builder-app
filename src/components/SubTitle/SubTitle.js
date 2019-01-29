@@ -4,12 +4,13 @@ import { Title } from '../Title/Title';
 import withRowContent from '../../hocs/RowContent';
 
 const SubTitle = React.memo(({
-  text, variant, color, fontSizeXS, fontSizeLG,
+  text, variant, color, fontSizeXS, fontSizeLG, textAlign,
 }) => (
   <Title
     variant={variant}
     color={color}
     text={text}
+    textAlign={textAlign}
     fontSizeXS={fontSizeXS}
     fontSizeLG={fontSizeLG}
   />
@@ -22,13 +23,11 @@ const rowContentSetup = {
     minHeight: '340px',
     display: 'flex',
     backgroundColor: '#fff',
-    justifyContent: { xs: 'center', lg: 'left' },
     alignItems: 'center',
   },
   boxConfig: {
     as: 'section',
     role: 'region',
-    textAlign: 'center',
     mx: 0,
   },
 };

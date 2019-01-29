@@ -4,7 +4,7 @@ import { Typography, Box } from '@smooth-ui/core-sc';
 import withRowContent from '../../hocs/RowContent';
 
 export const Title = React.memo(({
-  text, variant, color, fontSizeXS, fontSizeLG,
+  text, variant, color, fontSizeXS, fontSizeLG, textAlign,
 }) => (
   <Box>
     <Typography
@@ -13,7 +13,7 @@ export const Title = React.memo(({
       fontSize={{ xs: fontSizeXS, lg: fontSizeLG }}
       lineHeight={{ xs: `${fontSizeXS + 10}px`, lg: `${fontSizeLG + 10}px` }}
       fontWeight={700}
-      textAlign="left"
+      textAlign={textAlign}
       m={0}
       letterSpacing={1.5}
     >
