@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box } from '@smooth-ui/core-sc';
+import { Typography, Box, Button } from '@smooth-ui/core-sc';
 
 import withRowContent from '../../hocs/RowContent';
 
@@ -19,12 +19,30 @@ export const Title = React.memo(({
     >
       {text}
     </Typography>
+    {variant === 'h1'
+      ? (
+        <Button
+          fontWeight={500}
+          fontSize={{ xs: 18, lg: 26 }}
+          textAlign="center"
+          py="5px"
+          px="20px"
+          backgroundColor="#ffb142"
+          borderRadius="20px"
+          position="absolute"
+          bottom="8%"
+          right="5%"
+        >
+      Skip Description
+        </Button>
+      ) : ''}
   </Box>
 ));
 
 const rowContentSetup = {
   rowConfig: {},
   colConfig: {
+    position: 'relative',
     p: '50px',
     display: 'flex',
     backgroundColor: '#1865f4',
