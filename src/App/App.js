@@ -57,15 +57,15 @@ const App = (props) => {
               variant="h1"
               color="white"
               text="THE RECIPE BUILDER APP"
-              fontSizeXS="50px"
-              fontSizeLG="80px"
+              fontSizeXS={50}
+              fontSizeLG={80}
             />
             <WrappedSubTitle
               variant="h2"
               color="black"
-              text="finding a perfect recipe has never been easier"
-              fontSizeXS="40px"
-              fontSizeLG="60px"
+              text="if you're looking for some inspiration, then you've come to the right place"
+              fontSizeXS={40}
+              fontSizeLG={60}
             />
             <WrappedCaptureImg
               onChange={previewCapturedImg}
