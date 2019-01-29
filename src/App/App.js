@@ -7,6 +7,8 @@ import {
 } from '@smooth-ui/core-sc';
 import { LiveAnnouncer, LiveMessage } from 'react-aria-live';
 import Loading from 'react-loading-animation';
+import 'animate.css/animate.min.css';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 import {
   WrappedTitle,
@@ -63,25 +65,43 @@ const App = (props) => {
               fontSizeXS={50}
               fontSizeLG={80}
             />
-            <WrappedSubTitle
-              variant="h2"
-              color="black"
-              text="if you're looking for some inspiration for your next meal..."
-              textAlign="center"
-              fontSizeXS={40}
-              fontSizeLG={60}
-            />
-            <WrappedImage
-              imgSrc={meal1}
-            />
-            <WrappedSubTitle
-              variant="h2"
-              color="black"
-              text="...then you've definitely come to the right place"
-              textAlign="center"
-              fontSizeXS={40}
-              fontSizeLG={60}
-            />
+            <ScrollAnimation
+              animateIn="fadeIn"
+              animateOnce
+              offset={230}
+            >
+              <WrappedSubTitle
+                variant="h2"
+                color="black"
+                text="if you're looking for some inspiration for your next meal..."
+                textAlign="center"
+                fontSizeXS={40}
+                fontSizeLG={60}
+              />
+            </ScrollAnimation>
+            <ScrollAnimation
+              animateIn="fadeIn"
+              animateOnce
+              offset={230}
+            >
+              <WrappedImage
+                imgSrc={meal1}
+              />
+            </ScrollAnimation>
+            <ScrollAnimation
+              animateIn="fadeIn"
+              animateOnce
+              offset={230}
+            >
+              <WrappedSubTitle
+                variant="h2"
+                color="black"
+                text="...then you've definitely come to the right place"
+                textAlign="center"
+                fontSizeXS={40}
+                fontSizeLG={60}
+              />
+            </ScrollAnimation>
             <WrappedCaptureImg
               onChange={previewCapturedImg}
               onClick={removeCapturedImg}
