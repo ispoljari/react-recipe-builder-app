@@ -212,6 +212,7 @@ export default class AppContainer extends Component {
       error,
       a11yResults: error,
       firstResultLoaded: true,
+      irstIngredientLoaded: true
     });
   }
 
