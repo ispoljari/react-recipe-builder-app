@@ -16,7 +16,6 @@ const Image = React.memo(({ imgSrc, altText }) => (
 const rowContentSetup = {
   rowConfig: {},
   colConfig: {
-    minHeight: '340px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
