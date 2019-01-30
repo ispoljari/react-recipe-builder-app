@@ -34,7 +34,7 @@ export default class App extends Component {
 
   scrollToCameraInput = () => {
     scrollToComponent(this.cameraRef.current, {
-      duration: 2000,
+      duration: 1400,
     });
   }
 

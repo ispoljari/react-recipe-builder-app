@@ -212,7 +212,7 @@ export default class AppContainer extends Component {
       error,
       a11yResults: error,
       firstResultLoaded: true,
-      irstIngredientLoaded: true
+      firstIngredientLoaded: true
     });
   }
 
@@ -254,6 +254,8 @@ export default class AppContainer extends Component {
   // --------------------------
 
   previewCapturedImg = (e) => {
+    console.log(this.state.firstIngredientLoaded)
+    console.log(this.state.firstResultLoaded)
     const imgFile = e.target.files[0];
 
     if (imgFile) {
