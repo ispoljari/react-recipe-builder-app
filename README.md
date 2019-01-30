@@ -5,6 +5,9 @@
 ## SUMMARY
 This app is intended for anyone that needs cooking inspiration. If you have some ingredients available in the fridge and don't know what to do with them, this app is right for you. 
 
+## DEMO VIDEO
+![Demo video](demo.gif)
+
 ## APP FUNCTIONALITY:
 
 * the user can take a picture of the available ingredients (one or multiple ingredients per picture)
@@ -36,9 +39,5 @@ This app is intended for anyone that needs cooking inspiration. If you have some
 * a11y (Special attention has been given to screen reader accessibility during the design)
 * SEO
 * cross-browser compatibility
-
-## DEMO VIDEO
-![Demo video](demo.gif)
-
 
 ### This project was bootstrapped with Create React App.
