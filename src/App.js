@@ -23,7 +23,7 @@ import {
   WrappedNavigation,
   WrappedCaptureImg,
 } from './components';
-import meal from './img/meal.jpg';
+import meal1 from './img/meal1.jpg';
 
 
 export default class App extends Component {
@@ -102,7 +102,7 @@ export default class App extends Component {
                 offset={230}
               >
                 <WrappedImage
-                  imgSrc={meal}
+                  imgSrc={meal1}
                 />
               </ScrollAnimation>
               <ScrollAnimation
