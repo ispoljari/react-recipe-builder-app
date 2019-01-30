@@ -8,3 +8,4 @@ export { default as WrappedInputIngredient } from './InputIngredient/InputIngred
 export { default as WrappedResults } from './Results/Results';
 export { default as WrappedNavigation } from './Navigation/Navigation';
 export { default as WrappedCaptureImg } from './CaptureImg/CaptureImg';
+export { default as WrappedAuthor } from './Author/Author';

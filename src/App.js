@@ -22,6 +22,7 @@ import {
   WrappedResults,
   WrappedNavigation,
   WrappedCaptureImg,
+  WrappedAuthor,
 } from './components';
 import meal from './img/meal.jpg';
 
@@ -203,6 +204,11 @@ export default class App extends Component {
                 ) : ''}
               </Loading>
             </Col>
+          </Row>
+          <Row>
+            <Col>
+              <WrappedAuthor />
+            </Col>         
           </Row>
         </Grid>
       </LiveAnnouncer>

@@ -40,8 +40,8 @@ const rowContentSetup = {
     alignItems: 'center',
   },
   boxConfig: {
-    as: 'section',
-    role: 'region',
+    as: 'footer',
+    role: 'contentinfo',
     display: 'flex',
     mx: 'auto',
     justifyContent: 'center',
