@@ -38,7 +38,7 @@ This app is intended for anyone that needs cooking inspiration. If you have some
 * cross-browser compatibility
 
 ## DEMO VIDEO
-[![Watch the video](https://j.gifs.com/XLxvvW.gif)](https://j.gifs.com/XLxvvW.gif)
+![Demo video](demo.gif)
 
 
 ### This project was bootstrapped with Create React App.
