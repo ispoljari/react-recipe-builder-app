@@ -34,7 +34,7 @@ export default class App extends Component {
 
   scrollToCameraInput = () => {
     scrollToComponent(this.cameraRef.current, {
-      duration: 1500,
+      duration: 2000,
     });
   }
 
@@ -90,7 +90,7 @@ export default class App extends Component {
                 <WrappedSubTitle
                   variant="h2"
                   color="black"
-                  text="If you're looking for some inspiration for your next meal..."
+                  text="if you're looking for some inspiration for your next meal..."
                   textAlign="center"
                   fontSizeXS={40}
                   fontSizeLG={60}
@@ -113,7 +113,7 @@ export default class App extends Component {
                 <WrappedSubTitle
                   variant="h2"
                   color="black"
-                  text="...you have come to the right place."
+                  text="...then you've definitely come to the right place"
                   textAlign="center"
                   fontSizeXS={40}
                   fontSizeLG={60}
@@ -127,7 +127,7 @@ export default class App extends Component {
                 <WrappedInstructions
                   variant="h2"
                   color="black"
-                  text="To find some recipes, just take a picture of the ingredients you have available."
+                  text="to find some recipes, just take a picture of the ingredients you have available"
                   textAlign="center"
                   fontSizeXS={40}
                   fontSizeLG={60}

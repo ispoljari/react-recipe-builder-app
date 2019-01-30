@@ -30,7 +30,7 @@ const rowContentSetup = {
   rowConfig: {},
   colConfig: {
     p: '50px',
-    minHeight:'350px',
+    minHeight: '340px',
     display: 'flex',
     backgroundColor: '#fff',
     alignItems: 'center',
@@ -38,7 +38,7 @@ const rowContentSetup = {
   boxConfig: {
     as: 'section',
     role: 'region',
-    mx: 'auto',
+    mx: 0,
   },
 };
 

@@ -210,12 +210,9 @@ export default class AppContainer extends Component {
   loadFail = (error) => {
     this.setState({
       error,
-    }, () => {
-      this.setState({
-        a11yResults: error,
-        firstResultLoaded: true,
-        irstIngredientLoaded: true
-      })
+      a11yResults: error,
+      firstResultLoaded: true,
+      irstIngredientLoaded: true
     });
   }
 

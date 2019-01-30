@@ -21,7 +21,7 @@ const rowContentSetup = {
   rowConfig: {},
   colConfig: {
     p: '50px',
-    minHeight:'350px',
+    minHeight: '340px',
     display: 'flex',
     backgroundColor: '#49bdac',
     alignItems: 'center',

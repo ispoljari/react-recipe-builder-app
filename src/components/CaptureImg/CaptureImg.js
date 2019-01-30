@@ -64,8 +64,7 @@ const rowContentSetup = {
     my: '40px',
   },
   colConfig: {
-    height: '100vh',
-    maxHeight: '300px',
+    minHeight: '200px',
     display: 'flex',
     alignItems: 'center',
   },
