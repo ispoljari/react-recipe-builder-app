@@ -37,7 +37,6 @@ This app is intended for anyone that needs cooking inspiration. If you have some
 * mobile-first
 * RWD
 * a11y (Special attention has been given to screen reader accessibility during the design)
-* SEO
 * cross-browser compatibility
 
 ### This project was bootstrapped with Create React App.
