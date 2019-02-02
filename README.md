@@ -26,8 +26,6 @@ This app is intended for anyone that needs cooking inspiration. If you have some
 
 **TESTING**: ENZYME (a few component unit tests)
 
-**CONTINUOS INTEGRATION**: TRAVISCI 
-
 **CLIENT SIDE**: HTML5, CSS3, REACT (ES6 JS)
 
 **AUTOMATION**: CREATE-REACT-APP
