@@ -1,6 +1,6 @@
 # The Recipe Builder App
 ## LINK TO THE APP:
-[https://the-recipe-builder-app.netlify.com](https://the-recipe-builder-app.netlify.com)
+[https://limitless-cove-25974.herokuapp.com/](https://limitless-cove-25974.herokuapp.com/)
 
 ## SUMMARY
 This app is intended for anyone that needs cooking inspiration. If you have some ingredients available in the fridge and don't know what to do with them, this app is right for you. 
