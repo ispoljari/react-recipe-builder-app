@@ -165,7 +165,7 @@ export default class AppContainer extends Component {
     if (ingredients) {
       this.updateRecipeLoadingStatus(true);
 
-      const FULL_API_URL = `${URL_CORS_PROXY}${URL_RECIPES_API}`;
+      const FULL_API_URL = `${URL_CORS_PROXY}?${URL_RECIPES_API}`;
       const URL_QUERY = `${FULL_API_URL}?i=${ingredients}&p=${page}`;
       const rawResult = await fetchResults(URL_QUERY);
       let jsonResult;
